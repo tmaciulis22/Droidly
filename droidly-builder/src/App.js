@@ -1,11 +1,11 @@
 import { Grid } from '@mui/material';
-import BlocklyEditor from './Blockly/BlocklyEditor';
+import BlocklyEditorPage from './pages/BlocklyEditorPage';
 
 function App() {
   return (
       <Grid container direction='column'>
         <Grid item>
-          <BlocklyEditor />
+          <BlocklyEditorPage />
         </Grid>
       </Grid>
   )
