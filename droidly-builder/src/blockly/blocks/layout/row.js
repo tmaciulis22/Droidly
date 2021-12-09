@@ -1,14 +1,17 @@
 import Blockly from 'blockly';
 
-Blockly.Blocks['layout_row'] = {
+Blockly.Blocks['row'] = {
   init: function() {
     this.setColour(10)
     this.setTooltip('Layouts children items in a row')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
-    this.appendStatementInput('MODIFIER')
-      .appendField('styling') // TODO or modifier?
-    this.appendStatementInput('CONTENT')
-      .appendField('content')
+    this.appendDummyInput()
+      .appendField('Row')
+    this.appendStatementInput('ROW_MODIFIER')
+      .appendField('styling:')
+    this.appendStatementInput('ROW_CONTENT')
+      .appendField('content:')
+      .setCheck(['']) // TODO add type checks
   }
 }

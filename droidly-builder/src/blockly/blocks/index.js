@@ -3,11 +3,15 @@ import './layout'
 const layoutCategoryContent = {
   kind: 'category',
   name: 'Layout',
-  colour: '#0be881',
+  colour: '5',
   contents: [
     {
       kind: 'block',
-      type: 'layout_row'
+      type: 'screen'
+    },
+    {
+      kind: 'block',
+      type: 'row'
     }
   ]
 }
