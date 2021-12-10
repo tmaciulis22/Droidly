@@ -1,4 +1,4 @@
-import './generators'
+import './kotlinGenerator'
 import contents from "./blocks"
 
 const toolboxConfig = {

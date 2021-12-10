@@ -1,20 +1,4 @@
-import './layout'
-
-const layoutCategoryContent = {
-  kind: 'category',
-  name: 'Layout',
-  colour: '5',
-  contents: [
-    {
-      kind: 'block',
-      type: 'screen'
-    },
-    {
-      kind: 'block',
-      type: 'row'
-    }
-  ]
-}
+import layoutCategoryContent from './layout'
 
 const contents = [
   layoutCategoryContent,
