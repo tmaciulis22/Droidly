@@ -25,5 +25,5 @@ Blockly.Blocks['colour'] = {
 Blockly.Kotlin['colour'] = (block) => {
   const colourCode = `0xFF${block.getFieldValue('COLOUR').substring(1)}`
 
-  return [`Color(color = ${colourCode})`, Blockly.Kotlin.ORDER_ATOMIC]
+  return [`Color(${colourCode})`, Blockly.Kotlin.ORDER_ATOMIC]
 }
