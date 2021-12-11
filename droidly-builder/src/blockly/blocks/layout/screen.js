@@ -15,7 +15,7 @@ Blockly.Blocks['screen'] = {
   }
 }
 
-Blockly.Kotlin['screen'] = function (block) {
+Blockly.Kotlin['screen'] = (block) => {
   // TODO might need to conditionally add navigation controller
   const screenName = block.getFieldValue('SCREEN_NAME')
   const content = Blockly.Kotlin.statementToCode(block, 'SCREEN_CONTENT')

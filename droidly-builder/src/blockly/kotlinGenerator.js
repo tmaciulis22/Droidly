@@ -2,7 +2,6 @@ import Blockly from 'blockly';
 
 Blockly.Kotlin = new Blockly.Generator('Kotlin')
 
-
 // https://kotlinlang.org/docs/reference/grammar.html#expressions
 Blockly.Kotlin.ORDER_ATOMIC = 0 // 0 "" ...
 Blockly.Kotlin.ORDER_POSTFIX = 1 // ++, --, ., ?., ?
@@ -26,6 +25,8 @@ Blockly.Kotlin.ORDER_NONE = 99 // (...)
 Blockly.Kotlin.addReservedWords(
   'as,as?,break,class,continue,do,else,false,for,fun,if,in,!in,interface,is,!is,null,object,package,return,super,this,throw,true,try,typealias,typeof,val,var,when,while'
 )
+
+Blockly.Kotlin.INDENT = '    '
 
 Blockly.Kotlin.scrub_ = function(block, code, opt_thisOnly) {
   const nextBlock =

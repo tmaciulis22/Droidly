@@ -1,5 +1,10 @@
 import './screen'
 import './row'
+import './column'
+import './box'
+
+// TODO Scaffold?
+// TODO LazyColumn or LazyRow?
 
 const layoutCategoryContent = {
   kind: 'category',
@@ -13,7 +18,15 @@ const layoutCategoryContent = {
     {
       kind: 'block',
       type: 'row'
-    }
+    },
+    {
+      kind: 'block',
+      type: 'column'
+    },
+    {
+      kind: 'block',
+      type: 'box'
+    },
   ]
 }
 
