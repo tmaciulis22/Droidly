@@ -11,6 +11,6 @@ Blockly.Blocks['spacer'] = {
   }
 }
 
-Blockly.Kotlin['spacer'] = (block) => {
+Blockly.Kotlin['spacer'] = () => {
   return 'Spacer(modifier = Modifier.weight(1.0f))'
 }

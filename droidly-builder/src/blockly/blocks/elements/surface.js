@@ -12,6 +12,7 @@ Blockly.Blocks['surface'] = {
       .setCheck('Number')
       .appendField('elevation:')
     this.appendValueInput('SURFACE_SHAPE')
+      .setCheck('Shape')
       .appendField('shape:')
     this.appendValueInput('SURFACE_COLOR')
       .appendField('background color:')
