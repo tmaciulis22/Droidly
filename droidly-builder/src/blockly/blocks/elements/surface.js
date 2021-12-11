@@ -22,7 +22,6 @@ Blockly.Blocks['surface'] = {
       .appendField('styling:')
     this.appendStatementInput('SURFACE_CONTENT')
       .appendField('content:')
-      .setCheck(['']) // TODO add type checks
   }
 }
 

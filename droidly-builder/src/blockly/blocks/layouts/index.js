@@ -8,7 +8,7 @@ import './box'
 
 const layoutCategoryContent = {
   kind: 'category',
-  name: 'Layout',
+  name: 'Layouts',
   colour: '250',
   contents: [
     {

@@ -29,7 +29,6 @@ Blockly.Blocks['row'] = {
       .appendField('styling:')
     this.appendStatementInput('ROW_CONTENT')
       .appendField('content:')
-      .setCheck(['']) // TODO add type checks
   }
 }
 
