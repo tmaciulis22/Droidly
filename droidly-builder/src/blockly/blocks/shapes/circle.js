@@ -3,7 +3,7 @@ import Blockly from 'blockly'
 Blockly.Blocks['circle'] = {
   init: function() {
     this.setColour(10)
-    this.setTooltip('Circle shape used for defining UI element\'s background or form')
+    this.setTooltip('Circle shape')
     this.appendDummyInput()
       .appendField('Circle')
     this.setOutput(true, 'Shape')

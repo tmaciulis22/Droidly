@@ -16,7 +16,7 @@ Blockly.Blocks['surface'] = {
       .appendField('shape:')
     this.appendValueInput('SURFACE_COLOR')
       .setCheck('Colour')
-      .appendField('background colour:')
+      .appendField('colour:')
     this.appendDummyInput()
       .appendField('border width:')
       .appendField(new Blockly.FieldNumber(0, 0, null, 1), 'SURFACE_BORDER_WIDTH')
@@ -35,7 +35,7 @@ Blockly.Blocks['surface'] = {
 
 Blockly.Kotlin['surface'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'SURFACE_MODIFIER')
-  const onClick = Blockly.Kotlin.valueToCode(block, 'SURFACE_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || null
+  const onClick = Blockly.Kotlin.valueToCode(block, 'SURFACE_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || '{}'
   const elevation = `${block.getFieldValue('SURFACE_ELEVATION')}.dp` || '1.dp'
   const shape = Blockly.Kotlin.valueToCode(block, 'SURFACE_SHAPE', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.shapes.medium'
   const color = Blockly.Kotlin.valueToCode(block, 'SURFACE_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.colors.surface'
@@ -61,12 +61,12 @@ Blockly.Kotlin['surface'] = (block) => {
   const code = []
   code.push(
     'Surface(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}shape = ${shape}`,
-    `${Blockly.Kotlin.INDENT}color = ${color}`,
-    `${Blockly.Kotlin.INDENT}contentColor = contentColorFor(backgroundColor)`,
-    `${Blockly.Kotlin.INDENT}border = ${border}`,
-    `${Blockly.Kotlin.INDENT}elevation = ${elevation}`,
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}shape = ${shape},`,
+    `${Blockly.Kotlin.INDENT}color = ${color},`,
+    `${Blockly.Kotlin.INDENT}contentColor = contentColorFor(backgroundColor),`,
+    `${Blockly.Kotlin.INDENT}border = ${border},`,
+    `${Blockly.Kotlin.INDENT}elevation = ${elevation},`,
     ') {',
     `${content}`,
     '}'

@@ -1,4 +1,5 @@
 import './colour'
+import './colourRGB'
 import './colourARGB'
 
 const coloursCategoryContent = {
@@ -9,6 +10,10 @@ const coloursCategoryContent = {
     {
       kind: 'block',
       type: 'colour'
+    },
+    {
+      kind: 'block',
+      type: 'colourRGB'
     },
     {
       kind: 'block',

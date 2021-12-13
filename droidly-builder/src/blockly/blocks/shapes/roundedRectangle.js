@@ -3,11 +3,9 @@ import Blockly from 'blockly'
 Blockly.Blocks['roundedRectangle'] = {
   init: function() {
     this.setColour(10)
-    this.setTooltip('Rectangle shape with rounded corners used for defining UI element\'s background or form')
+    this.setTooltip('Rectangle shape with rounded corners (in percentage)')
     this.appendDummyInput()
       .appendField('Rounded rectangle')
-    this.appendDummyInput()
-      .appendField('rounding percentage:')
       .appendField(new Blockly.FieldNumber(20, 1, 100, 1), 'ROUNDING_PERCENTAGE')
     this.setOutput(true, 'Shape')
   }

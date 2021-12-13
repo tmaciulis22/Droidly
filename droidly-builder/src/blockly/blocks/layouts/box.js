@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 Blockly.Blocks['box'] = {
   init: function() {
     this.setColour(250)
-    this.setTooltip('Stacks children items on top of each other in a box with optional alignment')
+    this.setTooltip('Stacks children items on top of each other in a box with optional alignment. Last added content block will be on top.')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
     this.appendDummyInput()

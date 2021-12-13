@@ -3,7 +3,7 @@ import Blockly from 'blockly'
 Blockly.Blocks['background'] = {
   init: function() {
     this.setColour(200)
-    this.setTooltip('Changes elements background color and optionally its shape')
+    this.setTooltip('Add colored background to the element in form of optional shape. If used on Surface, Button and TextField, then it could change those elements color')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
     this.appendDummyInput()

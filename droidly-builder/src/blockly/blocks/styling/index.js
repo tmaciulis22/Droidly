@@ -11,7 +11,7 @@ import './fillMaxHeight'
 import './fillMaxSize'
 import './height'
 import './width'
-import './shadow'
+import './shape'
 
 const stylingCategoryContent = {
   kind: 'category',
@@ -64,16 +64,16 @@ const stylingCategoryContent = {
     },
     {
       kind: 'block',
+      type: 'shape'
+    },
+    {
+      kind: 'block',
       type: 'background'
     },
     {
       kind: 'block',
       type: 'border'
     },
-    {
-      kind: 'block',
-      type: 'shadow'
-    }
   ]
 }
 

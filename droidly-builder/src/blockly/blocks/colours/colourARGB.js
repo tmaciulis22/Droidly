@@ -12,15 +12,15 @@ Blockly.Blocks['colourARGB'] = {
       .setAlign(Blockly.ALIGN_RIGHT)
     this.appendDummyInput()
       .appendField('red:')
-      .appendField(new Blockly.FieldTextInput('FF'), 'RED')
+      .appendField(new Blockly.FieldTextInput('FF'), 'A_RED')
       .setAlign(Blockly.ALIGN_RIGHT)
     this.appendDummyInput()
       .appendField('green:')
-      .appendField(new Blockly.FieldTextInput('FF'), 'GREEN')
+      .appendField(new Blockly.FieldTextInput('FF'), 'A_GREEN')
       .setAlign(Blockly.ALIGN_RIGHT)
     this.appendDummyInput()
       .appendField('blue:')
-      .appendField(new Blockly.FieldTextInput('FF'), 'BLUE')
+      .appendField(new Blockly.FieldTextInput('FF'), 'A_BLUE')
       .setAlign(Blockly.ALIGN_RIGHT)
     this.setOutput(true, 'Colour')
   }
@@ -28,9 +28,9 @@ Blockly.Blocks['colourARGB'] = {
 
 Blockly.Kotlin['colourARGB'] = (block) => {
   const alpha = `0x${block.getFieldValue('ALPHA')}`
-  const red = `0x${block.getFieldValue('RED')}`
-  const green = `0x${block.getFieldValue('GREEN')}`
-  const blue = `0x${block.getFieldValue('BLUE')}`
+  const red = `0x${block.getFieldValue('A_RED')}`
+  const green = `0x${block.getFieldValue('A_GREEN')}`
+  const blue = `0x${block.getFieldValue('A_BLUE')}`
 
   return [`Color(red = ${red}, green = ${green}, blue = ${blue}, alpha = ${alpha})`, Blockly.Kotlin.ORDER_ATOMIC]
 }
