@@ -10,7 +10,7 @@ Blockly.Blocks['text'] = {
       .appendField('Text')
       .appendField(new Blockly.FieldTextInput('Lorem ipsum'), 'TEXT_STRING')
     this.appendValueInput('TEXT_COLOR')
-      .appendField('color:')
+      .appendField('colour:')
     this.appendDummyInput()
       .appendField('size:')
       .appendField(new Blockly.FieldNumber(16, 1, 164, 1), 'TEXT_SIZE')

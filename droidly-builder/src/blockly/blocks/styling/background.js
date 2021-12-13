@@ -13,7 +13,7 @@ Blockly.Blocks['background'] = {
       .appendField('colour:')
     this.appendValueInput('BACKGROUND_SHAPE')
       .setCheck('Shape')
-      .appendField('shape (optional):')
+      .appendField('shape:')
   }
 }
 

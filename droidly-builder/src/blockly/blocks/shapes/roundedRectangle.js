@@ -16,5 +16,5 @@ Blockly.Blocks['roundedRectangle'] = {
 Blockly.Kotlin['roundedRectangle'] = (block) => {
   const percent = block.getFieldValue('ROUNDING_PERCENTAGE') || '20'
 
-  return [`RoundedCornerShapeRectangleShape(percent = ${percent})`, Blockly.Kotlin.ORDER_ATOMIC]
+  return [`RoundedCornerShape(percent = ${percent})`, Blockly.Kotlin.ORDER_ATOMIC]
 }

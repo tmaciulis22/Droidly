@@ -11,5 +11,5 @@ Blockly.Blocks['rectangle'] = {
 }
 
 Blockly.Kotlin['rectangle'] = () => {
-  return ['RoundedCornerShape(0)', Blockly.Kotlin.ORDER_ATOMIC]
+  return ['RectangleShape', Blockly.Kotlin.ORDER_ATOMIC]
 }

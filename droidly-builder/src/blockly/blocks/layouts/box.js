@@ -9,7 +9,7 @@ Blockly.Blocks['box'] = {
     this.appendDummyInput()
       .appendField('Box')
     this.appendDummyInput()
-      .appendField('content alignment(2D plane):')
+      .appendField('content alignment (2D plane):')
       .appendField(new Blockly.FieldDropdown([
         ['top start', 'Alignment.TopStart'],
         ['top center', 'Alignment.TopCenter'],

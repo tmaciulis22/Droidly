@@ -1,6 +1,7 @@
 import './surface'
 import './text'
 import './spacer'
+import './button'
 
 const elementsCategoryContent = {
   kind: 'category',
@@ -9,15 +10,19 @@ const elementsCategoryContent = {
   contents: [
     {
       kind: 'block',
-      type: 'surface'
-    },
-    {
-      kind: 'block',
       type: 'text'
     },
     {
       kind: 'block',
       type: 'spacer'
+    },
+    {
+      kind: 'block',
+      type: 'button'
+    },
+    {
+      kind: 'block',
+      type: 'surface'
     },
   ]
 }

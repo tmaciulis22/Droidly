@@ -16,7 +16,7 @@ Blockly.Blocks['border'] = {
       .appendField('colour:')
     this.appendValueInput('BORDER_SHAPE')
       .setCheck('Shape')
-      .appendField('shape (optional):')
+      .appendField('shape:')
   }
 }
 
