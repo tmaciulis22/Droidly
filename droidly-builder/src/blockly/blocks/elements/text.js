@@ -8,7 +8,7 @@ Blockly.Blocks['text'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Text')
-      .appendField(new Blockly.FieldTextInput('Lorem ipsum'), 'TEXT_STRING')
+      .appendField(new Blockly.FieldMultilineInput('Lorem ipsum'), 'TEXT_STRING')
     this.appendDummyInput()
       .appendField('size:')
       .appendField(new Blockly.FieldNumber(16, 1, 164, 1), 'TEXT_SIZE')

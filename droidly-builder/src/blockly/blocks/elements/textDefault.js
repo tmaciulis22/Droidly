@@ -8,7 +8,7 @@ Blockly.Blocks['textDefault'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Text')
-      .appendField(new Blockly.FieldTextInput('Lorem ipsum'), 'TEXT_STRING')
+      .appendField(new Blockly.FieldMultilineInput('Lorem ipsum'), 'TEXT_STRING')
     this.appendStatementInput('TEXT_MODIFIER')
       .appendField('modifier:')
   }
