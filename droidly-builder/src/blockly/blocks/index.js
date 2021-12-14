@@ -1,15 +1,13 @@
 import layoutCategoryContent from './layouts'
 import elementsCategoryContent from './elements'
+import modifierCategoryContent from './modifier'
 import stylingCategoryContent from './styling'
-import shapesCategoryContent from './shapes'
-import coloursCategoryContent from './colours'
 
 const contents = [
   layoutCategoryContent,
   elementsCategoryContent,
+  modifierCategoryContent,
   stylingCategoryContent,
-  shapesCategoryContent,
-  coloursCategoryContent,
 ]
 
 export default contents

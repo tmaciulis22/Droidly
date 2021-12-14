@@ -22,10 +22,9 @@ Blockly.Blocks['box'] = {
         ['bottom end', 'Alignment.BottomEnd'],
       ]), 'BOX_ALIGNMENT')
     this.appendStatementInput('BOX_MODIFIER')
-      .appendField('styling:')
+      .appendField('modifier:')
     this.appendStatementInput('BOX_CONTENT')
       .appendField('content:')
-      .setCheck(['']) // TODO add type checks
   }
 }
 

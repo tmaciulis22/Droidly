@@ -14,20 +14,19 @@ Blockly.Blocks['text'] = {
       .appendField(new Blockly.FieldNumber(16, 1, 164, 1), 'TEXT_SIZE')
       .appendField('weight:')
       .appendField(new Blockly.FieldNumber(400, 100, 900, 100), 'TEXT_WEIGHT')
-    this.appendValueInput('TEXT_COLOR')
-      .appendField('colour:')
-    this.appendDummyInput()
       .appendField('max one line:')
       .appendField(new Blockly.FieldCheckbox(), 'IS_ONE_LINE')
+    this.appendValueInput('TEXT_COLOR')
+      .appendField('colour:')
     this.appendStatementInput('TEXT_MODIFIER')
-      .appendField('styling:')
+      .appendField('modifier:')
   }
 }
 
 Blockly.Kotlin['text'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_MODIFIER')
   const text = `"${block.getFieldValue('TEXT_STRING')}"` || '""'
-  const color = Blockly.Kotlin.valueToCode(block, 'TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'Color.Unspecified'
+  const color = Blockly.Kotlin.valueToCode(block, 'TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'Color(0xff000000)'
   const size = `${block.getFieldValue('TEXT_SIZE')}.sp` || '16.sp'
   const weight = `FontWeight.W${block.getFieldValue('TEXT_WEIGHT')}` || 'FontWeight.W400'
   const maxOneLine = block.getFieldValue('IS_ONE_LINE') === 'TRUE'

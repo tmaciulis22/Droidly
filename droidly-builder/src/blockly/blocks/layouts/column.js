@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 Blockly.Blocks['column'] = {
   init: function() {
     this.setColour(250)
-    this.setTooltip('Layouts children items in a column vertically  with optional arrangement and alignment')
+    this.setTooltip('Layouts children items in a column vertically with optional arrangement and alignment')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
     this.appendDummyInput()
@@ -26,7 +26,7 @@ Blockly.Blocks['column'] = {
         ['end', 'Alignment.End']
       ]), 'COLUMN_ALIGNMENT')
     this.appendStatementInput('COLUMN_MODIFIER')
-      .appendField('styling:')
+      .appendField('modifier:')
     this.appendStatementInput('COLUMN_CONTENT')
       .appendField('content:')
       .setCheck(['']) // TODO add type checks

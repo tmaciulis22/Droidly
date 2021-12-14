@@ -32,7 +32,7 @@ Blockly.Blocks['iconButton'] = {
       .setCheck('Action')
       .appendField('on click:')
     this.appendStatementInput('ICON_BUTTON_MODIFIER')
-      .appendField('styling:')
+      .appendField('modifier:')
   }
 }
 

@@ -18,6 +18,16 @@ export default function BlocklyEditorPage() {
   const { workspace } = useBlocklyWorkspace({
     ref: blocklyRef,
     toolboxConfiguration: toolboxConfig,
+    workspaceConfiguration: {
+      zoom: {
+        controls: true,
+        wheel: true,
+        startScale: 1.0,
+        maxScale: 2.0,
+        minScale: 0.5,
+      },
+      trashcan: true
+    },
     onWorkspaceChange: handleOnWorkspaceChanged
   })
 

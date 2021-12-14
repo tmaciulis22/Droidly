@@ -1,6 +1,6 @@
 import Blockly from 'blockly'
 
-Blockly.Blocks['defaultButton'] = {
+Blockly.Blocks['buttonDefault'] = {
   init: function() {
     this.setColour(175)
     this.setTooltip('Button with custom on click action')
@@ -8,18 +8,17 @@ Blockly.Blocks['defaultButton'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Button')
-    this.appendDummyInput()
       .appendField('text:')
       .appendField(new Blockly.FieldTextInput('Click me'), 'BUTTON_TEXT')
     this.appendValueInput('BUTTON_ON_CLICK')
       .setCheck('Action')
       .appendField('on click:')
     this.appendStatementInput('BUTTON_MODIFIER')
-      .appendField('styling:')
+      .appendField('modifier:')
   }
 }
 
-Blockly.Kotlin['defaultButton'] = (block) => {
+Blockly.Kotlin['buttonDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || '{}'
   const text = `"${block.getFieldValue('BUTTON_TEXT')}"` || '""'

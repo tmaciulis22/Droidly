@@ -1,8 +1,13 @@
 import './surface'
+import './surfaceDefault'
 import './text'
-import './spacer'
+import './textDefault'
 import './button'
-import './defaultButton'
+import './buttonDefault'
+import './iconDefault'
+import './iconButtonDefault'
+import './imageDefault'
+import './spacer'
 import './icon'
 import './iconButton'
 import './image'
@@ -14,7 +19,27 @@ const elementsCategoryContent = {
   contents: [
     {
       kind: 'block',
-      type: 'text'
+      type: 'textDefault'
+    },
+    {
+      kind: 'block',
+      type: 'buttonDefault'
+    },
+    {
+      kind: 'block',
+      type: 'surfaceDefault'
+    },
+    {
+      kind: 'block',
+      type: 'iconDefault'
+    },
+    {
+      kind: 'block',
+      type: 'iconButtonDefault'
+    },
+    {
+      kind: 'block',
+      type: 'imageDefault'
     },
     {
       kind: 'block',
@@ -22,7 +47,7 @@ const elementsCategoryContent = {
     },
     {
       kind: 'block',
-      type: 'defaultButton'
+      type: 'text'
     },
     {
       kind: 'block',

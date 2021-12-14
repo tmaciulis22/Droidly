@@ -1,9 +1,9 @@
 import Blockly from 'blockly';
 
-Blockly.Blocks['image'] = {
+Blockly.Blocks['imageDefault'] = {
   init: function() {
     this.setColour(175)
-    this.setTooltip('Draws an image from URL with opacity (0-100)')
+    this.setTooltip('Draws an image from URL.')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
     this.appendDummyInput()
@@ -11,18 +11,14 @@ Blockly.Blocks['image'] = {
     this.appendDummyInput()
       .appendField('url:')
       .appendField(new Blockly.FieldTextInput(''), 'IMAGE_URL')
-    this.appendDummyInput()
-      .appendField('opacity:')
-      .appendField(new Blockly.FieldNumber(100, 0, 100, 1), 'IMAGE_ALPHA')
     this.appendStatementInput('IMAGE_MODIFIER')
       .appendField('modifier:')
   }
 }
 
-Blockly.Kotlin['image'] = (block) => {
+Blockly.Kotlin['imageDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'IMAGE_MODIFIER')
   const url = block.getFieldValue('IMAGE_URL')
-  const opacity = `${Number(block.getFieldValue('IMAGE_ALPHA')) / 100}f` || '1.0f'
 
   const modifier = []
   modifier.push('Modifier')
@@ -36,7 +32,6 @@ Blockly.Kotlin['image'] = (block) => {
     'Image(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
     `${Blockly.Kotlin.INDENT}painter = rememberImagePainter(${url}, builder = { crossfade(true) }),`,
-    `${Blockly.Kotlin.INDENT}alpha = ${opacity}`,
     ')'
   )
 

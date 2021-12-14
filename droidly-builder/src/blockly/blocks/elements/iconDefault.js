@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-Blockly.Blocks['icon'] = {
+Blockly.Blocks['iconDefault'] = {
   init: function() {
     this.setColour(175)
     this.setTooltip('Draws an icon from a list')
@@ -25,17 +25,13 @@ Blockly.Blocks['icon'] = {
         ['close', 'Close'],
         ['add', 'Add'],
       ]), 'ICON_ICON')
-    this.appendValueInput('ICON_COLOR')
-      .setCheck('Colour')
-      .appendField('colour:')
     this.appendStatementInput('ICON_MODIFIER')
       .appendField('modifier:')
   }
 }
 
-Blockly.Kotlin['icon'] = (block) => {
+Blockly.Kotlin['iconDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'ICON_MODIFIER')
-  const color = Blockly.Kotlin.valueToCode(block, 'ICON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.colors.primary'
   const imageVector = `Icons.Default.${block.getFieldValue('ICON_ICON')}`
 
   const modifier = []
@@ -50,7 +46,6 @@ Blockly.Kotlin['icon'] = (block) => {
     'Icon(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
     `${Blockly.Kotlin.INDENT}imageVector = ${imageVector}`,
-    `${Blockly.Kotlin.INDENT}tint = ${color}`,
     ')'
   )
 

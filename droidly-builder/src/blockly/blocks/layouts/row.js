@@ -26,7 +26,7 @@ Blockly.Blocks['row'] = {
         ['bottom', 'Alignment.Bottom']
       ]), 'ROW_ALIGNMENT')
     this.appendStatementInput('ROW_MODIFIER')
-      .appendField('styling:')
+      .appendField('modifier:')
     this.appendStatementInput('ROW_CONTENT')
       .appendField('content:')
   }

@@ -1,6 +1,9 @@
 import './screen'
+import './rowDefault'
 import './row'
+import './columnDefault'
 import './column'
+import './boxDefault'
 import './box'
 
 // TODO Scaffold?
@@ -14,6 +17,18 @@ const layoutCategoryContent = {
     {
       kind: 'block',
       type: 'screen'
+    },
+    {
+      kind: 'block',
+      type: 'rowDefault'
+    },
+    {
+      kind: 'block',
+      type: 'columnDefault'
+    },
+    {
+      kind: 'block',
+      type: 'boxDefault'
     },
     {
       kind: 'block',
