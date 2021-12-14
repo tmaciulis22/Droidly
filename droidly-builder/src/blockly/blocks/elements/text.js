@@ -42,13 +42,13 @@ Blockly.Kotlin['text'] = (block) => {
   const code = []
   code.push(
     'Text(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}color = ${color}`,
-    `${Blockly.Kotlin.INDENT}text = ${text}`,
-    `${Blockly.Kotlin.INDENT}fontSize = ${size}`,
-    `${Blockly.Kotlin.INDENT}fontWeight = ${weight}`,
-    `${Blockly.Kotlin.INDENT}overflow = TextOverflow.Ellipsis`,
-    `${Blockly.Kotlin.INDENT}maxLines = ${numOfLines}`,
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}color = ${color},`,
+    `${Blockly.Kotlin.INDENT}text = ${text},`,
+    `${Blockly.Kotlin.INDENT}fontSize = ${size},`,
+    `${Blockly.Kotlin.INDENT}fontWeight = ${weight},`,
+    `${Blockly.Kotlin.INDENT}overflow = TextOverflow.Ellipsis,`,
+    `${Blockly.Kotlin.INDENT}maxLines = ${numOfLines},`,
     ')'
   )
 

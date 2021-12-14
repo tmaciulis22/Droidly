@@ -1,9 +1,11 @@
-import './surface'
-import './surfaceDefault'
 import './text'
 import './textDefault'
 import './button'
 import './buttonDefault'
+import './textField'
+import './textFieldDefault'
+import './surface'
+import './surfaceDefault'
 import './iconDefault'
 import './iconButtonDefault'
 import './imageDefault'
@@ -25,6 +27,10 @@ const elementsCategoryContent = {
     {
       kind: 'block',
       type: 'buttonDefault'
+    },
+    {
+      kind: 'block',
+      type: 'textFieldDefault'
     },
     {
       kind: 'block',
@@ -57,6 +63,10 @@ const elementsCategoryContent = {
     {
       kind: 'block',
       type: 'button'
+    },
+    {
+      kind: 'block',
+      type: 'textField'
     },
     {
       kind: 'block',

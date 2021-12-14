@@ -39,19 +39,24 @@ Blockly.Kotlin['button'] = (block) => {
   const shape = Blockly.Kotlin.valueToCode(block, 'BUTTON_SHAPE', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.shapes.small'
   const border = Blockly.Kotlin.valueToCode(block, 'BUTTON_BORDER', Blockly.Kotlin.ORDER_ATOMIC) || 'null'
 
-  const buttonColors = `ButtonDefaults.buttonColors(${buttonColor || 'MaterialTheme.colors.primary'}, ${textColor || 'MaterialTheme.colors.onPrimary'})`
+  const modifier = []
+  modifier.push('Modifier')
+  if (addedModifiers) {
+    modifier.push(addedModifiers)
+  }
+  const modifierString = modifier.join('\n')
 
   const code = []
   code.push(
-    'Button(',
-    `${Blockly.Kotlin.INDENT}modifier = ${addedModifiers}`,
-    `${Blockly.Kotlin.INDENT}onClick = ${onClick}`,
-    `${Blockly.Kotlin.INDENT}colors = ${buttonColors}`,
-    `${Blockly.Kotlin.INDENT}shape = ${shape}`,
-    `${Blockly.Kotlin.INDENT}border = ${border}`,
-    ') {',
-    `${Blockly.Kotlin.INDENT}Text(text = ${text}, style = MaterialTheme.typography.button)`,
-    '}'
+    'DroidlyButton(',
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}onClick = ${onClick},`,
+    `${Blockly.Kotlin.INDENT}text = ${text},`,
+    `${Blockly.Kotlin.INDENT}buttonColor = ${buttonColor || 'MaterialTheme.colors.primary'},`,
+    `${Blockly.Kotlin.INDENT}textColor = ${textColor || 'MaterialTheme.colors.onPrimary'},`,
+    `${Blockly.Kotlin.INDENT}shape = ${shape},`,
+    `${Blockly.Kotlin.INDENT}border = ${border},`,
+    ')'
   )
 
   return code.join('\n')

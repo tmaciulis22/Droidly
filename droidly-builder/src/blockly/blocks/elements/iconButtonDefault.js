@@ -47,14 +47,11 @@ Blockly.Kotlin['iconButtonDefault'] = (block) => {
 
   const code = []
   code.push(
-    'IconButton(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}onClick = ${onClick}`,
-    ') {',
-    `${Blockly.Kotlin.INDENT}Icon(`,
-    `${Blockly.Kotlin.INDENT}${Blockly.Kotlin.INDENT}imageVector = ${imageVector}`,
-    `${Blockly.Kotlin.INDENT})`,
-    '}'
+    'DroidlyIconButton(',
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}onClick = ${onClick},`,
+    `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
+    ')'
   )
 
   return code.join('\n')

@@ -6,14 +6,10 @@ Blockly.Blocks['colourARGB'] = {
     this.setTooltip('Create a colour from ARBG value in hex format (00 - FF). A - alpha(transparency), R - red, G - green, B - blue')
     this.appendDummyInput()
       .appendField('Colour')
+      .appendField(new Blockly.FieldTextInput('FFFFFF'), 'RGB')
     this.appendDummyInput()
       .appendField('alpha:')
       .appendField(new Blockly.FieldTextInput('FF'), 'ALPHA')
-      .setAlign(Blockly.ALIGN_RIGHT)
-      this.appendDummyInput()
-      .appendField('Colour')
-      .appendField(new Blockly.FieldTextInput('FFFFFF'), 'RGB')
-      .setAlign(Blockly.ALIGN_RIGHT)
     this.setOutput(true, 'Colour')
   }
 }

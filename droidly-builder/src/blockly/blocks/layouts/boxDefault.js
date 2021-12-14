@@ -29,7 +29,7 @@ Blockly.Kotlin['boxDefault'] = (block) => {
   const code = []
   code.push(
     'Box(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     ') {',
     `${content}`,
     '}'

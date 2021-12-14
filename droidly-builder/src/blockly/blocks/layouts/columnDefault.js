@@ -29,7 +29,7 @@ Blockly.Kotlin['columnDefault'] = (block) => {
   const code = []
   code.push(
     'Column(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     ') {',
     `${content}`,
     '}'

@@ -43,8 +43,8 @@ Blockly.Kotlin['box'] = (block) => {
   const code = []
   code.push(
     'Box(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}contentAlignment = ${alignment}`,
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}contentAlignment = ${alignment},`,
     ') {',
     `${content}`,
     '}'

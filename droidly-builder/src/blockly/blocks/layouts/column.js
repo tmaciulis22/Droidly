@@ -49,9 +49,9 @@ Blockly.Kotlin['column'] = (block) => {
   const code = []
   code.push(
     'Column(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}verticalArrangement = ${arrangement}`,
-    `${Blockly.Kotlin.INDENT}horizontalAlignment = ${alignment}`,
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}verticalArrangement = ${arrangement},`,
+    `${Blockly.Kotlin.INDENT}horizontalAlignment = ${alignment},`,
     ') {',
     `${content}`,
     '}'

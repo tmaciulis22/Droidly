@@ -1,6 +1,6 @@
 import Blockly from 'blockly'
 
-Blockly.Blocks['textField'] = {
+Blockly.Blocks['textFieldDefault'] = {
   init: function() {
     this.setColour(175)
     this.setTooltip('Text field accepting text input')
@@ -8,42 +8,25 @@ Blockly.Blocks['textField'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Text field')
+    this.appendDummyInput()
       .appendField('placeholder:')
       .appendField(new Blockly.FieldTextInput('Placeholder text'), 'TEXT_FIELD_PLACEHOLDER')
+    this.appendDummyInput()
       .appendField('max one line:')
       .appendField(new Blockly.FieldCheckbox('TRUE'), 'TEXT_FIELD_IS_ONE_LINE')
     this.appendValueInput('TEXT_FIELD_ON_ENTER')
       .setCheck('Action')
       .appendField('on enter:')
-    this.appendValueInput('TEXT_FIELD_COLOR')
-      .setCheck('Colour')
-      .appendField('text field colour:')
-    this.appendValueInput('TEXT_FIELD_TEXT_COLOR')
-      .setCheck('Colour')
-      .appendField('text colour:')
-    this.appendValueInput('TEXT_FIELD_SHAPE')
-      .setCheck('Shape')
-      .appendField('shape:')
-    this.appendValueInput('TEXT_FIELD_BORDER')
-      .setCheck('Border')
-      .appendField('border:')
     this.appendStatementInput('TEXT_FIELD_MODIFIER')
       .appendField('modifier:')
   }
 }
 
-Blockly.Kotlin['textField'] = (block) => {
+Blockly.Kotlin['textFieldDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_FIELD_MODIFIER')
 
   const onEnter = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_ON_ENTER', Blockly.Kotlin.ORDER_ATOMIC) || '{}'
   const placeholder = `"${block.getFieldValue('TEXT_FIELD_PLACEHOLDER')}"` || '""'
-
-  const textFieldColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
-  const textColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
-
-  const shape = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_SHAPE', Blockly.Kotlin.ORDER_ATOMIC)
-    || 'MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize)'
-  const border = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_BORDER', Blockly.Kotlin.ORDER_ATOMIC) || 'null'
 
   const singleLine = block.getFieldValue('TEXT_FIELD_IS_ONE_LINE') === 'TRUE' ? 'true' : 'false'
 
@@ -59,11 +42,7 @@ Blockly.Kotlin['textField'] = (block) => {
     'DroidlyTextField(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}placeholder = ${placeholder},`,
-    `${Blockly.Kotlin.INDENT}color = ${textFieldColor},`,
-    `${Blockly.Kotlin.INDENT}textColor = ${textColor},`,
-    `${Blockly.Kotlin.INDENT}shape = ${shape},`,
     `${Blockly.Kotlin.INDENT}singleLine = ${singleLine},`,
-    `${Blockly.Kotlin.INDENT}border = ${border},`,
     `${Blockly.Kotlin.INDENT}onEnter = ${onEnter},`,
     ')',
   )

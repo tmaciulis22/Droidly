@@ -18,7 +18,7 @@ Blockly.Blocks['imageDefault'] = {
 
 Blockly.Kotlin['imageDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'IMAGE_MODIFIER')
-  const url = block.getFieldValue('IMAGE_URL')
+  const url = block.getFieldValue('IMAGE_URL') || 'null'
 
   const modifier = []
   modifier.push('Modifier')
@@ -29,9 +29,9 @@ Blockly.Kotlin['imageDefault'] = (block) => {
 
   const code = []
   code.push(
-    'Image(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}painter = rememberImagePainter(${url}, builder = { crossfade(true) }),`,
+    'DroidlyImage(',
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}url = ${url},`,
     ')'
   )
 

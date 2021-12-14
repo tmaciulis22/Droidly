@@ -32,12 +32,11 @@ Blockly.Kotlin['buttonDefault'] = (block) => {
 
   const code = []
   code.push(
-    'Button(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}onClick = ${onClick}`,
-    ') {',
-    `${Blockly.Kotlin.INDENT}Text(text = ${text}, style = MaterialTheme.typography.button)`,
-    '}'
+    'DroidlyButton(',
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}onClick = ${onClick},`,
+    `${Blockly.Kotlin.INDENT}text = ${text},`,
+    ')'
   )
 
   return code.join('\n')

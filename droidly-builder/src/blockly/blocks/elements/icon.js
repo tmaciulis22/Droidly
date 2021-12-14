@@ -48,9 +48,10 @@ Blockly.Kotlin['icon'] = (block) => {
   const code = []
   code.push(
     'Icon(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString}`,
-    `${Blockly.Kotlin.INDENT}imageVector = ${imageVector}`,
-    `${Blockly.Kotlin.INDENT}tint = ${color}`,
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
+    `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
+    'contentDescription = "icon",',
+    `${Blockly.Kotlin.INDENT}tint = ${color},`,
     ')'
   )
 
