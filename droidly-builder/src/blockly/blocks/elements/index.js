@@ -7,6 +7,7 @@ import './buttonDefault'
 import './iconDefault'
 import './iconButtonDefault'
 import './imageDefault'
+import './divider'
 import './spacer'
 import './icon'
 import './iconButton'
@@ -40,6 +41,10 @@ const elementsCategoryContent = {
     {
       kind: 'block',
       type: 'imageDefault'
+    },
+    {
+      kind: 'block',
+      type: 'divider'
     },
     {
       kind: 'block',
