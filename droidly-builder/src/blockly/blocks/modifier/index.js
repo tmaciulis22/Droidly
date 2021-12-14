@@ -10,6 +10,8 @@ import './fillMaxHeight'
 import './fillMaxSize'
 import './height'
 import './width'
+import './rotate'
+import './zIndex'
 
 const modifierCategoryContent = {
   kind: 'category',
@@ -59,6 +61,14 @@ const modifierCategoryContent = {
     {
       kind: 'block',
       type: 'width'
+    },
+    {
+      kind: 'block',
+      type: 'rotate'
+    },
+    {
+      kind: 'block',
+      type: 'zIndex'
     },
   ]
 }
