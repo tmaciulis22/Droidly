@@ -27,10 +27,9 @@ Blockly.Kotlin['textDefault'] = (block) => {
 
   const code = []
   code.push(
-    'Text(',
+    'DroidlyText(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}text = ${text},`,
-    `${Blockly.Kotlin.INDENT}overflow = TextOverflow.Ellipsis,`,
     ')'
   )
 

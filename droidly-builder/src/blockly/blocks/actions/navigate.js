@@ -1,8 +1,9 @@
 import Blockly from 'blockly'
+import { screenTypes } from '../screens'
 
 const menuGenerator = (block) => () => {
   const screenOptions = block.workspace.topBlocks_
-    .filter(block => block.type === 'screen')
+    .filter(block => screenTypes.some(type => block.type === type))
     .map(block => {
       const screenName = block.getFieldValue('SCREEN_NAME')
       return [screenName, screenName]

@@ -25,12 +25,11 @@ Blockly.Blocks['text'] = {
 
 Blockly.Kotlin['text'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_MODIFIER')
-  const text = `"${block.getFieldValue('TEXT_STRING')}"` || '""'
-  const color = Blockly.Kotlin.valueToCode(block, 'TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'Color(0xff000000)'
-  const size = `${block.getFieldValue('TEXT_SIZE')}.sp` || '16.sp'
-  const weight = `FontWeight.W${block.getFieldValue('TEXT_WEIGHT')}` || 'FontWeight.W400'
-  const maxOneLine = block.getFieldValue('IS_ONE_LINE') === 'TRUE'
-  const numOfLines = maxOneLine ? 1 : 9999999
+  const text = `"${block.getFieldValue('TEXT_STRING')}"`
+  const color = Blockly.Kotlin.valueToCode(block, 'TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
+  const size = block.getFieldValue('TEXT_SIZE') ? `${block.getFieldValue('TEXT_SIZE')}.sp` : null
+  const weight = block.getFieldValue('TEXT_WEIGHT') ? `FontWeight.W${block.getFieldValue('TEXT_WEIGHT')}` : null
+  const maxOneLine = block.getFieldValue('IS_ONE_LINE') === 'TRUE' ? 1 : null
 
   const modifier = []
   modifier.push('Modifier')
@@ -41,16 +40,24 @@ Blockly.Kotlin['text'] = (block) => {
 
   const code = []
   code.push(
-    'Text(',
+    'DroidlyText(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}color = ${color},`,
-    `${Blockly.Kotlin.INDENT}text = ${text},`,
-    `${Blockly.Kotlin.INDENT}fontSize = ${size},`,
-    `${Blockly.Kotlin.INDENT}fontWeight = ${weight},`,
-    `${Blockly.Kotlin.INDENT}overflow = TextOverflow.Ellipsis,`,
-    `${Blockly.Kotlin.INDENT}maxLines = ${numOfLines},`,
-    ')'
+    `${Blockly.Kotlin.INDENT}text = ${text},`
   )
+
+  if (color) {
+    code.push(`${Blockly.Kotlin.INDENT}color = ${color},`)
+  }
+  if (size) {
+    code.push(`${Blockly.Kotlin.INDENT}fontSize = ${size},`)
+  }
+  if (weight) {
+    code.push(`${Blockly.Kotlin.INDENT}fontWeight = ${weight},`)
+  }
+  if (maxOneLine) {
+    code.push(`${Blockly.Kotlin.INDENT}maxLines = ${maxOneLine},`,)
+  }
+  code.push(')')
 
   return code.join('\n')
 }

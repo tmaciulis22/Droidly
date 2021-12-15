@@ -7,12 +7,6 @@ import androidx.navigation.NavController
 abstract class Screen(
     val route: String,
     val composable: @Composable (NavController) -> Unit,
-    val imageVector: ImageVector? = null, // for screens which show DroidlyBottomBar
-    val appBarConfig: AppBarConfig = AppBarConfig.NoAppBar // for screens which show DroidlyTopBar
+    val showTopBar: Boolean = false,
+    val bottomBarTabIcon: ImageVector? = null // for screens which show DroidlyBottomBar
 )
-
-enum class AppBarConfig {
-    NoAppBar,
-    ShowAppBar,
-    ShowAppBarWithNavigationIcon;
-}

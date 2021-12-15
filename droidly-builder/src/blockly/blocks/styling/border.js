@@ -18,7 +18,7 @@ Blockly.Blocks['border'] = {
 
 Blockly.Kotlin['border'] = (block) => {
   const borderWidth = `${block.getFieldValue('BORDER_WIDTH')}.dp` || '1.dp'
-  const borderColor = `${block.getFieldValue('BORDER_COLOR') || 'Color(0xff000000)'}`
+  const borderColor = Blockly.Kotlin.valueToCode(block, 'BORDER_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'Color(0xff000000)'
 
   return [`BorderStroke(${borderWidth}, ${borderColor})`, Blockly.Kotlin.ORDER_ATOMIC]
 }

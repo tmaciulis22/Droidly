@@ -35,7 +35,7 @@ Blockly.Blocks['icon'] = {
 
 Blockly.Kotlin['icon'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'ICON_MODIFIER')
-  const color = Blockly.Kotlin.valueToCode(block, 'ICON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.colors.primary'
+  const color = Blockly.Kotlin.valueToCode(block, 'ICON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const imageVector = `Icons.Default.${block.getFieldValue('ICON_ICON')}`
 
   const modifier = []
@@ -47,13 +47,15 @@ Blockly.Kotlin['icon'] = (block) => {
 
   const code = []
   code.push(
-    'Icon(',
+    'DroidlyIcon(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
-    'contentDescription = "icon",',
-    `${Blockly.Kotlin.INDENT}tint = ${color},`,
-    ')'
   )
+  
+  if (color) {
+    code.push(`${Blockly.Kotlin.INDENT}tint = ${color},`)
+  }
+  code.push(')')
 
   return code.join('\n')
 }

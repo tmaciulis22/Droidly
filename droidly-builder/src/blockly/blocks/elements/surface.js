@@ -32,11 +32,11 @@ Blockly.Blocks['surface'] = {
 
 Blockly.Kotlin['surface'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'SURFACE_MODIFIER')
-  const onClick = Blockly.Kotlin.valueToCode(block, 'SURFACE_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const elevation = `${block.getFieldValue('SURFACE_ELEVATION')}.dp` || '1.dp'
-  const shape = Blockly.Kotlin.valueToCode(block, 'SURFACE_SHAPE', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.shapes.medium'
-  const color = Blockly.Kotlin.valueToCode(block, 'SURFACE_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.colors.surface'
-  const border = Blockly.Kotlin.valueToCode(block, 'SURFACE_BORDER', Blockly.Kotlin.ORDER_ATOMIC) || 'null'
+  const elevation = block.getFieldValue('SURFACE_ELEVATION') >= 0 ? `${block.getFieldValue('SURFACE_ELEVATION')}.dp` : null
+  const onClick = Blockly.Kotlin.valueToCode(block, 'SURFACE_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || null
+  const shape = Blockly.Kotlin.valueToCode(block, 'SURFACE_SHAPE', Blockly.Kotlin.ORDER_ATOMIC) || null
+  const color = Blockly.Kotlin.valueToCode(block, 'SURFACE_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
+  const border = Blockly.Kotlin.valueToCode(block, 'SURFACE_BORDER', Blockly.Kotlin.ORDER_ATOMIC) || null
   const content = Blockly.Kotlin.statementToCode(block, 'SURFACE_CONTENT')
 
   const modifier = []
@@ -44,19 +44,31 @@ Blockly.Kotlin['surface'] = (block) => {
   if (addedModifiers) {
     modifier.push(addedModifiers)
   }
-  if (onClick){
-    modifier.push(`.clickable { ${onClick} }`)
-  }
   const modifierString = modifier.join('\n')
 
   const code = []
   code.push(
-    'Surface(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}shape = ${shape},`,
-    `${Blockly.Kotlin.INDENT}color = ${color},`,
-    `${Blockly.Kotlin.INDENT}border = ${border},`,
-    `${Blockly.Kotlin.INDENT}elevation = ${elevation},`,
+    'DroidlySurface(',
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`
+  )
+
+  if (elevation) {
+    code.push(`${Blockly.Kotlin.INDENT}elevation = ${elevation},`)
+  }
+  if (shape) {
+    code.push(`${Blockly.Kotlin.INDENT}shape = ${shape},`)
+  }
+  if (color) {
+    code.push(`${Blockly.Kotlin.INDENT}color = ${color},`)
+  }
+  if (border) {
+    code.push(`${Blockly.Kotlin.INDENT}border = ${border},`)
+  }
+  if (onClick) {
+    code.push(`${Blockly.Kotlin.INDENT}onClick = { ${onClick} }`)
+  }
+
+  code.push(
     ') {',
     `${content}`,
     '}'

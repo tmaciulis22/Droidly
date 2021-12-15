@@ -50,7 +50,7 @@ Blockly.Kotlin['iconButtonDefault'] = (block) => {
     'DroidlyIconButton(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
-    `${Blockly.Kotlin.INDENT}onClick = ${onClick},`,
+    `${Blockly.Kotlin.INDENT}onClick = { ${onClick} },`,
     ')'
   )
 

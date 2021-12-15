@@ -43,7 +43,7 @@ Blockly.Kotlin['iconDefault'] = (block) => {
 
   const code = []
   code.push(
-    'Icon(',
+    'DroidlyIcon(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
     ')'

@@ -38,7 +38,7 @@ Blockly.Blocks['iconButton'] = {
 
 Blockly.Kotlin['iconButton'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'ICON_BUTTON_MODIFIER')
-  const color = Blockly.Kotlin.valueToCode(block, 'ICON_BUTTON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || 'MaterialTheme.colors.primary'
+  const color = Blockly.Kotlin.valueToCode(block, 'ICON_BUTTON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const imageVector = `Icons.Default.${block.getFieldValue('ICON_BUTTON_ICON')}`
   const onClick = Blockly.Kotlin.valueToCode(block, 'ICON_BUTTON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || '{}'
 
@@ -54,10 +54,13 @@ Blockly.Kotlin['iconButton'] = (block) => {
     'DroidlyIconButton(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
-    `${Blockly.Kotlin.INDENT}tint = ${color},`,
-    `${Blockly.Kotlin.INDENT}onClick = ${onClick},`,
-    ')'
+    `${Blockly.Kotlin.INDENT}onClick = { ${onClick} },`
   )
+
+  if (color) {
+    code.push(`${Blockly.Kotlin.INDENT}tint = ${color},`)
+  }
+  code.push(')')
 
   return code.join('\n')
 }

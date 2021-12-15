@@ -1,4 +1,4 @@
-package com.example.droidly
+package com.example.droidly.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.droidly.ui.navigation.AppBarConfig
+import com.example.droidly.Screens
 import com.example.droidly.ui.navigation.DroidlyNavHost
 import com.example.droidly.ui.view.DroidlyBottomBar
 import com.example.droidly.ui.view.DroidlyTopBar
@@ -19,21 +19,22 @@ fun DroidlyContent() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val screensWithTopBar = Screens.allScreens.filter { it.appBarConfig != AppBarConfig.NoAppBar }
-    val screensWithBottomBar = Screens.allScreens.filter { it.imageVector != null }
+    val showTopBar = Screens.allScreens.filter { it.showTopBar }
+        .any { it.route == currentRoute }
+    val showBottomBar = Screens.allScreens.filter { it.bottomBarTabIcon != null }
+        .any { it.route == currentRoute }
 
     Scaffold(
         topBar = {
-            if (screensWithTopBar.any { it.route == currentRoute })
+            if (showTopBar)
                 DroidlyTopBar(
                     navController = navController,
                     title = currentRoute ?: "Droidly",
-                    showNavigationIcon = screensWithTopBar
-                        .find { it.route == currentRoute }?.appBarConfig == AppBarConfig.ShowAppBarWithNavigationIcon
+                    showNavigationIcon = !showBottomBar
                 )
         },
         bottomBar = {
-            if (screensWithBottomBar.any { it.route == currentRoute })
+            if (showBottomBar)
                 DroidlyBottomBar(navController)
         }
     ) { scaffoldPadding ->

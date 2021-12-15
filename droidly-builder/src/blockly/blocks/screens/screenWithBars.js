@@ -7,11 +7,11 @@ Blockly.Blocks['screenWithBars'] = {
     this.appendDummyInput()
       .appendField('Screen')
       .appendField(new Blockly.FieldTextInput('NameOfScreen'), 'SCREEN_NAME')
-    this.appendValueInput('TOP_BAR')
-      .setCheck('TopBar')
-      .appendField('top bar:')
+    this.appendDummyInput('TOP_BAR')
+      .appendField('show top bar:')
+      .appendField(new Blockly.FieldCheckbox(), 'SHOW_TOP_BAR')
     this.appendDummyInput()
-      .appendField('Bottom tab icon')
+      .appendField('bottom tab icon:')
       .appendField(new Blockly.FieldDropdown(
         [
           ['account', 'AccountCircle'],

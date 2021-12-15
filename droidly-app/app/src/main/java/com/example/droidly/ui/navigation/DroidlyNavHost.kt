@@ -10,7 +10,7 @@ import com.example.droidly.Screens
 fun DroidlyNavHost(
     navController: NavHostController
 ) {
-    val startDestination = Screens.startingScreenName
+    val startDestination = Screens.startScreenRoute
     val screens = Screens.allScreens
 
     NavHost(navController = navController, startDestination = startDestination) {

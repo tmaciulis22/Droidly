@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 Blockly.Blocks['surfaceDefault'] = {
   init: function() {
     this.setColour(175)
-    this.setTooltip('Draws a material surface or aka card.')
+    this.setTooltip('Draws a material surface(card) with elevation.')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
     this.appendDummyInput()
@@ -22,8 +22,8 @@ Blockly.Blocks['surfaceDefault'] = {
 
 Blockly.Kotlin['surfaceDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'SURFACE_MODIFIER')
-  const onClick = Blockly.Kotlin.valueToCode(block, 'SURFACE_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const elevation = `${block.getFieldValue('SURFACE_ELEVATION')}.dp` || '1.dp'
+  const elevation = block.getFieldValue('SURFACE_ELEVATION') >= 0 ? `${block.getFieldValue('SURFACE_ELEVATION')}.dp` : null
+  const onClick = Blockly.Kotlin.valueToCode(block, 'SURFACE_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || null
   const content = Blockly.Kotlin.statementToCode(block, 'SURFACE_CONTENT')
 
   const modifier = []
@@ -31,17 +31,22 @@ Blockly.Kotlin['surfaceDefault'] = (block) => {
   if (addedModifiers) {
     modifier.push(addedModifiers)
   }
-  if (onClick){
-    modifier.push(`.clickable { ${onClick} }`)
-  }
   const modifierString = modifier.join('\n')
 
   const code = []
   code.push(
-    'Surface(',
-    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}elevation = ${elevation},`,
-    `${Blockly.Kotlin.INDENT}shape = 'MaterialTheme.shapes.medium',`,
+    'DroidlySurface(',
+    `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`
+  )
+
+  if (elevation) {
+    code.push(`${Blockly.Kotlin.INDENT}elevation = ${elevation},`)
+  }
+  if (onClick) {
+    code.push(`${Blockly.Kotlin.INDENT}onClick = { ${onClick} }`)
+  }
+
+  code.push(
     ') {',
     `${content}`,
     '}'
