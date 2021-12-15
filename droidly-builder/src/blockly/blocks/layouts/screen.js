@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 Blockly.Blocks['screen'] = {
   init: function() {
     this.setColour(250)
-    this.setTooltip('Defines app screen') // TODO might need to add checkbox for navigation controller
+    this.setTooltip('Defines app screen')
     this.appendDummyInput()
       .appendField('Screen')
     this.appendDummyInput()
@@ -11,12 +11,10 @@ Blockly.Blocks['screen'] = {
       .appendField(new Blockly.FieldTextInput('NameOfScreen'), 'SCREEN_NAME')
     this.appendStatementInput('SCREEN_CONTENT')
       .appendField('content:')
-      .setCheck(['']) // TODO add type checks
-  }
+  },
 }
 
 Blockly.Kotlin['screen'] = (block) => {
-  // TODO might need to conditionally add navigation controller
   const screenName = block.getFieldValue('SCREEN_NAME')
   const content = Blockly.Kotlin.statementToCode(block, 'SCREEN_CONTENT')
 
