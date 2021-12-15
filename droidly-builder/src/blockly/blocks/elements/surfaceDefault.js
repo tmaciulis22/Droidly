@@ -41,6 +41,7 @@ Blockly.Kotlin['surfaceDefault'] = (block) => {
     'Surface(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}elevation = ${elevation},`,
+    `${Blockly.Kotlin.INDENT}shape = 'MaterialTheme.shapes.medium',`,
     ') {',
     `${content}`,
     '}'

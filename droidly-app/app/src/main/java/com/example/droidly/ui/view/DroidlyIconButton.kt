@@ -13,9 +13,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun DroidlyIconButton(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
     imageVector: ImageVector = Icons.Default.ArrowBack,
-    tint: Color = MaterialTheme.colors.primary
+    tint: Color = MaterialTheme.colors.primary,
+    onClick: () -> Unit = {}
 ) {
     IconButton(
         modifier = modifier,

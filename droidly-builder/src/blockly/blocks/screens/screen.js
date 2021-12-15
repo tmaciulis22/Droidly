@@ -2,16 +2,14 @@ import Blockly from 'blockly';
 
 Blockly.Blocks['screen'] = {
   init: function() {
-    this.setColour(250)
-    this.setTooltip('Defines app screen')
+    this.setColour(20)
+    this.setTooltip('Defines app screen.')
     this.appendDummyInput()
       .appendField('Screen')
-    this.appendDummyInput()
-      .appendField('name:')
       .appendField(new Blockly.FieldTextInput('NameOfScreen'), 'SCREEN_NAME')
     this.appendStatementInput('SCREEN_CONTENT')
       .appendField('content:')
-  },
+  }
 }
 
 Blockly.Kotlin['screen'] = (block) => {

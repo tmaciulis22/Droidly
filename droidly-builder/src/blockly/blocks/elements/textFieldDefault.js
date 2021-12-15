@@ -16,7 +16,7 @@ Blockly.Blocks['textFieldDefault'] = {
       .appendField(new Blockly.FieldCheckbox('TRUE'), 'TEXT_FIELD_IS_ONE_LINE')
     this.appendValueInput('TEXT_FIELD_ON_ENTER')
       .setCheck('Action')
-      .appendField('on enter:')
+      .appendField('on submit:')
     this.appendStatementInput('TEXT_FIELD_MODIFIER')
       .appendField('modifier:')
   }

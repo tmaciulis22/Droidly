@@ -19,8 +19,7 @@ Blockly.Blocks['navigate'] = {
   init: function() {
     this.setColour(360)
     this.setTooltip('Navigates to selected screen')
-    this.removeInput('NAVIGATE_SCREEN_INPUT', true)
-    this.appendDummyInput('NAVIGATE_SCREEN_INPUT')
+    this.appendDummyInput()
       .appendField('Navigate to')
       .appendField(new Blockly.FieldDropdown(
         menuGenerator(this)

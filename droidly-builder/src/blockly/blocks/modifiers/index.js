@@ -13,9 +13,9 @@ import './width'
 import './rotate'
 import './zIndex'
 
-const modifierCategoryContent = {
+const modifiersCategoryContent = {
   kind: 'category',
-  name: 'Modifier',
+  name: 'Modifiers',
   colour: '200',
   contents: [
     {
@@ -73,4 +73,4 @@ const modifierCategoryContent = {
   ]
 }
 
-export default modifierCategoryContent
+export default modifiersCategoryContent

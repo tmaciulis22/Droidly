@@ -1,4 +1,3 @@
-import './screen'
 import './rowDefault'
 import './row'
 import './columnDefault'
@@ -6,18 +5,11 @@ import './column'
 import './boxDefault'
 import './box'
 
-// TODO Scaffold?
-// TODO LazyColumn or LazyRow?
-
-const layoutCategoryContent = {
+const layoutsCategoryContent = {
   kind: 'category',
   name: 'Layouts',
   colour: '250',
   contents: [
-    {
-      kind: 'block',
-      type: 'screen'
-    },
     {
       kind: 'block',
       type: 'rowDefault'
@@ -45,4 +37,4 @@ const layoutCategoryContent = {
   ]
 }
 
-export default layoutCategoryContent
+export default layoutsCategoryContent
