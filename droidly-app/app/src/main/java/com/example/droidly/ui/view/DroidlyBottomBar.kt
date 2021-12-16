@@ -16,7 +16,7 @@ fun DroidlyBottomBar(navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNavigation(backgroundColor = MaterialTheme.colors.background) {
+    BottomNavigation(backgroundColor = MaterialTheme.colors.surface) {
         Screen.bottomNavTabs.forEach { item ->
             BottomNavigationItem(
                 icon = {
@@ -36,8 +36,6 @@ fun DroidlyBottomBar(navController: NavController) {
                         restoreState = true
                     }
                 },
-                selectedContentColor = MaterialTheme.colors.primary,
-                unselectedContentColor = MaterialTheme.colors.onSurface.copy(0.6f)
             )
         }
     }

@@ -1,5 +1,6 @@
 package com.example.droidly.ui.view
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -17,6 +18,7 @@ fun DroidlyTopBar(
         },
         navigationIcon = if (showNavigationIcon)
             (@Composable { DroidlyIconButton { navController.popBackStack() }})
-        else null
+        else null,
+        backgroundColor = MaterialTheme.colors.surface
     )
 }

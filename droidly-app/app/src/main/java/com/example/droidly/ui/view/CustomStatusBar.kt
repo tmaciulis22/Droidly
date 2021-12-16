@@ -9,11 +9,11 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 @Composable
 fun CustomStatusBar() {
     val systemUiController = rememberSystemUiController()
-    val primarySurfaceColor = MaterialTheme.colors.primarySurface
+    val surfaceColor = MaterialTheme.colors.surface
 
     SideEffect {
         systemUiController.setStatusBarColor(
-            color = primarySurfaceColor
+            color = surfaceColor
         )
     }
 }
