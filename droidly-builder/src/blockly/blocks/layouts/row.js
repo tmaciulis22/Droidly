@@ -49,7 +49,7 @@ Blockly.Kotlin['row'] = (block) => {
   code.push(
     'Row(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}horizontalArrangmenet = ${arrangement},`,
+    `${Blockly.Kotlin.INDENT}horizontalArrangement = ${arrangement},`,
     `${Blockly.Kotlin.INDENT}verticalAlignment = ${alignment},`,
     ') {',
     `${content}`,
