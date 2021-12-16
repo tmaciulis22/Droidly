@@ -3,7 +3,7 @@ import Blockly from 'blockly';
 Blockly.Blocks['screenWithBars'] = {
   init: function() {
     this.setColour(20)
-    this.setTooltip('Defines app screen.')
+    this.setTooltip('Defines app screen with top and bottom bars. If no bottom bar icon is picked then the bar won\'t be shown')
     this.appendDummyInput()
       .appendField('Screen')
       .appendField(new Blockly.FieldTextInput('NameOfScreen'), 'SCREEN_NAME')
@@ -11,9 +11,10 @@ Blockly.Blocks['screenWithBars'] = {
       .appendField('show top bar:')
       .appendField(new Blockly.FieldCheckbox(), 'SHOW_TOP_BAR')
     this.appendDummyInput()
-      .appendField('bottom tab icon:')
+      .appendField('bottom tab:')
       .appendField(new Blockly.FieldDropdown(
         [
+          ['NO_BAR', 'NO_BAR'],
           ['account', 'AccountCircle'],
           ['search', 'Search'],
           ['home', 'Home'],

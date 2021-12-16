@@ -4,7 +4,6 @@ export default function getImports() {
   code.push(
     'package com.example.droidly',
     '',
-    'import com.example.droidly.ui.navigation.Screen',
     'import androidx.navigation.NavController',
     'import androidx.compose.runtime.Composable',
     'import com.example.droidly.ui.view.*',
@@ -24,6 +23,7 @@ export default function getImports() {
     'import androidx.compose.ui.unit.dp',
     'import androidx.compose.ui.unit.sp',
     'import androidx.compose.ui.zIndex',
+    'import androidx.compose.ui.graphics.vector.ImageVector',
     '',
     ''
   )

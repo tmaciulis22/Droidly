@@ -34,7 +34,7 @@ Blockly.Kotlin['buttonDefault'] = (block) => {
   code.push(
     'DroidlyButton(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}onClick = ${onClick},`,
+    `${Blockly.Kotlin.INDENT}onClick = { ${onClick} },`,
     `${Blockly.Kotlin.INDENT}text = ${text},`,
     ')'
   )
