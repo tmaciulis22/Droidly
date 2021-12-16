@@ -8,8 +8,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.droidly.Screens
+import com.example.droidly.Screen
 import com.example.droidly.ui.navigation.DroidlyNavHost
+import com.example.droidly.ui.view.CustomStatusBar
 import com.example.droidly.ui.view.DroidlyBottomBar
 import com.example.droidly.ui.view.DroidlyTopBar
 
@@ -19,11 +20,10 @@ fun DroidlyContent() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val showTopBar = Screens.allScreens.filter { it.showTopBar }
-        .any { it.route == currentRoute }
-    val showBottomBar = Screens.allScreens.filter { it.bottomBarTabIcon != null }
-        .any { it.route == currentRoute }
+    val showTopBar = Screen.screensWithTopBar.any { it.name == currentRoute }
+    val showBottomBar = Screen.bottomNavTabs.any { it.name == currentRoute }
 
+    CustomStatusBar()
     Scaffold(
         topBar = {
             if (showTopBar)

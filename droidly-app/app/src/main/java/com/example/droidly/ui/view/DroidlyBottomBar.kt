@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.droidly.Screens
+import com.example.droidly.Screen
 
 @Composable
 fun DroidlyBottomBar(navController: NavController) {
@@ -17,18 +17,18 @@ fun DroidlyBottomBar(navController: NavController) {
     val currentDestination = navBackStackEntry?.destination
 
     BottomNavigation(backgroundColor = MaterialTheme.colors.background) {
-        Screens.allScreens.filter { it.bottomBarTabIcon != null }.forEach { item ->
+        Screen.bottomNavTabs.forEach { item ->
             BottomNavigationItem(
                 icon = {
                     Icon(
                         imageVector = item.bottomBarTabIcon ?: Icons.Default.Warning,
-                        contentDescription = "${item.route} tab"
+                        contentDescription = "${item.name} tab"
                     )
                 },
-                label = { Text(item.route) },
-                selected = currentDestination?.hierarchy?.any { it.route == item.route } == true,
+                label = { Text(item.name) },
+                selected = currentDestination?.hierarchy?.any { it.route == item.name } == true,
                 onClick = {
-                    navController.navigate(item.route) {
+                    navController.navigate(item.name) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }

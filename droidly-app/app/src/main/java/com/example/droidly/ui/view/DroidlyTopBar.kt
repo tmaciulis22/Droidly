@@ -15,9 +15,8 @@ fun DroidlyTopBar(
         title = {
             Text(title)
         },
-        navigationIcon = {
-            if (showNavigationIcon)
-                DroidlyIconButton { navController.popBackStack() }
-        }
+        navigationIcon = if (showNavigationIcon)
+            (@Composable { DroidlyIconButton { navController.popBackStack() }})
+        else null
     )
 }

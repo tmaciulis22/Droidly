@@ -11,13 +11,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-val Primary = Color(0xff2ecc71)
-val PrimaryVariant = Color(0xff27ae60)
-val Secondary = Color(0xfff1c40f)
-val Background = Color(0xffecf0f1)
-val OnBackground = Color(0xff000000)
-val OnSurface = Color(0xff000000)
-val Surface = Color.White
+val LightPrimary = Color(0xff4caf50)
+val LightPrimaryVariant = Color(0xff80e27e)
+val LightSecondary = Color(0xfffdd835)
+val LightBackground = Color(0xffdcdde1)
+val LightSurface = Color(0xffffffff)
+val LightOnPrimary = Color(0xffffffff)
+val LightOnSecondary = Color(0xffffffff)
+val LightOnBackground = Color(0xff000000)
+val LightOnSurface = Color(0xff000000)
+
+val DarkPrimary = Color(0xff087f23)
+val DarkPrimaryVariant = Color(0xff4caf50)
+val DarkSecondary = Color(0xffc6a700)
+val DarkBackground = Color(0xff2f3640)
+val DarkSurface = Color(0xff5f6573)
+val DarkOnPrimary = Color(0xfff5f6fa)
+val DarkOnSecondary = Color(0xfff5f6fa)
+val DarkOnBackground = Color(0xfff5f6fa)
+val DarkOnSurface = Color(0xfff5f6fa)
 
 val Shapes = Shapes(
     small = RoundedCornerShape(4.dp),
@@ -25,24 +37,28 @@ val Shapes = Shapes(
     large = RoundedCornerShape(0.dp)
 )
 
-private val DarkColorPalette = darkColors(
-    primary = Primary,
-    primaryVariant = PrimaryVariant,
-    secondary = Secondary,
-    background = Background,
-    onBackground = OnBackground,
-    surface = Surface,
-    onSurface = OnSurface
+private val LightColorPalette = lightColors(
+    primary = LightPrimary,
+    onPrimary = LightOnPrimary,
+    primaryVariant = LightPrimaryVariant,
+    secondary = LightSecondary,
+    onSecondary = LightOnSecondary,
+    background = LightBackground,
+    onBackground = LightOnBackground,
+    surface = LightSurface,
+    onSurface = LightOnSurface,
 )
 
-private val LightColorPalette = lightColors(
-    primary = Primary,
-    primaryVariant = PrimaryVariant,
-    secondary = Secondary,
-    background = Background,
-    onBackground = OnBackground,
-    surface = Surface,
-    onSurface = OnSurface
+private val DarkColorPalette = darkColors(
+    primary = DarkPrimary,
+    onPrimary = DarkOnPrimary,
+    primaryVariant = DarkPrimaryVariant,
+    secondary = DarkSecondary,
+    onSecondary = DarkOnSecondary,
+    background = DarkBackground,
+    onBackground = DarkOnBackground,
+    surface = DarkSurface,
+    onSurface = DarkOnSurface,
 )
 
 @Composable
