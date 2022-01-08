@@ -4,6 +4,12 @@ import elementsCategoryContent from './elements'
 import modifiersCategoryContent from './modifiers'
 import stylingCategoryContent from './styling'
 import actionsCategoryContent from './actions'
+import functionsCategoryContent from './functions'
+import variablesCategoryContent from './variables'
+import loopsCategoryContent from './loops'
+import logicCategoryContent from './logic'
+import mathCategoryContent from './math'
+import listsCategoryContent from './lists'
 
 const contents = [
   screensCategoryContent,
@@ -12,6 +18,16 @@ const contents = [
   modifiersCategoryContent,
   stylingCategoryContent,
   actionsCategoryContent,
+  {
+    "kind": "sep",
+    "gap": "32"
+  },
+  functionsCategoryContent,
+  variablesCategoryContent,
+  loopsCategoryContent,
+  logicCategoryContent,
+  mathCategoryContent,
+  listsCategoryContent,
 ]
 
 export default contents
