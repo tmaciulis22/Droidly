@@ -81,7 +81,6 @@ export default function BlocklyEditorPage() {
 		});
   }
 
-  // Add button to generate code
   return (
     <Box>
       <div ref={blocklyRef} style={{ height: '100vh' }} />

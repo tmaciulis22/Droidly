@@ -29,7 +29,6 @@ Blockly.Blocks['column'] = {
       .appendField('modifier:')
     this.appendStatementInput('COLUMN_CONTENT')
       .appendField('content:')
-      .setCheck(['']) // TODO add type checks
   }
 }
 
