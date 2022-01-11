@@ -3,6 +3,7 @@ package com.example.droidly.ui.view
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import coil.compose.rememberImagePainter
 import com.example.droidly.R
 
@@ -19,6 +20,7 @@ fun DroidlyImage(
             error(R.drawable.ic_error)
             placeholder(R.drawable.ic_loading)
         }),
+        contentScale = ContentScale.Crop,
         contentDescription = "image",
         alpha = alpha
     )
