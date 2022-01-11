@@ -24,6 +24,7 @@ Blockly.Blocks['icon'] = {
         ['star', 'Star'],
         ['close', 'Close'],
         ['add', 'Add'],
+        ['shopping cart', 'ShoppingCart']
       ]), 'ICON_ICON')
     this.appendValueInput('ICON_COLOR')
       .setCheck('Colour')

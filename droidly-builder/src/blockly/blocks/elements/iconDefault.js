@@ -24,6 +24,7 @@ Blockly.Blocks['iconDefault'] = {
         ['star', 'Star'],
         ['close', 'Close'],
         ['add', 'Add'],
+        ['shopping cart', 'ShoppingCart']
       ]), 'ICON_ICON')
     this.appendStatementInput('ICON_MODIFIER')
       .appendField('modifier:')
