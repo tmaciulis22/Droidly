@@ -4,6 +4,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 
 @Composable
@@ -14,7 +15,10 @@ fun DroidlyTopBar(
 ){
     TopAppBar(
         title = {
-            Text(title)
+            Text(
+                title,
+                fontWeight = FontWeight.W800
+            )
         },
         navigationIcon = if (showNavigationIcon)
             (@Composable { DroidlyIconButton { navController.popBackStack() }})
