@@ -12,6 +12,8 @@ import './height'
 import './width'
 import './rotate'
 import './zIndex'
+import './scrollableVertically'
+import './scrollableHorizontally'
 
 const modifiersCategoryContent = {
   kind: 'category',
@@ -69,6 +71,14 @@ const modifiersCategoryContent = {
     {
       kind: 'block',
       type: 'zIndex'
+    },
+    {
+      kind: 'block',
+      type: 'scrollableHorizontally'
+    },
+    {
+      kind: 'block',
+      type: 'scrollableVertically'
     },
   ]
 }
