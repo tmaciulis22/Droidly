@@ -32,7 +32,7 @@ Blockly.Blocks['button'] = {
 
 Blockly.Kotlin['button'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
-  const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || '{}'
+  const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
   const text = `"${block.getFieldValue('BUTTON_TEXT')}"` || '""'
 
   const textColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
