@@ -1,5 +1,5 @@
 import Blockly from 'blockly'
-import camelize from '../../../util/camelize'
+import camelCase from '../../../util/camelCase'
 
 Blockly.Blocks['stringProperty'] = {
   init: function() {
@@ -8,7 +8,7 @@ Blockly.Blocks['stringProperty'] = {
     this.setPreviousStatement(true)
     this.appendDummyInput()
       .appendField('String')
-      .appendField(new Blockly.FieldTextInput('STRING_PROPERTY_NAME'), 'STRING_PROPERTY_NAME')
+      .appendField(new Blockly.FieldTextInput('stringPropertyName'), 'STRING_PROPERTY_NAME')
     this.setNextStatement(true)
   }
 }
@@ -16,5 +16,5 @@ Blockly.Blocks['stringProperty'] = {
 Blockly.Kotlin['stringProperty'] = (block) => {
   const propertyName = block.getFieldValue('STRING_PROPERTY_NAME')
 
-  return `var ${camelize(propertyName)}: String`
+  return `var ${camelCase(propertyName)}: String? = null`
 }

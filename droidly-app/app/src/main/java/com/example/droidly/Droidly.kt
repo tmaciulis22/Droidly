@@ -1,5 +1,7 @@
 package com.example.droidly
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class Droidly() : Application()
+@HiltAndroidApp
+class Droidly : Application()

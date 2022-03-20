@@ -1,5 +1,5 @@
 import Blockly from 'blockly'
-import camelize from '../../../util/camelize'
+import camelCase from '../../../util/camelCase'
 
 Blockly.Blocks['booleanProperty'] = {
   init: function() {
@@ -8,7 +8,7 @@ Blockly.Blocks['booleanProperty'] = {
     this.setPreviousStatement(true)
     this.appendDummyInput()
       .appendField('Boolean')
-      .appendField(new Blockly.FieldTextInput('BOOLEAN_PROPERTY_NAME'), 'BOOLEAN_PROPERTY_NAME')
+      .appendField(new Blockly.FieldTextInput('booleanPropertyName'), 'BOOLEAN_PROPERTY_NAME')
     this.setNextStatement(true)
   }
 }
@@ -16,5 +16,5 @@ Blockly.Blocks['booleanProperty'] = {
 Blockly.Kotlin['booleanProperty'] = (block) => {
   const propertyName = block.getFieldValue('BOOLEAN_PROPERTY_NAME')
 
-  return `var ${camelize(propertyName)}: Boolean`
+  return `var ${camelCase(propertyName)}: Boolean? = null`
 }

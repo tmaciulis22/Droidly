@@ -1,4 +1,5 @@
 import Blockly from 'blockly'
+import camelCase from '../../../util/camelCase'
 
 Blockly.Blocks['model'] = {
   init: function() {
@@ -6,20 +7,40 @@ Blockly.Blocks['model'] = {
     this.setTooltip('Creates a database model with CRUD operations.')
     this.appendDummyInput()
       .appendField('Model')
-      .appendField(new Blockly.FieldTextInput('MODEL_NAME'), 'MODEL_NAME')
+      .appendField(new Blockly.FieldTextInput('NameOfModel'), 'MODEL_NAME')
     this.appendStatementInput('MODEL_PROPERTIES')
   }
 }
 
 Blockly.Kotlin['model'] = (block) => {
+  const indent = Blockly.Kotlin.INDENT
   const modelName = block.getFieldValue('MODEL_NAME')
   const modelProperties = Blockly.Kotlin.statementToCode(block, 'MODEL_PROPERTIES')
-
   const code = []
+
+  const daoClassLines = []
+
+  daoClassLines.push(
+      `@Dao`,
+      `interface ${modelName} {`,
+      ``,
+      `${indent}@Query("SELECT * FROM ${camelCase(modelName)})`,
+      `${indent}suspend fun readAll(): List<${modelName}>`,
+      ``,
+      `${indent}@Insert(onConflict = OnConflictStrategy.REPLACE)`,
+      `${indent}suspend fun save(entity: ${modelName})`,
+      '',
+      `${indent}@Delete`,
+      `${indent}suspend fun delete(entity: ${modelName})`,
+      `}`,
+      ''
+  )
+
   code.push(
-    `@Entity("tableName=${modelName}")`,
+    daoClassLines.join('\n'),
+    `@Entity(tableName = "${camelCase(modelName)}")`,
     `data class ${modelName}(`,
-    `${Blockly.Kotlin.INDENT}@PrimaryKey(autoGenerate = true) val id: Long`,
+    `${indent}@PrimaryKey(autoGenerate = true) val id: Long`,
     modelProperties,
     `)`
   )

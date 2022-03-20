@@ -1,5 +1,5 @@
 import Blockly from 'blockly'
-import camelize from '../../../util/camelize'
+import camelCase from '../../../util/camelCase'
 
 Blockly.Blocks['numberProperty'] = {
   init: function() {
@@ -8,7 +8,7 @@ Blockly.Blocks['numberProperty'] = {
     this.setPreviousStatement(true)
     this.appendDummyInput()
       .appendField('Number')
-      .appendField(new Blockly.FieldTextInput('NUMBER_PROPERTY_NAME'), 'NUMBER_PROPERTY_NAME')
+      .appendField(new Blockly.FieldTextInput('numberPropertyName'), 'NUMBER_PROPERTY_NAME')
     this.setNextStatement(true)
   }
 }
@@ -16,5 +16,5 @@ Blockly.Blocks['numberProperty'] = {
 Blockly.Kotlin['numberProperty'] = (block) => {
   const propertyName = block.getFieldValue('NUMBER_PROPERTY_NAME')
 
-  return `var ${camelize(propertyName)}: Double`
+  return `var ${camelCase(propertyName)}: Double? = null`
 }

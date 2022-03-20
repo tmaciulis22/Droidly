@@ -6,8 +6,8 @@ import toolboxConfig from '../blockly/toolbox';
 import { Button } from '@mui/material';
 import BuildModal from '../components/BuildModal';
 import { screenTypes } from '../blockly/blocks/screens';
-import getScreenObjects from '../util/getScreenObjects';
-import getImports from '../util/getImports';
+import generateViewLayerCode from '../util/generateViewLayerCode';
+import generateViewLayerImports from '../util/generateImports';
 
 export default function BlocklyEditorPage() {
 
@@ -57,8 +57,8 @@ export default function BlocklyEditorPage() {
   }
 
   const handleBuild = (startScreen) => {
-    const imports = getImports()
-    const screenObjects = getScreenObjects(screenBlocks, startScreen)
+    const imports = generateViewLayerImports()
+    const screenObjects = generateViewLayerCode(screenBlocks, startScreen)
     const workspaceCode = Blockly.Kotlin.workspaceToCode(workspace)
 
     const sourceCodeBlob = new Blob([imports, screenObjects, workspaceCode], { type: 'text/plain'})

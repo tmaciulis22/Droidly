@@ -1,6 +1,6 @@
 import Blockly from 'blockly';
 
-export default function getScreenObjects(screenBlocks, startScreen) {
+export default function generateViewLayerCode(screenBlocks, startScreen) {
   const indent = Blockly.Kotlin.INDENT
   const code = []
 
