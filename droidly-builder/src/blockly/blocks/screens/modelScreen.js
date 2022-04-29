@@ -21,7 +21,7 @@ Blockly.Blocks['modelScreen'] = {
 
 Blockly.Kotlin['modelScreen'] = (block) => {
   const screenName = block.getFieldValue('SCREEN_NAME')
-  const modelName = camelCase(block.getFieldValue('MODEL_NAME'))
+  const modelName = block.getFieldValue('MODEL_NAME')
   const content = Blockly.Kotlin.statementToCode(block, 'SCREEN_CONTENT')
 
   const code = []
@@ -32,7 +32,7 @@ Blockly.Kotlin['modelScreen'] = (block) => {
     `${Blockly.Kotlin.INDENT}modelId: Long`,
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
     `) {`,
-    `${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${modelName}s.first { it.id == modelId }`,
+    `${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${camelCase(modelName)}s.firstOrNull { it.id == modelId } ?: ${modelName}()`,
     `${Blockly.Kotlin.INDENT}DroidlyLoadingBar(isLoading = mainViewModel.mainState.isLoading)`,
     `${content}`,
     `}`

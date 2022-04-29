@@ -40,7 +40,7 @@ Blockly.Kotlin['model'] = (block) => {
     daoClassLines.join('\n'),
     `@Entity(tableName = "${camelCase(modelName)}")`,
     `data class ${modelName}(`,
-    `${indent}@PrimaryKey(autoGenerate = true) val id: Long`,
+    `${indent}@PrimaryKey(autoGenerate = true) val id: Long? = null`,
     modelProperties,
     `)`
   )
