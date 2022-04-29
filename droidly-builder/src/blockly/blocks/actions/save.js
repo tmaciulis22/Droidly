@@ -18,8 +18,8 @@ Blockly.Blocks['save'] = {
 }
 
 Blockly.Kotlin['save'] = (block) => {
-  const modelToDelete = block.getFieldValue('MODEL_TO_SAVE')
-  const action = modelToDelete !== 'NOT_SELECTED' ? `mainViewModel.save${modelToDelete}(item)` : '// mainViewModel.save(item)'
+  const modelToSave = block.getFieldValue('MODEL_TO_SAVE')
+  const action = modelToSave !== 'NOT_SELECTED' ? `mainViewModel.save${modelToSave}(item)` : '// mainViewModel.save(item)'
   const nextAction = Blockly.Kotlin.valueToCode(block, 'NAVIGATION_ACTION', Blockly.Kotlin.ORDER_ATOMIC)
 
   const codeToReturn = nextAction 

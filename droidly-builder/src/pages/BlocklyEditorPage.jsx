@@ -41,7 +41,7 @@ export default function BlocklyEditorPage() {
 
   const handleBuildButtonClick = () => {
     const screenBlocks = workspace.topBlocks_
-      .filter(block => screenTypes.some(type => block.type === type))
+      .filter(block => [screenTypes, 'modelScreen'].some(type => block.type === type))
     setScreenBlocks(screenBlocks)
 
     const screenOptions = screenBlocks

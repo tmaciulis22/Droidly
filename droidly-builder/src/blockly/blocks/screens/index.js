@@ -1,5 +1,6 @@
 import './screen'
 import './screenWithBars'
+import './modelScreen'
 
 const screensCategoryContent = {
   kind: 'category',
@@ -14,6 +15,10 @@ const screensCategoryContent = {
       kind: 'block',
       type: 'screenWithBars'
     },
+    {
+      kind: 'block',
+      type: 'modelScreen'
+    }
   ]
 }
 

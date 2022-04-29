@@ -41,7 +41,6 @@ export const modelPropertyMenuGenerator = (block) => () => {
   if (modelName === 'NameOfModel' || modelBlock === undefined) {
     return [['ModelClassProperty', 'NOT_SELECTED']]
   } else {
-    console.log(modelName)
     const properties = modelBlock.getDescendants().slice(1).map(child => {
       const property = child.getFieldValue('PROPERTY_NAME')
 
@@ -49,6 +48,21 @@ export const modelPropertyMenuGenerator = (block) => () => {
     })
 
     return [...properties]
+  }
+}
+
+export const navigateModelMenuGenerator = (block) => () => {
+  const screenOptions = block.workspace.topBlocks_
+    .filter(block => block.type === 'modelScreen')
+    .map(block => {
+      const screenName = block.getFieldValue('SCREEN_NAME')
+      return [screenName, screenName]
+    })
+  
+  if (screenOptions.length !== 0 ) {
+    return screenOptions
+  } else {
+    return [['SCREEN_NAME', 'NOT_SELECTED']]
   }
 }
 

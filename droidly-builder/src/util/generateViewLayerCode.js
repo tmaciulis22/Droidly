@@ -18,13 +18,17 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
 
   screenBlocks.forEach((block, index) => {
     const name = block.getFieldValue('SCREEN_NAME')
-    const composable = `{ ${name}(it) }`
+    const isModelScreen = block.type === 'modelScreen'
+    const composable = isModelScreen 
+      ? `{ navController, modelId -> ${name}(navController, modelId) }`
+      :  `{ navController, _ -> ${name}(navController) }`
     const showTopBar = block.getFieldValue('SHOW_TOP_BAR') === 'TRUE' ? 'true' : 'false'
     const bottomBarTabIconValue = block.getFieldValue('BOTTOM_TAB_ICON')
     const includeIcon = bottomBarTabIconValue !== 'NO_BAR' && bottomBarTabIconValue !== null
     const bottomBarTabIcon = includeIcon ? `Icons.Default.${bottomBarTabIconValue}` : 'null'
     const commaOrSemicolon = index === screenBlocks.length -1 ? ';' : ','
-    code.push(`${indent}${name}(${composable}, ${showTopBar}, ${bottomBarTabIcon})${commaOrSemicolon}`)
+
+    code.push(`${indent}${name}(${composable}, ${isModelScreen}, ${showTopBar}, ${bottomBarTabIcon})${commaOrSemicolon}`)
   })
 
   code.push(

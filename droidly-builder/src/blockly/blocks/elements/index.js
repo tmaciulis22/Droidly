@@ -46,6 +46,10 @@ const elementsCategoryContent = {
       kind: 'block',
       type: 'rowList'
     },
+    // {
+    //   kind: 'block',
+    //   type: 'modelFrame'
+    // },
     {
       kind: 'block',
       type: 'iconDefault'
