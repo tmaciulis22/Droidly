@@ -2,27 +2,27 @@ import Blockly from 'blockly'
 import camelCase from '../../../util/camelCase'
 import { modelMenuGenerator } from '../../../util/menuGenerators'
 
-Blockly.Blocks['rowList'] = {
+Blockly.Blocks['columnList'] = {
   init: function() {
     this.setColour(175)
-    this.setTooltip('Content list in a row direction.')
+    this.setTooltip('Content list in a column direction.')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
     this.appendDummyInput()
-      .appendField('Row list of')
+      .appendField('Column list of')
       .appendField(new Blockly.FieldDropdown(
         modelMenuGenerator(this)
         ), 'MODEL_CLASS')
-    this.appendStatementInput('ROW_MODIFIER')
+    this.appendStatementInput('COLUMN_MODIFIER')
       .appendField('modifier:')
-    this.appendStatementInput('ROW_CONTENT')
+    this.appendStatementInput('COLUMN_CONTENT')
       .appendField('content:')
   }
 }
 
-Blockly.Kotlin['rowList'] = (block) => {
-  const addedModifiers = Blockly.Kotlin.statementToCode(block, 'ROW_MODIFIER')
-  const content = Blockly.Kotlin.statementToCode(block, 'ROW_CONTENT')
+Blockly.Kotlin['columnList'] = (block) => {
+  const addedModifiers = Blockly.Kotlin.statementToCode(block, 'COLUMN_MODIFIER')
+  const content = Blockly.Kotlin.statementToCode(block, 'COLUMN_CONTENT')
   const model = block.getFieldValue('MODEL_CLASS')
 
   const modifier = []
@@ -34,10 +34,10 @@ Blockly.Kotlin['rowList'] = (block) => {
 
   const code = []
   code.push(
-    'DroidlyLazyRow(',
+    'DroidlyLazyColumn(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}dataList = mainViewModel.mainState.${camelCase(model)}s`,
-    ') {',
+    ') { item ->',
     `${content}`,
     '}'
   )

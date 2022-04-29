@@ -3,10 +3,9 @@ import './stringProperty'
 import './numberProperty'
 import './booleanProperty'
 import './dateProperty'
-import './modelProperty'
-import './listProperty'
-import './columnList'
-import './rowList'
+// import './modelProperty'
+// import './listProperty'
+import './modelPropertyInput'
 import './modelPropertyOutput'
 import './textOutput'
 
@@ -35,21 +34,17 @@ const modelCategoryContent = {
       kind: 'block',
       type: 'dateProperty'
     },
+    // {
+    //   kind: 'block',
+    //   type: 'modelProperty'
+    // },
+    // {
+    //   kind: 'block',
+    //   type: 'listProperty'
+    // },
     {
       kind: 'block',
-      type: 'modelProperty'
-    },
-    {
-      kind: 'block',
-      type: 'listProperty'
-    },
-    {
-      kind: 'block',
-      type: 'columnList'
-    },
-    {
-      kind: 'block',
-      type: 'rowList'
+      type: 'modelPropertyInput'
     },
     {
       kind: 'block',

@@ -9,6 +9,8 @@ import './surfaceDefault'
 import './iconDefault'
 import './iconButtonDefault'
 import './imageDefault'
+import './columnList'
+import './rowList'
 import './divider'
 import './spacer'
 import './icon'
@@ -35,6 +37,14 @@ const elementsCategoryContent = {
     {
       kind: 'block',
       type: 'surfaceDefault'
+    },
+    {
+      kind: 'block',
+      type: 'columnList'
+    },
+    {
+      kind: 'block',
+      type: 'rowList'
     },
     {
       kind: 'block',

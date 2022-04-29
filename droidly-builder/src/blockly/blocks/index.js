@@ -3,8 +3,8 @@ import layoutsCategoryContent from './layouts'
 import elementsCategoryContent from './elements'
 import modifiersCategoryContent from './modifiers'
 import stylingCategoryContent from './styling'
-import actionsCategoryContent from './actions'
 import modelCategoryContent from './model'
+import actionsCategoryContent from './actions'
 
 // import functionsCategoryContent from './functions'
 // import variablesCategoryContent from './variables'
@@ -19,12 +19,12 @@ const contents = [
   elementsCategoryContent,
   modifiersCategoryContent,
   stylingCategoryContent,
-  actionsCategoryContent,
   modelCategoryContent,
-  {
-    "kind": "sep",
-    "gap": "32"
-  },
+  actionsCategoryContent,
+  // {
+  //   "kind": "sep",
+  //   "gap": "32"
+  // },
   // functionsCategoryContent,
   // variablesCategoryContent,
   // loopsCategoryContent,

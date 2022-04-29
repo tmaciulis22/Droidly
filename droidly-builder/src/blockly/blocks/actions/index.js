@@ -1,4 +1,6 @@
 import './navigate'
+import './save'
+import './delete'
 
 const actionsCategoryContent = {
   kind: 'category',
@@ -8,6 +10,14 @@ const actionsCategoryContent = {
     {
       kind: 'block',
       type: 'navigate'
+    },
+    {
+      kind: 'block',
+      type: 'save'
+    },
+    {
+      kind: 'block',
+      type: 'delete'
     }
   ]
 }

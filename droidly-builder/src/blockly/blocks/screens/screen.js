@@ -19,7 +19,10 @@ Blockly.Kotlin['screen'] = (block) => {
   const code = []
   code.push(
     '@Composable',
-    `fun ${screenName}(navController: NavController) {`,
+    `fun ${screenName} (`,
+    `${Blockly.Kotlin.INDENT}navController: NavController,`,
+    `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
+    `) {`,
     `${content}`,
     '}'
   )

@@ -60,7 +60,7 @@ Blockly.Kotlin['textField'] = (block) => {
     `${Blockly.Kotlin.INDENT}singleLine = ${singleLine},`
   )
   if (onSubmit) {
-    code.push(`${Blockly.Kotlin.INDENT}onSubmit = ${onSubmit},`)
+    code.push(`${Blockly.Kotlin.INDENT}onEnter = { ${onSubmit} },`)
   }
   if (placeholder) {
     code.push(`${Blockly.Kotlin.INDENT}placeholder = "${placeholder}",`)

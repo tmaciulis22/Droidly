@@ -33,7 +33,7 @@ export const listMenuGenerator = (block) => () => {
 }
 
 export const modelPropertyMenuGenerator = (block) => () => {
-  const modelName = block.getFieldValue('MODEL_OUTPUT_NAME')
+  const modelName = block.getFieldValue(block.type === 'modelPropertyInput' ? 'MODEL_INPUT_NAME' : 'MODEL_OUTPUT_NAME')
   const modelBlock = block.workspace.topBlocks_.find(block => 
     block.getFieldValue('MODEL_NAME') === modelName
   )
@@ -41,6 +41,7 @@ export const modelPropertyMenuGenerator = (block) => () => {
   if (modelName === 'NameOfModel' || modelBlock === undefined) {
     return [['ModelClassProperty', 'NOT_SELECTED']]
   } else {
+    console.log(modelName)
     const properties = modelBlock.getDescendants().slice(1).map(child => {
       const property = child.getFieldValue('PROPERTY_NAME')
 
