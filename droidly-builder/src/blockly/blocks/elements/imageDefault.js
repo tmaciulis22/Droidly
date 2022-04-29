@@ -17,7 +17,8 @@ Blockly.Blocks['imageDefault'] = {
 
 Blockly.Kotlin['imageDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'IMAGE_MODIFIER')
-  const url = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
+  const url = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
+  const formattedUrl = url.includes('item as? ') ? url : `"${url}"`
 
   const modifier = []
   modifier.push('Modifier')
@@ -30,7 +31,7 @@ Blockly.Kotlin['imageDefault'] = (block) => {
   code.push(
     'DroidlyImage(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}url = ${url},`,
+    `${Blockly.Kotlin.INDENT}url = ${formattedUrl},`,
     ')'
   )
 

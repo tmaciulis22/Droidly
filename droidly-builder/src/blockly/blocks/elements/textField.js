@@ -40,7 +40,8 @@ Blockly.Kotlin['textField'] = (block) => {
   const singleLine = block.getFieldValue('TEXT_FIELD_IS_ONE_LINE') === 'TRUE' ? 'true' : 'false'
 
   const onSubmit = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_ON_SUBMIT', Blockly.Kotlin.ORDER_ATOMIC) || null
-  const placeholder = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
+  const placeholder = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
+  const formattedPlaceholder = placeholder.includes('item as? ') ? placeholder : `"${placeholder}"`
   const textFieldColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const textColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const shape = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_SHAPE', Blockly.Kotlin.ORDER_ATOMIC) || null
@@ -63,7 +64,7 @@ Blockly.Kotlin['textField'] = (block) => {
     code.push(`${Blockly.Kotlin.INDENT}onEnter = { ${onSubmit} },`)
   }
   if (placeholder) {
-    code.push(`${Blockly.Kotlin.INDENT}placeholder = "${placeholder}",`)
+    code.push(`${Blockly.Kotlin.INDENT}placeholder = "${formattedPlaceholder}",`)
   }
   if (textFieldColor) {
     code.push(`${Blockly.Kotlin.INDENT}color = ${textFieldColor},`)

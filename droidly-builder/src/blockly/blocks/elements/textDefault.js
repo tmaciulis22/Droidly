@@ -15,7 +15,8 @@ Blockly.Blocks['textDefault'] = {
 
 Blockly.Kotlin['textDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_MODIFIER')
-  const text = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
+  const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
+  const formattedText = text.includes('item as? ') ? text : `"${text}"`
 
   const modifier = []
   modifier.push('Modifier')
@@ -28,7 +29,7 @@ Blockly.Kotlin['textDefault'] = (block) => {
   code.push(
     'DroidlyText(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}text = ${text},`,
+    `${Blockly.Kotlin.INDENT}text = ${formattedText},`,
     ')'
   )
 

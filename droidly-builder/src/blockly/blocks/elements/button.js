@@ -33,7 +33,8 @@ Blockly.Blocks['button'] = {
 Blockly.Kotlin['button'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const text = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
+  const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
+  const formattedText = text.includes('item as? ') ? text : `"${text}"`
 
   const textColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const buttonColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
@@ -52,7 +53,7 @@ Blockly.Kotlin['button'] = (block) => {
     'DroidlyButton(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}onClick = { ${onClick} },`,
-    `${Blockly.Kotlin.INDENT}text = ${text},`,
+    `${Blockly.Kotlin.INDENT}text = ${formattedText},`,
   )
 
   if (buttonColor) {

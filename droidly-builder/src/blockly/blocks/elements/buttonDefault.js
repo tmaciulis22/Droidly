@@ -21,7 +21,8 @@ Blockly.Blocks['buttonDefault'] = {
 Blockly.Kotlin['buttonDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const text = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
+  const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
+  const formattedText = text.includes('item as? ') ? text : `"${text}"`
 
   const modifier = []
   modifier.push('Modifier')
@@ -35,7 +36,7 @@ Blockly.Kotlin['buttonDefault'] = (block) => {
     'DroidlyButton(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}onClick = { ${onClick} },`,
-    `${Blockly.Kotlin.INDENT}text = ${text},`,
+    `${Blockly.Kotlin.INDENT}text = ${formattedText},`,
     ')'
   )
 

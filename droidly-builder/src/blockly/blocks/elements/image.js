@@ -20,7 +20,8 @@ Blockly.Blocks['image'] = {
 
 Blockly.Kotlin['image'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'IMAGE_MODIFIER')
-  const url = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
+  const url = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
+  const formattedUrl = url.includes('item as? ') ? url : `"${url}"`
   const opacity = `${Number(block.getFieldValue('IMAGE_ALPHA')) / 100}f` || '1.0f'
 
   const modifier = []
@@ -34,7 +35,7 @@ Blockly.Kotlin['image'] = (block) => {
   code.push(
     'DroidlyImage(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}url = ${url},`,
+    `${Blockly.Kotlin.INDENT}url = ${formattedUrl},`,
     `${Blockly.Kotlin.INDENT}alpha = ${opacity},`,
     ')'
   )

@@ -113,8 +113,8 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
     ``
   )
 
-  const mainStateLoading = `${indent}${indent}mainState = MainState(isLoading = true)`
-  const mainStateNotLoading = `${indent}${indent}mainState = MainState(isLoading = false)`
+  const mainStateLoading = `${indent}${indent}mainState = mainState.copy(isLoading = true)`
+  const mainStateNotLoading = `${indent}${indent}mainState = mainState.copy(isLoading = false)`
 
   modelNames.forEach((name, index) => {
     const modelNameCamel = camelCase(name)
@@ -124,7 +124,8 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
       `${indent}fun readAll${name}s() = viewModelScope.launch {`,
       mainStateLoading,
       `${indent}${indent}val ${modelNameCamel}s = ${daoNameCamel}.readAll()`,
-      `${indent}${indent}mainState = MainState(${modelNameCamel}s = ${modelNameCamel}s)`,
+      `${indent}${indent}mainState = mainState.copy(${modelNameCamel}s = ${modelNameCamel}s)`,
+      mainStateNotLoading,
       `${indent}}`,
       ``,
       `${indent}fun save${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
@@ -136,6 +137,7 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
       `${indent}fun delete${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
       mainStateLoading,
       `${indent}${indent}${daoNameCamel}.delete(${modelNameCamel})`,
+      `mainState = mainState.copy(${modelNameCamel}s = mainState.${modelNameCamel}s.filter { it != ${modelNameCamel} })`,
       mainStateNotLoading,
       `${indent}}`,
       ``

@@ -16,6 +16,14 @@ Blockly.Kotlin['screen'] = (block) => {
   const screenName = block.getFieldValue('SCREEN_NAME')
   const content = Blockly.Kotlin.statementToCode(block, 'SCREEN_CONTENT')
 
+  // TODO add creator block
+  const modelListBlocks = block.getDescendants().slice(1).filter(child => 
+    child.type === 'rowList' || child.type === 'columnList'
+  )
+  const usedModels = modelListBlocks.map(listBlock =>
+    `${Blockly.Kotlin.INDENT}${Blockly.Kotlin.INDENT}mainViewModel.readAll${listBlock.getFieldValue('MODEL_CLASS')}s()`
+  ).join('\n')
+
   const code = []
   code.push(
     '@Composable',
@@ -23,8 +31,12 @@ Blockly.Kotlin['screen'] = (block) => {
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
     `) {`,
+    `${Blockly.Kotlin.INDENT}LaunchedEffect("${screenName}") {`,
+    usedModels,
+    `${Blockly.Kotlin.INDENT}}`,
+    `${Blockly.Kotlin.INDENT}DroidlyLoadingBar(isLoading = mainViewModel.mainState.isLoading)`,
     `${content}`,
-    '}'
+    `}`
   )
 
   // Newline character added, so that file where screen Composable is located would have extra trailing line.

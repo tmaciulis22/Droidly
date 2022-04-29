@@ -14,7 +14,6 @@ Blockly.Blocks['modelPropertyInput'] = {
       .appendField(new Blockly.FieldDropdown(
         modelPropertyMenuGenerator(this)
       ), 'MODEL_INPUT_PROPERTY')
-      
     this.setOutput(true, 'ModelProperty')
   }
 }

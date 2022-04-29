@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Droidly</string>
+
+    <string name="savable_view_tag">savable_view_tag</string>
 </resources>

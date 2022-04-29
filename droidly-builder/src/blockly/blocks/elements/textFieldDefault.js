@@ -23,7 +23,8 @@ Blockly.Kotlin['textFieldDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_FIELD_MODIFIER')
 
   const onEnter = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_ON_ENTER', Blockly.Kotlin.ORDER_ATOMIC) || '{}'
-  const placeholder = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
+  const placeholder = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
+  const formattedPlaceholder = placeholder.includes('item as? ') ? placeholder : `"${placeholder}"`
 
   const modifier = []
   modifier.push('Modifier')
@@ -36,7 +37,7 @@ Blockly.Kotlin['textFieldDefault'] = (block) => {
   code.push(
     'DroidlyTextField(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}placeholder = ${placeholder},`,
+    `${Blockly.Kotlin.INDENT}placeholder = ${formattedPlaceholder},`,
     `${Blockly.Kotlin.INDENT}onEnter = { ${onEnter} },`,
     ')',
   )
