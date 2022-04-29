@@ -22,7 +22,7 @@ Blockly.Kotlin['model'] = (block) => {
 
   daoClassLines.push(
       `@Dao`,
-      `interface ${modelName} {`,
+      `interface ${modelName}Dao {`,
       ``,
       `${indent}@Query("SELECT * FROM ${camelCase(modelName)})`,
       `${indent}suspend fun readAll(): List<${modelName}>`,
@@ -42,7 +42,8 @@ Blockly.Kotlin['model'] = (block) => {
     `data class ${modelName}(`,
     `${indent}@PrimaryKey(autoGenerate = true) val id: Long? = null`,
     modelProperties,
-    `)`
+    `)`,
+    ''
   )
 
   return code.join('\n')
