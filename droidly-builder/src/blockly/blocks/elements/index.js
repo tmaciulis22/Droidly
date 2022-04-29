@@ -2,6 +2,8 @@ import './text'
 import './textDefault'
 import './button'
 import './buttonDefault'
+import './fab'
+import './fabDefault'
 import './textField'
 import './textFieldDefault'
 import './surface'
@@ -46,10 +48,10 @@ const elementsCategoryContent = {
       kind: 'block',
       type: 'rowList'
     },
-    // {
-    //   kind: 'block',
-    //   type: 'modelFrame'
-    // },
+    {
+      kind: 'block',
+      type: 'fabDefault'
+    },
     {
       kind: 'block',
       type: 'iconDefault'
@@ -77,6 +79,10 @@ const elementsCategoryContent = {
     {
       kind: 'block',
       type: 'button'
+    },
+    {
+      kind: 'block',
+      type: 'fab'
     },
     {
       kind: 'block',
