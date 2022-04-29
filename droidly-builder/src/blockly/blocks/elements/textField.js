@@ -8,9 +8,8 @@ Blockly.Blocks['textField'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Text field')
-    this.appendDummyInput()
+    this.appendValueInput('TEXT_INPUT')
       .appendField('placeholder:')
-      .appendField(new Blockly.FieldTextInput('Placeholder text'), 'TEXT_FIELD_PLACEHOLDER')
     this.appendDummyInput()
       .appendField('max one line:')
       .appendField(new Blockly.FieldCheckbox('TRUE'), 'TEXT_FIELD_IS_ONE_LINE')
@@ -31,6 +30,7 @@ Blockly.Blocks['textField'] = {
       .appendField('border:')
     this.appendStatementInput('TEXT_FIELD_MODIFIER')
       .appendField('modifier:')
+    this.setInputsInline(false)
   }
 }
 
@@ -40,7 +40,7 @@ Blockly.Kotlin['textField'] = (block) => {
   const singleLine = block.getFieldValue('TEXT_FIELD_IS_ONE_LINE') === 'TRUE' ? 'true' : 'false'
 
   const onSubmit = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_ON_SUBMIT', Blockly.Kotlin.ORDER_ATOMIC) || null
-  const placeholder = block.getFieldValue('TEXT_FIELD_PLACEHOLDER') || null
+  const placeholder = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
   const textFieldColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const textColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const shape = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_SHAPE', Blockly.Kotlin.ORDER_ATOMIC) || null

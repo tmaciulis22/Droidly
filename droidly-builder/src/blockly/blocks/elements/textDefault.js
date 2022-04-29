@@ -6,9 +6,8 @@ Blockly.Blocks['textDefault'] = {
     this.setTooltip('Displays a text')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
-    this.appendDummyInput()
+    this.appendValueInput('TEXT_INPUT')
       .appendField('Text')
-      .appendField(new Blockly.FieldMultilineInput('Lorem ipsum'), 'TEXT_STRING')
     this.appendStatementInput('TEXT_MODIFIER')
       .appendField('modifier:')
   }
@@ -16,7 +15,7 @@ Blockly.Blocks['textDefault'] = {
 
 Blockly.Kotlin['textDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_MODIFIER')
-  const text = `"${block.getFieldValue('TEXT_STRING')}"` || '""'
+  const text = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
 
   const modifier = []
   modifier.push('Modifier')

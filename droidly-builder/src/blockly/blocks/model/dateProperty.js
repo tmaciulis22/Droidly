@@ -8,13 +8,13 @@ Blockly.Blocks['dateProperty'] = {
     this.setPreviousStatement(true)
     this.appendDummyInput()
       .appendField('Date')
-      .appendField(new Blockly.FieldTextInput('datePropertyName'), 'DATE_PROPERTY_NAME')
+      .appendField(new Blockly.FieldTextInput('datePropertyName'), 'PROPERTY_NAME')
     this.setNextStatement(true)
   }
 }
 
 Blockly.Kotlin['dateProperty'] = (block) => {
-  const propertyName = block.getFieldValue('DATE_PROPERTY_NAME')
+  const propertyName = block.getFieldValue('PROPERTY_NAME')
 
   return `var ${camelCase(propertyName)}: Date? = null`
 }

@@ -1,6 +1,6 @@
 import Blockly from 'blockly'
 import camelCase from '../../../util/camelCase'
-import menuGenerator from './modelMenuGenerator'
+import { modelMenuGenerator } from '../../../util/menuGenerators'
 
 Blockly.Blocks['modelProperty'] = {
   init: function() {
@@ -10,15 +10,15 @@ Blockly.Blocks['modelProperty'] = {
     this.appendDummyInput()
       .appendField('Model')
       .appendField(new Blockly.FieldDropdown(
-        menuGenerator(this)
+        modelMenuGenerator(this)
         ), 'MODEL_CLASS')
-      .appendField(new Blockly.FieldTextInput('modelPropertyName'), 'MODEL_PROPERTY_NAME')
+      .appendField(new Blockly.FieldTextInput('modelPropertyName'), 'PROPERTY_NAME')
     this.setNextStatement(true)
   }
 }
 
 Blockly.Kotlin['modelProperty'] = (block) => {
-  const propertyName = block.getFieldValue('MODEL_PROPERTY_NAME')
+  const propertyName = block.getFieldValue('PROPERTY_NAME')
   const modelClass = block.getFieldValue('MODEL_CLASS')
 
   return `var ${camelCase(propertyName)}: ${modelClass}? = null`

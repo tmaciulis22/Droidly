@@ -8,8 +8,8 @@ Blockly.Blocks['buttonDefault'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Button')
+    this.appendValueInput('TEXT_INPUT')
       .appendField('text:')
-      .appendField(new Blockly.FieldTextInput('Click me'), 'BUTTON_TEXT')
     this.appendValueInput('BUTTON_ON_CLICK')
       .setCheck('Action')
       .appendField('on click:')
@@ -21,7 +21,7 @@ Blockly.Blocks['buttonDefault'] = {
 Blockly.Kotlin['buttonDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const text = `"${block.getFieldValue('BUTTON_TEXT')}"` || '""'
+  const text = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
 
   const modifier = []
   modifier.push('Modifier')

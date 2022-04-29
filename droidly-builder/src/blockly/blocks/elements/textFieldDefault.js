@@ -8,9 +8,8 @@ Blockly.Blocks['textFieldDefault'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Text field')
-    this.appendDummyInput()
+    this.appendValueInput('TEXT_INPUT')
       .appendField('placeholder:')
-      .appendField(new Blockly.FieldTextInput('Placeholder text'), 'TEXT_FIELD_PLACEHOLDER')
     this.appendDummyInput()
       .appendField('max one line:')
       .appendField(new Blockly.FieldCheckbox('TRUE'), 'TEXT_FIELD_IS_ONE_LINE')
@@ -19,6 +18,7 @@ Blockly.Blocks['textFieldDefault'] = {
       .appendField('on submit:')
     this.appendStatementInput('TEXT_FIELD_MODIFIER')
       .appendField('modifier:')
+    this.setInputsInline(false)
   }
 }
 
@@ -26,7 +26,7 @@ Blockly.Kotlin['textFieldDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_FIELD_MODIFIER')
 
   const onEnter = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_ON_ENTER', Blockly.Kotlin.ORDER_ATOMIC) || '{}'
-  const placeholder = `"${block.getFieldValue('TEXT_FIELD_PLACEHOLDER')}"` || '""'
+  const placeholder = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
 
   const singleLine = block.getFieldValue('TEXT_FIELD_IS_ONE_LINE') === 'TRUE' ? 'true' : 'false'
 

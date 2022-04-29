@@ -8,13 +8,13 @@ Blockly.Blocks['stringProperty'] = {
     this.setPreviousStatement(true)
     this.appendDummyInput()
       .appendField('String')
-      .appendField(new Blockly.FieldTextInput('stringPropertyName'), 'STRING_PROPERTY_NAME')
+      .appendField(new Blockly.FieldTextInput('stringPropertyName'), 'PROPERTY_NAME')
     this.setNextStatement(true)
   }
 }
 
 Blockly.Kotlin['stringProperty'] = (block) => {
-  const propertyName = block.getFieldValue('STRING_PROPERTY_NAME')
+  const propertyName = block.getFieldValue('PROPERTY_NAME')
 
   return `var ${camelCase(propertyName)}: String? = null`
 }

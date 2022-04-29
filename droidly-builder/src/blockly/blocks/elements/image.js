@@ -8,9 +8,8 @@ Blockly.Blocks['image'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Image')
-    this.appendDummyInput()
+    this.appendValueInput('TEXT_INPUT')
       .appendField('url:')
-      .appendField(new Blockly.FieldTextInput(''), 'IMAGE_URL')
     this.appendDummyInput()
       .appendField('opacity:')
       .appendField(new Blockly.FieldNumber(100, 0, 100, 1), 'IMAGE_ALPHA')
@@ -21,8 +20,7 @@ Blockly.Blocks['image'] = {
 
 Blockly.Kotlin['image'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'IMAGE_MODIFIER')
-  const url = block.getFieldValue('IMAGE_URL') || null
-  const urlString = url ? `"${url}"` : 'null'
+  const url = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
   const opacity = `${Number(block.getFieldValue('IMAGE_ALPHA')) / 100}f` || '1.0f'
 
   const modifier = []
@@ -36,7 +34,7 @@ Blockly.Kotlin['image'] = (block) => {
   code.push(
     'DroidlyImage(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}url = ${urlString},`,
+    `${Blockly.Kotlin.INDENT}url = ${url},`,
     `${Blockly.Kotlin.INDENT}alpha = ${opacity},`,
     ')'
   )

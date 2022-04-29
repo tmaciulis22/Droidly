@@ -4,7 +4,11 @@ import './numberProperty'
 import './booleanProperty'
 import './dateProperty'
 import './modelProperty'
-import './modelsListProperty'
+import './listProperty'
+import './columnList'
+import './rowList'
+import './modelPropertyOutput'
+import './textOutput'
 
 const modelCategoryContent = {
   kind: 'category',
@@ -37,7 +41,23 @@ const modelCategoryContent = {
     },
     {
       kind: 'block',
-      type: 'modelsListProperty'
+      type: 'listProperty'
+    },
+    {
+      kind: 'block',
+      type: 'columnList'
+    },
+    {
+      kind: 'block',
+      type: 'rowList'
+    },
+    {
+      kind: 'block',
+      type: 'modelPropertyOutput'
+    },
+    {
+      kind: 'block',
+      type: 'textOutput'
     }
   ]
 }

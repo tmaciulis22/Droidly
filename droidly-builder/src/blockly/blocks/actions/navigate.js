@@ -1,20 +1,5 @@
 import Blockly from 'blockly'
-import { screenTypes } from '../screens'
-
-const menuGenerator = (block) => () => {
-  const screenOptions = block.workspace.topBlocks_
-    .filter(block => screenTypes.some(type => block.type === type))
-    .map(block => {
-      const screenName = block.getFieldValue('SCREEN_NAME')
-      return [screenName, screenName]
-    })
-  
-  if (screenOptions.length !== 0 ) {
-    return screenOptions
-  } else {
-    return [['SCREEN_NAME', 'NOT_SELECTED']]
-  }
-}
+import { navigateMenuGenerator } from '../../../util/menuGenerators'
 
 Blockly.Blocks['navigate'] = {
   init: function() {
@@ -23,7 +8,7 @@ Blockly.Blocks['navigate'] = {
     this.appendDummyInput()
       .appendField('Navigate to')
       .appendField(new Blockly.FieldDropdown(
-        menuGenerator(this)
+        navigateMenuGenerator(this)
         ), 'SCREEN_TO_NAVIGATE')
     this.setOutput(true, 'Action')
   }

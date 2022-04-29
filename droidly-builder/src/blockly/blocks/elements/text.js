@@ -6,26 +6,28 @@ Blockly.Blocks['text'] = {
     this.setTooltip('Displays a text')
     this.setPreviousStatement(true)
     this.setNextStatement(true)
-    this.appendDummyInput()
+    this.appendValueInput('TEXT_INPUT')
       .appendField('Text')
-      .appendField(new Blockly.FieldMultilineInput('Lorem ipsum'), 'TEXT_STRING')
     this.appendDummyInput()
       .appendField('size:')
       .appendField(new Blockly.FieldNumber(16, 1, 164, 1), 'TEXT_SIZE')
+    this.appendDummyInput()
       .appendField('weight:')
       .appendField(new Blockly.FieldNumber(400, 100, 900, 100), 'TEXT_WEIGHT')
+    this.appendDummyInput()
       .appendField('max one line:')
       .appendField(new Blockly.FieldCheckbox(), 'IS_ONE_LINE')
     this.appendValueInput('TEXT_COLOR')
       .appendField('colour:')
     this.appendStatementInput('TEXT_MODIFIER')
       .appendField('modifier:')
+    this.setInputsInline(false)
   }
 }
 
 Blockly.Kotlin['text'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_MODIFIER')
-  const text = `"${block.getFieldValue('TEXT_STRING')}"`
+  const text = `"${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}"`
   const color = Blockly.Kotlin.valueToCode(block, 'TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const size = block.getFieldValue('TEXT_SIZE') ? `${block.getFieldValue('TEXT_SIZE')}.sp` : null
   const weight = block.getFieldValue('TEXT_WEIGHT') ? `FontWeight.W${block.getFieldValue('TEXT_WEIGHT')}` : null

@@ -18,7 +18,6 @@ export default function BlocklyEditorPage() {
 
   const blocklyRef = useRef(null)
 
-  // TODO delete this at the end of project
   const handleOnWorkspaceChanged = (workspace) => {
     const code = Blockly.Kotlin.workspaceToCode(workspace)
     console.log(code)

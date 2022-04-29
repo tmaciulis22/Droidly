@@ -8,13 +8,13 @@ Blockly.Blocks['numberProperty'] = {
     this.setPreviousStatement(true)
     this.appendDummyInput()
       .appendField('Number')
-      .appendField(new Blockly.FieldTextInput('numberPropertyName'), 'NUMBER_PROPERTY_NAME')
+      .appendField(new Blockly.FieldTextInput('numberPropertyName'), 'PROPERTY_NAME')
     this.setNextStatement(true)
   }
 }
 
 Blockly.Kotlin['numberProperty'] = (block) => {
-  const propertyName = block.getFieldValue('NUMBER_PROPERTY_NAME')
+  const propertyName = block.getFieldValue('PROPERTY_NAME')
 
   return `var ${camelCase(propertyName)}: Double? = null`
 }
