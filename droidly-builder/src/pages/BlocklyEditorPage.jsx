@@ -3,15 +3,20 @@ import { Box } from '@mui/system';
 import { useBlocklyWorkspace } from 'react-blockly';
 import Blockly from 'blockly'
 import toolboxConfig from '../blockly/toolbox';
-import { Button } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
+import UploadIcon from '@mui/icons-material/Upload';
+import DownloadIcon from '@mui/icons-material/Download';
+import BuildIcon from '@mui/icons-material/Build';
 import BuildModal from '../components/BuildModal';
 import { screenTypes } from '../blockly/blocks/screens';
 import generateViewLayerCode from '../util/generateViewLayerCode';
 import generateViewLayerImports from '../util/generateImports';
+import UploadModal from '../components/UploadModal';
 
 export default function BlocklyEditorPage() {
 
-  const [showModal, setShowModal] = useState(false)
+  const [showBuildModal, setShowBuildModal] = useState(false)
+  const [showUploadModal, setShowUploadModal] = useState(false)
   const [modalScreenOptions, setModalScreenOptions] = useState([])
 
   const [screenBlocks, setScreenBlocks] = useState([])
@@ -39,6 +44,14 @@ export default function BlocklyEditorPage() {
     onWorkspaceChange: handleOnWorkspaceChanged
   })
 
+  const handleUploadButtonClick = () => {
+    setShowUploadModal(true)
+  }
+
+  const handleUploadModalClose = () => {
+    setShowUploadModal(false)
+  }
+
   const handleBuildButtonClick = () => {
     const screenBlocks = workspace.topBlocks_
       .filter(block => [screenTypes, 'modelScreen'].some(type => block.type === type))
@@ -48,11 +61,11 @@ export default function BlocklyEditorPage() {
       .map(block => block.getFieldValue('SCREEN_NAME'))
     setModalScreenOptions(screenOptions)
 
-    setShowModal(true)
+    setShowBuildModal(true)
   }
 
-  const handleModalClose = () => {
-    setShowModal(false)
+  const handleBuildModalClose = () => {
+    setShowBuildModal(false)
   }
 
   const handleBuild = (startScreen) => {
@@ -83,18 +96,46 @@ export default function BlocklyEditorPage() {
   return (
     <Box>
       <div ref={blocklyRef} style={{ height: '100vh' }} />
-      <Button 
-        style={{ position: 'fixed', top: '1rem', right: '1rem'}}
-        variant='contained'
-        color='success'
-        onClick={handleBuildButtonClick}
-      >
-        Build app
-      </Button>
+      <div style={{ 
+        position: 'fixed', 
+        top: '1rem', 
+        right: '2rem', 
+        display: 'flex', 
+        gap: '1rem'
+      }}>
+        <Tooltip title="Upload XML">
+          <IconButton 
+            color='success'
+            onClick={handleUploadButtonClick}
+          >
+            <UploadIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Download XML">
+          <IconButton 
+            color='success'
+            onClick={handleBuildButtonClick}
+          >
+            <DownloadIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Build app">
+          <IconButton 
+            color='success'
+            onClick={handleBuildButtonClick}
+          >
+            <BuildIcon />
+          </IconButton>
+        </Tooltip>
+      </div>
+      <UploadModal
+        show={showUploadModal}
+        onClose={handleUploadModalClose}
+      />
       <BuildModal
         screenOptions={modalScreenOptions}
-        show={showModal}
-        onClose={handleModalClose}
+        show={showBuildModal}
+        onClose={handleBuildModalClose}
         onBuild={handleBuild}
       />
     </Box>
