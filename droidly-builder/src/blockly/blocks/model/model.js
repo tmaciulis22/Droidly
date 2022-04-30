@@ -24,7 +24,7 @@ Blockly.Kotlin['model'] = (block) => {
       `@Dao`,
       `interface ${modelName}Dao {`,
       ``,
-      `${indent}@Query("SELECT * FROM ${camelCase(modelName)})`,
+      `${indent}@Query("SELECT * FROM ${camelCase(modelName)}")`,
       `${indent}suspend fun readAll(): List<${modelName}>`,
       ``,
       `${indent}@Insert(onConflict = OnConflictStrategy.REPLACE)`,
@@ -40,7 +40,7 @@ Blockly.Kotlin['model'] = (block) => {
     daoClassLines.join('\n'),
     `@Entity(tableName = "${camelCase(modelName)}")`,
     `data class ${modelName}(`,
-    `${indent}@PrimaryKey(autoGenerate = true) val id: Long? = null`,
+    `${indent}@PrimaryKey(autoGenerate = true) val id: Long? = null,`,
     modelProperties,
     `)`,
     ''

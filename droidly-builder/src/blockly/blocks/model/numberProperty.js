@@ -16,5 +16,5 @@ Blockly.Blocks['numberProperty'] = {
 Blockly.Kotlin['numberProperty'] = (block) => {
   const propertyName = block.getFieldValue('PROPERTY_NAME')
 
-  return `var ${camelCase(propertyName)}: Double? = null`
+  return `var ${camelCase(propertyName)}: Double? = null,`
 }

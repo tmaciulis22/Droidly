@@ -22,12 +22,12 @@ fun DroidlyNavHost(
                 composable("${screen.name}/${modelIdArgumentKey}") {
                     screen.composable.invoke(
                         navController,
-                        it.arguments?.getString(stringResource(R.string.modelId_argument_key))
+                        it.arguments?.getString(stringResource(R.string.modelId_argument_key))?.toLong() ?: -1
                     )
                 }
             } else {
                 composable(screen.name) {
-                    screen.composable.invoke(navController, null)
+                    screen.composable.invoke(navController, -1L)
                 }
             }
         }

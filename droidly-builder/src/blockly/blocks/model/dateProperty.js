@@ -16,5 +16,5 @@ Blockly.Blocks['dateProperty'] = {
 Blockly.Kotlin['dateProperty'] = (block) => {
   const propertyName = block.getFieldValue('PROPERTY_NAME')
 
-  return `var ${camelCase(propertyName)}: Date? = null`
+  return `var ${camelCase(propertyName)}: Date? = null,`
 }

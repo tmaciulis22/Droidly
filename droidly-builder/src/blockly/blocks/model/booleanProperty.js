@@ -16,5 +16,5 @@ Blockly.Blocks['booleanProperty'] = {
 Blockly.Kotlin['booleanProperty'] = (block) => {
   const propertyName = block.getFieldValue('PROPERTY_NAME')
 
-  return `var ${camelCase(propertyName)}: Boolean? = null`
+  return `var ${camelCase(propertyName)}: Boolean? = null,`
 }

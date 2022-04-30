@@ -22,5 +22,5 @@ Blockly.Kotlin['listProperty'] = (block) => {
   const propertyName = block.getFieldValue('PROPERTY_NAME')
   const propertyType = block.getFieldValue('PROPERTY_TYPE')
 
-  return `val ${camelCase(propertyName)}: MutableList<${propertyType}> = mutableListOf()`
+  return `val ${camelCase(propertyName)}: MutableList<${propertyType}> = mutableListOf(),`
 }

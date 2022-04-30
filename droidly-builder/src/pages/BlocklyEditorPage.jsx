@@ -11,6 +11,7 @@ import BuildModal from '../components/BuildModal';
 import { screenTypes } from '../blockly/blocks/screens';
 import generateViewLayerCode from '../util/generateViewLayerCode';
 import generateViewLayerImports from '../util/generateImports';
+import generateDataLayerCode from '../util/generateDataLayerCode';
 import UploadModal from '../components/UploadModal';
 
 export default function BlocklyEditorPage() {
@@ -29,7 +30,7 @@ export default function BlocklyEditorPage() {
     const code = Blockly.Kotlin.workspaceToCode(workspace)
     console.log(code)
 
-    const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))
+    const xml = Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(workspace))
     setCurrentXml(xml)
   }
 
@@ -96,17 +97,22 @@ export default function BlocklyEditorPage() {
     const xmlText = await xmlFile.text()
 
     Blockly.mainWorkspace.clear()
-    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xmlText), Blockly.mainWorkspace)
-    
+    const dom = Blockly.Xml.textToDom(xmlText)
+    Blockly.Xml.domToWorkspace(dom, Blockly.mainWorkspace)
+
     setShowUploadModal(false)
   }
 
   const handleBuild = (startScreen) => {
     const imports = generateViewLayerImports()
+    const modelBlocks = workspace.topBlocks_.filter(block =>
+      block.type === 'model'
+    )
+    const dataLayerCode = generateDataLayerCode(modelBlocks)
     const screenObjects = generateViewLayerCode(screenBlocks, startScreen)
     const workspaceCode = Blockly.Kotlin.workspaceToCode(workspace)
 
-    const sourceCodeBlob = new Blob([imports, screenObjects, workspaceCode], { type: 'text/plain'})
+    const sourceCodeBlob = new Blob([imports, dataLayerCode, screenObjects, workspaceCode], { type: 'text/plain'})
     const url = window.URL.createObjectURL(
       sourceCodeBlob,
     )

@@ -29,7 +29,7 @@ Blockly.Kotlin['modelScreen'] = (block) => {
     '@Composable',
     `fun ${screenName} (`,
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
-    `${Blockly.Kotlin.INDENT}modelId: Long`,
+    `${Blockly.Kotlin.INDENT}modelId: Long,`,
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
     `) {`,
     `${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${camelCase(modelName)}s.firstOrNull { it.id == modelId } ?: ${modelName}()`,

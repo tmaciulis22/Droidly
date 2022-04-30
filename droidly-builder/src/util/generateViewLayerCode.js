@@ -10,7 +10,8 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
     '**/',
     '',
     'enum class Screen(',
-    `${indent}val composable: @Composable (NavController) -> Unit = {},`,
+    `${indent}val composable: @Composable (NavController, Long) -> Unit = {_, _ -> },`,
+    `${indent}val isModelScreen: Boolean = false,`,
     `${indent}val showTopBar: Boolean = false,`,
     `${indent}val bottomBarTabIcon: ImageVector? = null // for screens which show DroidlyBottomBar`,
     ') {'

@@ -23,7 +23,7 @@ Blockly.Kotlin['navigateWithId'] = (block) => {
   const screenName = block.getFieldValue('SCREEN_TO_NAVIGATE')
   const modelName = block.getFieldValue('MODEL_NAME')
   const actionToReturn = screenName !== 'NOT_SELECTED' 
-    ? `navController.navigate("${screenName}", (item as? ${modelName}).id)`
+    ? `navController.navigate("${screenName}", (item as? ${modelName})?.id)`
     : '// navController.navigate("SCREEN_NAME")'
 
   return [actionToReturn, Blockly.Kotlin.ORDER_ATOMIC]

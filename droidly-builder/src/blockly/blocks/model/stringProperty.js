@@ -16,5 +16,5 @@ Blockly.Blocks['stringProperty'] = {
 Blockly.Kotlin['stringProperty'] = (block) => {
   const propertyName = block.getFieldValue('PROPERTY_NAME')
 
-  return `var ${camelCase(propertyName)}: String? = null`
+  return `var ${camelCase(propertyName)}: String? = null,`
 }

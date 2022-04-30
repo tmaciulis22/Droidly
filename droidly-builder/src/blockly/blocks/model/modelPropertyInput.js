@@ -22,5 +22,5 @@ Blockly.Kotlin['modelPropertyInput'] = (block) => {
   const modelName = block.getFieldValue('MODEL_INPUT_NAME')
   const property = block.getFieldValue('MODEL_INPUT_PROPERTY')
 
-  return [`(item as? ${modelName}).${property} = it`, Blockly.Kotlin.ORDER_ATOMIC]
+  return [`(item as? ${modelName})?.${property} = it`, Blockly.Kotlin.ORDER_ATOMIC]
 }

@@ -27,11 +27,10 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
     `${indent}fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {`,
     `${indent}${indent}return Room.databaseBuilder(`,
     `${indent}${indent}${indent}appContext,`,
-    `${indent}${indent}${indent}AppDatabase::class.java`,
+    `${indent}${indent}${indent}AppDatabase::class.java,`,
     `${indent}${indent}${indent}"droidly-database"`,
     `${indent}${indent}).build()`,
     `${indent}}`,
-    `}`,
     ``,
     `${indent}@Singleton`,
     `${indent}@Provides`,
@@ -67,7 +66,7 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
       ``
     )
 
-    return `${indent}${indent}${modelName}::class`
+    return `${indent}${indent}${modelName}::class,`
   }).join(',\n')
 
   code.push(`}`, ``)
@@ -76,7 +75,7 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
     `@Database(`,
     `${indent}entities = [`,
     entities,
-    `${indent}]`,
+    `${indent}],`,
     `${indent}version = 1`,
     `)`,
     `abstract class AppDatabase : RoomDatabase() {`,
@@ -87,11 +86,11 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
 
   code.push(
     `data class MainState(`,
-    `${indent}val isLoading: Boolean = false`,
+    `${indent}val isLoading: Boolean = false,`,
   )
   modelNames.forEach(name => {
     code.push(
-      `${indent}val ${camelCase(name)}s: List<${name}> = emptyList()`
+      `${indent}val ${camelCase(name)}s: List<${name}> = emptyList(),`
     )
   })
   code.push(
@@ -131,7 +130,7 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
       `${indent}fun save${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
       mainStateLoading,
       `${indent}${indent}${daoNameCamel}.save(${modelNameCamel})`,
-      mainStateNotLoading
+      mainStateNotLoading,
       `${indent}}`,
       ``,
       `${indent}fun delete${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
