@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Typography, Button, Grid, Paper } from "@mui/material";
 import StyledDropzone from "./StyledDropzone";
 
@@ -12,12 +12,8 @@ export default function UploadModal({
     onClose()
   }
 
-  const handleUpload = () => {
-    onUpload()
-  }
-
-  const handleAdd = () => {
-    // TODO
+  const handleAdd = (xmlFile) => {
+    onUpload(xmlFile[0])
   }
 
   return (
@@ -42,7 +38,7 @@ export default function UploadModal({
           </Grid>
           <Grid item>
           </Grid>
-          <Grid item container spacing={2} justifyContent={'flex-end'}>
+          <Grid item container justifyContent={'flex-end'}>
             <Grid item>
               <Button
                 variant='outlined'
@@ -50,15 +46,6 @@ export default function UploadModal({
                 onClick={onClose}
               >
                 Cancel
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                variant='contained'
-                color='success'
-                onClick={handleUpload}
-              >
-                Upload
               </Button>
             </Grid>
           </Grid>

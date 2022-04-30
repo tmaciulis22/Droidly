@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 export default function StyledDropzone({ 
@@ -14,17 +14,37 @@ export default function StyledDropzone({
   } = useDropzone({
     onDropAccepted: onAdd,
     maxFiles: 1,
-    accept: { 'application/xml': ['.xml'] }
+    accept: { 'text/xml': ['.xml'] }
   });
+
+  const backgroundAndBorderColors = useMemo(() => {
+    let style = {
+      borderColor: '#8c8c8c',
+      backgroundColor: '#fafafa'
+    }
+    if (isDragAccept) {
+      style = {
+        borderColor: '#00e676',
+        backgroundColor: '#00e67650'
+      }
+    }
+    if (isDragReject) {
+      style = {
+        borderColor: '#ff1744',
+        backgroundColor: '#ff174450'
+      }
+    }
+
+    return style
+  }, [isDragAccept, isDragReject])
 
   return (
     <Grid container {...getRootProps({
       padding: '5rem',
       border: '2px dashed',
-      borderColor: isDragAccept ? '#00e676' : isDragReject ? '#ff1744' : '#8c8c8c',
       borderRadius: '4px',
-      backgroundColor: isDragAccept ? '#00e67650' : isDragReject ? '#ff174450' : '#fafafa',
       color: '#8c8c8c',
+      ...backgroundAndBorderColors
      })}>
       <Grid item xs={12}>
         <input {...getInputProps()} />

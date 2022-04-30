@@ -15,6 +15,8 @@ import UploadModal from '../components/UploadModal';
 
 export default function BlocklyEditorPage() {
 
+  const [currentXml, setCurrentXml] = useState('')
+
   const [showBuildModal, setShowBuildModal] = useState(false)
   const [showUploadModal, setShowUploadModal] = useState(false)
   const [modalScreenOptions, setModalScreenOptions] = useState([])
@@ -26,6 +28,9 @@ export default function BlocklyEditorPage() {
   const handleOnWorkspaceChanged = (workspace) => {
     const code = Blockly.Kotlin.workspaceToCode(workspace)
     console.log(code)
+
+    const xml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace))
+    setCurrentXml(xml)
   }
 
   const { workspace } = useBlocklyWorkspace({
@@ -48,13 +53,32 @@ export default function BlocklyEditorPage() {
     setShowUploadModal(true)
   }
 
+  const handleDownloadButtonClick = () => {
+    const sourceCodeBlob = new Blob([currentXml], { type: 'text/plain'})
+    const url = window.URL.createObjectURL(sourceCodeBlob)
+    const link = document.createElement('a')
+
+    link.setAttribute(
+      'download',
+      `workspace.xml`,
+    )
+    link.href = url
+    document.body.appendChild(link)
+
+    window.requestAnimationFrame(function () {
+      var event = new MouseEvent('click')
+      link.dispatchEvent(event)
+      link.parentNode.removeChild(link)
+		})
+  }
+
   const handleUploadModalClose = () => {
     setShowUploadModal(false)
   }
 
   const handleBuildButtonClick = () => {
     const screenBlocks = workspace.topBlocks_
-      .filter(block => [screenTypes, 'modelScreen'].some(type => block.type === type))
+      .filter(block => [...screenTypes, 'modelScreen'].some(type => block.type === type))
     setScreenBlocks(screenBlocks)
 
     const screenOptions = screenBlocks
@@ -66,6 +90,15 @@ export default function BlocklyEditorPage() {
 
   const handleBuildModalClose = () => {
     setShowBuildModal(false)
+  }
+
+  const handleUpload = async (xmlFile) => {
+    const xmlText = await xmlFile.text()
+
+    Blockly.mainWorkspace.clear()
+    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xmlText), Blockly.mainWorkspace)
+    
+    setShowUploadModal(false)
   }
 
   const handleBuild = (startScreen) => {
@@ -90,7 +123,7 @@ export default function BlocklyEditorPage() {
       var event = new MouseEvent('click')
       link.dispatchEvent(event)
       link.parentNode.removeChild(link)
-		});
+		})
   }
 
   return (
@@ -114,7 +147,7 @@ export default function BlocklyEditorPage() {
         <Tooltip title="Download XML">
           <IconButton 
             color='success'
-            onClick={handleBuildButtonClick}
+            onClick={handleDownloadButtonClick}
           >
             <DownloadIcon />
           </IconButton>
@@ -131,6 +164,7 @@ export default function BlocklyEditorPage() {
       <UploadModal
         show={showUploadModal}
         onClose={handleUploadModalClose}
+        onUpload={handleUpload}
       />
       <BuildModal
         screenOptions={modalScreenOptions}
