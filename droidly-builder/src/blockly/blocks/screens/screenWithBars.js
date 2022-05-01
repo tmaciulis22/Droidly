@@ -43,9 +43,6 @@ Blockly.Kotlin['screenWithBars'] = (block) => {
   const modelListBlocks = block.getDescendants().slice(1).filter(child => 
     child.type === 'rowList' || child.type === 'columnList'
   )
-  const usedModels = modelListBlocks.map(listBlock =>
-    `${Blockly.Kotlin.INDENT}${Blockly.Kotlin.INDENT}mainViewModel.readAll${listBlock.getFieldValue('MODEL_CLASS')}s()`
-  )
 
   const code = []
   code.push(
@@ -53,10 +50,19 @@ Blockly.Kotlin['screenWithBars'] = (block) => {
     `fun ${screenName}(`,
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
-    `) {`,
-    `${Blockly.Kotlin.INDENT}LaunchedEffect("${screenName}") {`,
-    usedModels,
-    `${Blockly.Kotlin.INDENT}}`,
+    `) {`
+  )
+  if (modelListBlocks.length > 0) {
+    const usedModels = modelListBlocks.map(listBlock =>
+      `${Blockly.Kotlin.INDENT}${Blockly.Kotlin.INDENT}mainViewModel.readAll${listBlock.getFieldValue('MODEL_CLASS')}s()`
+    )
+    code.push(
+      `${Blockly.Kotlin.INDENT}LaunchedEffect("${screenName}") {`,
+      usedModels,
+      `${Blockly.Kotlin.INDENT}}`
+    )
+  }
+  code.push(
     `${content}`,
     '}'
   )

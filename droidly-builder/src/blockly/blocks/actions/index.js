@@ -1,6 +1,5 @@
 import './navigate'
 import './navigateUp'
-import './navigateWithModelId'
 import './save'
 import './delete'
 
@@ -16,10 +15,6 @@ const actionsCategoryContent = {
     {
       kind: 'block',
       type: 'navigateUp'
-    },
-    {
-      kind: 'block',
-      type: 'navigateWithId'
     },
     {
       kind: 'block',

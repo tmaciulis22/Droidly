@@ -1,4 +1,5 @@
 import Blockly from 'blockly';
+import checkIfModelScreen from './checkIfModelScreen';
 
 export default function generateViewLayerCode(screenBlocks, startScreen) {
   const indent = Blockly.Kotlin.INDENT
@@ -19,7 +20,7 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
 
   screenBlocks.forEach((block, index) => {
     const name = block.getFieldValue('SCREEN_NAME')
-    const isModelScreen = block.type === 'modelScreen'
+    const isModelScreen = checkIfModelScreen(block)
     const composable = isModelScreen 
       ? `{ navController, modelId, mainViewModel -> ${name}(navController, modelId, mainViewModel) }`
       :  `{ navController, _, mainViewModel -> ${name}(navController, mainViewModel) }`

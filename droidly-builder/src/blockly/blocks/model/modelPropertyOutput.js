@@ -8,7 +8,7 @@ Blockly.Blocks['modelPropertyOutput'] = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown(
         modelMenuGenerator(this)
-      ), 'MODEL_OUTPUT_NAME')
+      ), 'MODEL_NAME')
       .appendField('property')
       .appendField(new Blockly.FieldDropdown(
         modelPropertyMenuGenerator(this)

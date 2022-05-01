@@ -1,4 +1,5 @@
 import Blockly from 'blockly'
+import checkIfModelScreen from '../../../util/checkIfModelScreen'
 import { navigateMenuGenerator } from '../../../util/menuGenerators'
 
 Blockly.Blocks['navigate'] = {
@@ -16,7 +17,19 @@ Blockly.Blocks['navigate'] = {
 
 Blockly.Kotlin['navigate'] = (block) => {
   const screenName = block.getFieldValue('SCREEN_TO_NAVIGATE')
-  const actionToReturn = screenName !== 'NOT_SELECTED' ? `navController.navigate("${screenName}")` : '// navController.navigate("SCREEN_NAME")'
+  const screenBlock = block.workspace.topBlocks_.find(topBlock => 
+    topBlock.getFieldValue('SCREEN_NAME') === screenName
+  )
+  const isModelScreen = checkIfModelScreen(screenBlock)
+
+  let actionToReturn = '/* navController.navigate("SCREEN_NAME") */'
+  if (screenName !== 'NOT_SELECTED') {
+    if (isModelScreen) {
+      actionToReturn = `navController.navigate("${screenName}", item.id)`
+    } else {
+      actionToReturn = `navController.navigate("${screenName}")`
+    }
+  }
 
   return [actionToReturn, Blockly.Kotlin.ORDER_ATOMIC]
 }

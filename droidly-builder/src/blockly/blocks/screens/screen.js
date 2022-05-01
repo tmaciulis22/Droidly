@@ -1,4 +1,7 @@
 import Blockly from 'blockly';
+import checkIfModelScreen from '../../../util/checkIfModelScreen';
+import getModelNameFromScreenBlock from '../../../util/getModelNameFromScreenBlock';
+import camelCase from '../../../util/camelCase';
 
 Blockly.Blocks['screen'] = {
   init: function() {
@@ -19,9 +22,6 @@ Blockly.Kotlin['screen'] = (block) => {
   const modelListBlocks = block.getDescendants().slice(1).filter(child => 
     child.type === 'rowList' || child.type === 'columnList'
   )
-  const usedModels = modelListBlocks.map(listBlock =>
-    `${Blockly.Kotlin.INDENT}${Blockly.Kotlin.INDENT}mainViewModel.readAll${listBlock.getFieldValue('MODEL_CLASS')}s()`
-  ).join('\n')
 
   const code = []
   code.push(
@@ -29,10 +29,22 @@ Blockly.Kotlin['screen'] = (block) => {
     `fun ${screenName}(`,
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
-    `) {`,
-    `${Blockly.Kotlin.INDENT}LaunchedEffect("${screenName}") {`,
-    usedModels,
-    `${Blockly.Kotlin.INDENT}}`,
+    `) {`
+  )
+  if (modelListBlocks.length > 0) {
+    const usedModels = modelListBlocks.map(listBlock =>
+      `${Blockly.Kotlin.INDENT}${Blockly.Kotlin.INDENT}mainViewModel.readAll${listBlock.getFieldValue('MODEL_CLASS')}s()`
+    ).join('\n')
+    code.push(
+      `${Blockly.Kotlin.INDENT}LaunchedEffect("${screenName}") {`,
+      usedModels,
+      `${Blockly.Kotlin.INDENT}}`
+    )
+  } else if (checkIfModelScreen(block)) {
+    const modelName = getModelNameFromScreenBlock(block)
+    code.push(`${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${camelCase(modelName)}s.firstOrNull { it.id == modelId } ?: ${modelName}()`)
+  }
+  code.push(
     `${content}`,
     `}`
   )
