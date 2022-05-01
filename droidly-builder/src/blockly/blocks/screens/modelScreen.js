@@ -27,13 +27,12 @@ Blockly.Kotlin['modelScreen'] = (block) => {
   const code = []
   code.push(
     '@Composable',
-    `fun ${screenName} (`,
+    `fun ${screenName}(`,
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
     `${Blockly.Kotlin.INDENT}modelId: Long,`,
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
     `) {`,
     `${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${camelCase(modelName)}s.firstOrNull { it.id == modelId } ?: ${modelName}()`,
-    `${Blockly.Kotlin.INDENT}DroidlyLoadingBar(isLoading = mainViewModel.mainState.isLoading)`,
     `${content}`,
     `}`
   )

@@ -29,7 +29,7 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
     `${indent}${indent}${indent}appContext,`,
     `${indent}${indent}${indent}AppDatabase::class.java,`,
     `${indent}${indent}${indent}"droidly-database"`,
-    `${indent}${indent}).build()`,
+    `${indent}${indent}).fallbackToDestructiveMigration().build()`,
     `${indent}}`,
     ``,
     `${indent}@Singleton`,
@@ -99,6 +99,7 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
   )
 
   code.push(
+    `@HiltViewModel`,
     `class MainViewModel @Inject constructor(`
   )
   daoNames.forEach(name => {
@@ -130,13 +131,15 @@ function getAppModuleAndDaos(modelBlocks) { // TODO refactor
       `${indent}fun save${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
       mainStateLoading,
       `${indent}${indent}${daoNameCamel}.save(${modelNameCamel})`,
+      `${indent}${indent}val ${modelNameCamel}s = ${daoNameCamel}.readAll()`,
+      `${indent}${indent}mainState = mainState.copy(${modelNameCamel}s = ${modelNameCamel}s)`,
       mainStateNotLoading,
       `${indent}}`,
       ``,
       `${indent}fun delete${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
       mainStateLoading,
       `${indent}${indent}${daoNameCamel}.delete(${modelNameCamel})`,
-      `mainState = mainState.copy(${modelNameCamel}s = mainState.${modelNameCamel}s.filter { it != ${modelNameCamel} })`,
+      `${indent}${indent}mainState = mainState.copy(${modelNameCamel}s = mainState.${modelNameCamel}s.filter { it != ${modelNameCamel} })`,
       mainStateNotLoading,
       `${indent}}`,
       ``

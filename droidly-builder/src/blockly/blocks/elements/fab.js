@@ -31,7 +31,7 @@ Blockly.Kotlin['fab'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
   const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedText = text.includes('item as? ') ? text : `"${text}"`
+  const formattedText = text.includes('item.') ? text : `"${text}"`
 
   const textColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const buttonColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null

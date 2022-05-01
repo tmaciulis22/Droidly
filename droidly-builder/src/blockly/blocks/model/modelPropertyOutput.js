@@ -18,8 +18,7 @@ Blockly.Blocks['modelPropertyOutput'] = {
 }
 
 Blockly.Kotlin['modelPropertyOutput'] = (block) => {
-  const modelName = block.getFieldValue('MODEL_OUTPUT_NAME')
   const property = block.getFieldValue('MODEL_OUTPUT_PROPERTY')
 
-  return [`(item as? ${modelName})?.${property}.toString()`, Blockly.Kotlin.ORDER_ATOMIC]
+  return [`item.${property}?.toString() ?: "-"`, Blockly.Kotlin.ORDER_ATOMIC]
 }

@@ -22,7 +22,7 @@ Blockly.Kotlin['fabDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'FAB_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'FAB_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
   const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedText = text.includes('item as? ') ? text : `"${text}"`
+  const formattedText = text.includes('item.') ? text : `"${text}"`
 
   const modifier = []
   modifier.push('Modifier')

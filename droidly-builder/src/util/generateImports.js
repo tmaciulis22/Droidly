@@ -37,6 +37,7 @@ export default function generateViewLayerImports() {
     'import dagger.hilt.InstallIn',
     'import dagger.hilt.android.qualifiers.ApplicationContext',
     'import dagger.hilt.components.SingletonComponent',
+    'import dagger.hilt.android.lifecycle.HiltViewModel',
     'import java.util.Date',
     'import javax.inject.Singleton',
     'import okhttp3.OkHttpClient',

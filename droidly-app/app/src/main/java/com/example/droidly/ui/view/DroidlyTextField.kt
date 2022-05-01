@@ -23,7 +23,7 @@ fun DroidlyTextField(
     shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     singleLine: Boolean = true,
     border: BorderStroke? = null,
-    onEnter: (String) -> Unit = {}
+    onValueChanged: (String) -> Unit = {}
 ) {
     val modifierToAdd = border?.let {
         modifier.then(Modifier.border(border, shape))
@@ -38,6 +38,7 @@ fun DroidlyTextField(
         value = textFieldValue,
         onValueChange = {
             textFieldValueState = it
+            onValueChanged(it.text)
         },
         singleLine = singleLine,
         placeholder = {
@@ -53,7 +54,6 @@ fun DroidlyTextField(
         ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Go),
         keyboardActions = KeyboardActions(onGo = {
-            onEnter(textFieldValueState.text)
             focusManager.clearFocus()
         })
     )

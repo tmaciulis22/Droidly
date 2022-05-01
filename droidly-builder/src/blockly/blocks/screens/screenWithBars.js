@@ -40,7 +40,6 @@ Blockly.Kotlin['screenWithBars'] = (block) => {
   const screenName = block.getFieldValue('SCREEN_NAME')
   const content = Blockly.Kotlin.statementToCode(block, 'SCREEN_CONTENT')
 
-  // TODO add creator block
   const modelListBlocks = block.getDescendants().slice(1).filter(child => 
     child.type === 'rowList' || child.type === 'columnList'
   )
@@ -51,14 +50,13 @@ Blockly.Kotlin['screenWithBars'] = (block) => {
   const code = []
   code.push(
     '@Composable',
-    `fun ${screenName} (`,
+    `fun ${screenName}(`,
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
     `) {`,
     `${Blockly.Kotlin.INDENT}LaunchedEffect("${screenName}") {`,
     usedModels,
     `${Blockly.Kotlin.INDENT}}`,
-    `${Blockly.Kotlin.INDENT}DroidlyLoadingBar(isLoading = mainViewModel.mainState.isLoading)`,
     `${content}`,
     '}'
   )

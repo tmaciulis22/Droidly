@@ -28,7 +28,7 @@ Blockly.Blocks['text'] = {
 Blockly.Kotlin['text'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_MODIFIER')
   const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedText = text.includes('item as? ') ? text : `"${text}"`
+  const formattedText = text.includes('item.') ? text : `"${text}"`
   const color = Blockly.Kotlin.valueToCode(block, 'TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const size = block.getFieldValue('TEXT_SIZE') ? `${block.getFieldValue('TEXT_SIZE')}.sp` : null
   const weight = block.getFieldValue('TEXT_WEIGHT') ? `FontWeight.W${block.getFieldValue('TEXT_WEIGHT')}` : null

@@ -10,7 +10,7 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
     '**/',
     '',
     'enum class Screen(',
-    `${indent}val composable: @Composable (NavController, Long) -> Unit = {_, _ -> },`,
+    `${indent}val composable: @Composable (NavController, Long, MainViewModel) -> Unit = {_, _, _ -> },`,
     `${indent}val isModelScreen: Boolean = false,`,
     `${indent}val showTopBar: Boolean = false,`,
     `${indent}val bottomBarTabIcon: ImageVector? = null // for screens which show DroidlyBottomBar`,
@@ -21,8 +21,8 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
     const name = block.getFieldValue('SCREEN_NAME')
     const isModelScreen = block.type === 'modelScreen'
     const composable = isModelScreen 
-      ? `{ navController, modelId -> ${name}(navController, modelId) }`
-      :  `{ navController, _ -> ${name}(navController) }`
+      ? `{ navController, modelId, mainViewModel -> ${name}(navController, modelId, mainViewModel) }`
+      :  `{ navController, _, mainViewModel -> ${name}(navController, mainViewModel) }`
     const showTopBar = block.getFieldValue('SHOW_TOP_BAR') === 'TRUE' ? 'true' : 'false'
     const bottomBarTabIconValue = block.getFieldValue('BOTTOM_TAB_ICON')
     const includeIcon = bottomBarTabIconValue !== 'NO_BAR' && bottomBarTabIconValue !== null

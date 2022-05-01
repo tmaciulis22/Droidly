@@ -19,7 +19,8 @@ import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.LocalView
 import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.lifecycle.ViewTreeViewModelStoreOwner
-import androidx.savedstate.ViewTreeSavedStateRegistryOwner
+import androidx.savedstate.findViewTreeSavedStateRegistryOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import java.util.*
 
 @Composable
@@ -77,7 +78,7 @@ private class FullScreenLayout(
         id = android.R.id.content
         ViewTreeLifecycleOwner.set(this, ViewTreeLifecycleOwner.get(composeView))
         ViewTreeViewModelStoreOwner.set(this, ViewTreeViewModelStoreOwner.get(composeView))
-        ViewTreeSavedStateRegistryOwner.set(this, ViewTreeSavedStateRegistryOwner.get(composeView))
+        composeView.setViewTreeSavedStateRegistryOwner(composeView.findViewTreeSavedStateRegistryOwner())
 
         setTag(R.string.savable_view_tag, "CustomLayout:$uniqueId")
     }

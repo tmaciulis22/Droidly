@@ -41,7 +41,7 @@ Blockly.Kotlin['textField'] = (block) => {
 
   const onSubmit = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_ON_SUBMIT', Blockly.Kotlin.ORDER_ATOMIC) || null
   const placeholder = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedPlaceholder = placeholder.includes('item as? ') ? placeholder : `"${placeholder}"`
+  const formattedPlaceholder = placeholder.includes('item.') ? placeholder : `"${placeholder}"`
   const textFieldColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const textColor = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const shape = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_SHAPE', Blockly.Kotlin.ORDER_ATOMIC) || null
