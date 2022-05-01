@@ -197,16 +197,20 @@ fun Persons(
                 elevation = 2.dp,
                 onClick = { navController.navigate("PersonDetails", item.id) }
             ) {
-                DroidlyText(
-                    modifier = Modifier
-                        .padding(all = 6.dp),
-                    text = item.firstName?.toString() ?: "-",
-                )
-                DroidlyText(
-                    modifier = Modifier
-                        .padding(all = 6.dp),
-                    text = item.lastName?.toString() ?: "-",
-                )
+                Row(
+                    modifier = Modifier,
+                ) {
+                    DroidlyText(
+                        modifier = Modifier
+                            .padding(all = 6.dp),
+                        text = item.firstName?.toString() ?: "-",
+                    )
+                    DroidlyText(
+                        modifier = Modifier
+                            .padding(all = 6.dp),
+                        text = item.lastName?.toString() ?: "-",
+                    )
+                }
             }
         }
         DroidlyFAB(
