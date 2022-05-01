@@ -3,12 +3,27 @@ package com.example.droidly
 import androidx.navigation.NavController
 import androidx.compose.runtime.Composable
 import com.example.droidly.ui.view.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.material.Divider
+import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.room.*
 import androidx.room.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
@@ -33,7 +48,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 import com.example.droidly.ui.navigation.navigate
 import android.content.Context
-import android.util.Log
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -67,57 +81,52 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideCarDao(appDatabase: AppDatabase): CarDao = appDatabase.getCarDao()
+    fun providePersonDao(appDatabase: AppDatabase): PersonDao = appDatabase.getPersonDao()
 
 }
 
 @Database(
     entities = [
-        Car::class,
+        Person::class,
     ],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getCarDao(): CarDao
+    abstract fun getPersonDao(): PersonDao
 }
 
 data class MainState(
     val isLoading: Boolean = false,
-    val cars: List<Car> = emptyList(),
+    val persons: List<Person> = emptyList(),
 )
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    val carDao: CarDao
+    val personDao: PersonDao
 ) : ViewModel() {
 
     var mainState by mutableStateOf(MainState())
         private set
 
-    fun readAllCars() = viewModelScope.launch {
+    fun readAllPersons() = viewModelScope.launch {
         mainState = mainState.copy(isLoading = true)
-        val cars = carDao.readAll()
-        mainState = mainState.copy(cars = cars)
-        mainState = mainState.copy(
-            isLoading = false,
-            cars = cars
-        )
+        val persons = personDao.readAll()
+        mainState = mainState.copy(persons = persons)
+        mainState = mainState.copy(isLoading = false)
     }
 
-    fun saveCar(car: Car) = viewModelScope.launch {
+    fun savePerson(person: Person) = viewModelScope.launch {
         mainState = mainState.copy(isLoading = true)
-        carDao.save(car)
-        val cars = carDao.readAll()
-        mainState = mainState.copy(
-            isLoading = false,
-            cars = cars
-        )
+        personDao.save(person)
+        val persons = personDao.readAll()
+        mainState = mainState.copy(persons = persons)
+        mainState = mainState.copy(isLoading = false)
     }
 
-    fun deleteCar(car: Car) = viewModelScope.launch {
+    fun deletePerson(person: Person) = viewModelScope.launch {
         mainState = mainState.copy(isLoading = true)
-        carDao.delete(car)
-        mainState = mainState.copy(cars = mainState.cars.filter { it != car })
+        personDao.delete(person)
+        mainState = mainState.copy(persons = mainState.persons.filter { it != person })
         mainState = mainState.copy(isLoading = false)
     }
 
@@ -132,13 +141,13 @@ enum class Screen(
     val showTopBar: Boolean = false,
     val bottomBarTabIcon: ImageVector? = null // for screens which show DroidlyBottomBar
 ) {
-    Cars({ navController, _, mainViewModel -> Cars(navController, mainViewModel) }, false, false, null),
-    CreateCar({ navController, modelId, mainViewModel -> CreateCar(navController, modelId, mainViewModel) }, true, false, null),
-    CarDetails({ navController, modelId, mainViewModel -> CarDetails(navController, modelId, mainViewModel) }, true, false, null);
+    Persons({ navController, _, mainViewModel -> Persons(navController, mainViewModel) }, false, false, null),
+    PersonDetails({ navController, modelId, mainViewModel -> PersonDetails(navController, modelId, mainViewModel) }, true, false, null),
+    CreatePerson({ navController, modelId, mainViewModel -> CreatePerson(navController, modelId, mainViewModel) }, true, false, null);
 
     companion object {
         val startingScreen: String
-            get() = Cars.name
+            get() = Persons.name
         val screensWithTopBar: List<Screen>
             get() = values().filter { it.showTopBar }
         val bottomNavTabs: List<Screen>
@@ -147,141 +156,126 @@ enum class Screen(
 }
 
 @Dao
-interface CarDao {
+interface PersonDao {
 
-    @Query("SELECT * FROM car")
-    suspend fun readAll(): List<Car>
+    @Query("SELECT * FROM person")
+    suspend fun readAll(): List<Person>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(entity: Car)
+    suspend fun save(entity: Person)
 
     @Delete
-    suspend fun delete(entity: Car)
+    suspend fun delete(entity: Person)
 }
 
-@Entity(tableName = "car")
-data class Car(
+@Entity(tableName = "person")
+data class Person(
     @PrimaryKey(autoGenerate = true) val id: Long? = null,
-    var brand: String? = null,
-    var model: String? = null,
-    var year: Double? = null,
+    var firstName: String? = null,
+    var lastName: String? = null,
 )
 
 @Composable
-fun Cars(
+fun Persons(
     navController: NavController,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    LaunchedEffect("Cars") {
-        mainViewModel.readAllCars()
+    LaunchedEffect("Persons") {
+        mainViewModel.readAllPersons()
     }
     Column(
         modifier = Modifier
-            .padding(all = 16.dp)
-            .fillMaxHeight(),
+            .padding(all = 16.dp),
     ) {
         DroidlyLazyColumn(
             modifier = Modifier,
-            dataList = mainViewModel.mainState.cars
+            dataList = mainViewModel.mainState.persons
         ) { item ->
             DroidlySurface(
                 modifier = Modifier
-                    .padding(bottom = 12.dp),
+                    .padding(bottom = 16.dp),
                 elevation = 2.dp,
-                onClick = { navController.navigate("CarDetails", item.id) }
+                onClick = { navController.navigate("PersonDetails", item.id) }
             ) {
-                Column(
-                    modifier = Modifier,
-                ) {
-                    DroidlyText(
-                        modifier = Modifier
-                            .padding(all = 6.dp),
-                        text = item.brand.toString(),
-                    )
-                    DroidlyText(
-                        modifier = Modifier
-                            .padding(all = 6.dp),
-                        text = item.model.toString(),
-                    )
-                    DroidlyText(
-                        modifier = Modifier
-                            .padding(all = 6.dp),
-                        text = item.year.toString(),
-                    )
-                }
+                DroidlyText(
+                    modifier = Modifier
+                        .padding(all = 6.dp),
+                    text = item.firstName?.toString() ?: "-",
+                )
+                DroidlyText(
+                    modifier = Modifier
+                        .padding(all = 6.dp),
+                    text = item.lastName?.toString() ?: "-",
+                )
             }
         }
         DroidlyFAB(
             modifier = Modifier,
-            onClick = { navController.navigate("CreateCar", -1L) },
+            onClick = { navController.navigate("CreatePerson", -1L) },
             text = "Add",
         )
     }
 }
 
 @Composable
-fun CreateCar(
+fun PersonDetails(
     navController: NavController,
     modelId: Long,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
-    val item = mainViewModel.mainState.cars.firstOrNull { it.id == modelId } ?: Car()
-    Column(
-        modifier = Modifier
-            .padding(all = 16.dp),
-    ) {
-        DroidlyTextField(
-            modifier = Modifier
-                .padding(bottom = 12.dp),
-            placeholder = "Brand",
-            onValueChanged = { item.brand = it },
-        )
-        DroidlyTextField(
-            modifier = Modifier
-                .padding(bottom = 12.dp),
-            placeholder = "Model",
-            onValueChanged = { item.model = it },
-        )
-        DroidlyButton(
-            modifier = Modifier,
-            onClick = {
-                mainViewModel.saveCar(item)
-                navController.navigateUp()
-             },
-            text = "Create",
-        )
-    }
-}
-
-@Composable
-fun CarDetails(
-    navController: NavController,
-    modelId: Long,
-    mainViewModel: MainViewModel = hiltViewModel()
-) {
-    val item = mainViewModel.mainState.cars.firstOrNull { it.id == modelId } ?: Car()
-    Log.i("TAUTTEST", modelId.toString())
-    Log.i("TAUTTEST", item.id.toString())
+    val item = mainViewModel.mainState.persons.firstOrNull { it.id == modelId } ?: Person()
     Column(
         modifier = Modifier
             .padding(all = 16.dp),
     ) {
         DroidlyText(
             modifier = Modifier
-                .padding(bottom = 12.dp),
-            text = item.brand.toString(),
-            fontSize = 24.sp,
-            fontWeight = FontWeight.W800,
+                .padding(bottom = 16.dp),
+            text = item.firstName?.toString() ?: "-",
         )
         DroidlyImage(
             modifier = Modifier
-                .padding(bottom = 12.dp),
+                .padding(bottom = 16.dp),
             url = "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80",
         )
         DroidlyButton(
             modifier = Modifier,
             onClick = { navController.navigateUp() },
             text = "Go back",
+        )
+    }
+}
+
+@Composable
+fun CreatePerson(
+    navController: NavController,
+    modelId: Long,
+    mainViewModel: MainViewModel = hiltViewModel()
+) {
+    val item = mainViewModel.mainState.persons.firstOrNull { it.id == modelId } ?: Person()
+    Column(
+        modifier = Modifier
+            .padding(all = 16.dp),
+    ) {
+        DroidlyTextField(
+            modifier = Modifier
+                .padding(bottom = 16.dp),
+            placeholder = "First name",
+            onValueChanged = { item.firstName = it },
+        )
+        DroidlyTextField(
+            modifier = Modifier
+                .padding(bottom = 16.dp),
+            placeholder = "Last name",
+            onValueChanged = { item.lastName = it },
+        )
+        DroidlyButton(
+            modifier = Modifier,
+            onClick = {
+                mainViewModel.savePerson(item)
+                navController.navigateUp()
+             },
+            text = "Create",
         )
     }
 }

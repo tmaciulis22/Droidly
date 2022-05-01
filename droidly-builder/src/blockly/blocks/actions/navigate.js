@@ -20,12 +20,16 @@ Blockly.Kotlin['navigate'] = (block) => {
   const screenBlock = block.workspace.topBlocks_.find(topBlock => 
     topBlock.getFieldValue('SCREEN_NAME') === screenName
   )
-  const isModelScreen = checkIfModelScreen(screenBlock)
+  const isDestinationModelScreen = checkIfModelScreen(screenBlock)
+  const modelList = block.getRootBlock().getDescendants().slice(1).find(child => 
+    child.type === 'rowList' || child.type === 'columnList'
+  )
+  const addItemId = modelList.getChildren()[0].toString().includes(screenName)
 
   let actionToReturn = '/* navController.navigate("SCREEN_NAME") */'
   if (screenName !== 'NOT_SELECTED') {
-    if (isModelScreen) {
-      actionToReturn = `navController.navigate("${screenName}", item.id)`
+    if (isDestinationModelScreen) {
+      actionToReturn = `navController.navigate("${screenName}", ${addItemId ? "item.id" : "-1L"})`
     } else {
       actionToReturn = `navController.navigate("${screenName}")`
     }

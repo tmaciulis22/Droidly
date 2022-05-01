@@ -15,7 +15,7 @@ Blockly.Blocks['textField'] = {
       .appendField(new Blockly.FieldCheckbox('TRUE'), 'TEXT_FIELD_IS_ONE_LINE')
     this.appendValueInput('TEXT_FIELD_ON_SUBMIT')
       .setCheck('Action')
-      .appendField('on submit:')
+      .appendField('on enter:')
     this.appendValueInput('TEXT_FIELD_COLOR')
       .setCheck('Colour')
       .appendField('text field colour:')
@@ -61,7 +61,7 @@ Blockly.Kotlin['textField'] = (block) => {
     `${Blockly.Kotlin.INDENT}singleLine = ${singleLine},`
   )
   if (onSubmit) {
-    code.push(`${Blockly.Kotlin.INDENT}onEnter = { ${onSubmit} },`)
+    code.push(`${Blockly.Kotlin.INDENT}onValueChanged = { ${onSubmit} },`)
   }
   if (placeholder) {
     code.push(`${Blockly.Kotlin.INDENT}placeholder = "${formattedPlaceholder}",`)

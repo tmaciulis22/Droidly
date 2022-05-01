@@ -12,7 +12,7 @@ Blockly.Blocks['textFieldDefault'] = {
       .appendField('placeholder:')
     this.appendValueInput('TEXT_FIELD_ON_ENTER')
       .setCheck(['Action', 'ModelProperty'])
-      .appendField('on submit:')
+      .appendField('on enter:')
     this.appendStatementInput('TEXT_FIELD_MODIFIER')
       .appendField('modifier:')
     this.setInputsInline(false)
@@ -38,7 +38,7 @@ Blockly.Kotlin['textFieldDefault'] = (block) => {
     'DroidlyTextField(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}placeholder = ${formattedPlaceholder},`,
-    `${Blockly.Kotlin.INDENT}onEnter = { ${onEnter} },`,
+    `${Blockly.Kotlin.INDENT}onValueChanged = { ${onEnter} },`,
     ')',
   )
 

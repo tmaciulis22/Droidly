@@ -22,16 +22,22 @@ Blockly.Kotlin['screen'] = (block) => {
   const modelListBlocks = block.getDescendants().slice(1).filter(child => 
     child.type === 'rowList' || child.type === 'columnList'
   )
+  const isModelScreen = checkIfModelScreen(block)
 
   const code = []
   code.push(
     '@Composable',
     `fun ${screenName}(`,
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
+  )
+  if (isModelScreen) {
+    code.push(`${Blockly.Kotlin.INDENT}modelId: Long,`)
+  }
+  code.push(
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,
     `) {`
   )
-  if (modelListBlocks.length > 0) {
+  if (!isModelScreen && modelListBlocks.length > 0) {
     const usedModels = modelListBlocks.map(listBlock =>
       `${Blockly.Kotlin.INDENT}${Blockly.Kotlin.INDENT}mainViewModel.readAll${listBlock.getFieldValue('MODEL_CLASS')}s()`
     ).join('\n')
@@ -40,7 +46,7 @@ Blockly.Kotlin['screen'] = (block) => {
       usedModels,
       `${Blockly.Kotlin.INDENT}}`
     )
-  } else if (checkIfModelScreen(block)) {
+  } else {
     const modelName = getModelNameFromScreenBlock(block)
     code.push(`${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${camelCase(modelName)}s.firstOrNull { it.id == modelId } ?: ${modelName}()`)
   }
