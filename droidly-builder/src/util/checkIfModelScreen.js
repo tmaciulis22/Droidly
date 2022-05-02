@@ -1,4 +1,8 @@
 export default function checkIfModelScreen(block) {
+  if (block === undefined) {
+    return false
+  }
+
   const hasModelActions = block.getDescendants().slice(1).some(descendant => 
     descendant.type === 'modelPropertyInput' 
     || descendant.type === 'modelPropertyOutput'

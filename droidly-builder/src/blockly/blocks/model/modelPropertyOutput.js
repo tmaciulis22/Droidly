@@ -6,6 +6,7 @@ Blockly.Blocks['modelPropertyOutput'] = {
     this.setColour(300)
     this.setTooltip('Displays a model property')
     this.appendDummyInput()
+      .appendField('Get')
       .appendField(new Blockly.FieldDropdown(
         modelMenuGenerator(this)
       ), 'MODEL_NAME')

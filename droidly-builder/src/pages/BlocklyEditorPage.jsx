@@ -106,7 +106,7 @@ export default function BlocklyEditorPage() {
   const handleBuild = (startScreen) => {
     const imports = generateViewLayerImports()
     const modelBlocks = workspace.topBlocks_.filter(block =>
-      block.type === 'model'
+      block.type === 'model' || block.type === 'modelApi'
     )
     const dataLayerCode = generateDataLayerCode(modelBlocks)
     const screenObjects = generateViewLayerCode(screenBlocks, startScreen)
