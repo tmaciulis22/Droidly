@@ -15,6 +15,7 @@ export default function generateDataLayerCode(modelBlocks) {
 function getAppModuleAndDaos(modelBlocks) {
   if (modelBlocks.length === 0) return ''
 
+  const localModelBlocks = modelBlocks.filter(block => block.getFieldValue('MODEL_SOURCE') === 'LOCAL')
   const indent = Blockly.Kotlin.INDENT
   const code = []
 
@@ -23,16 +24,22 @@ function getAppModuleAndDaos(modelBlocks) {
     `@InstallIn(SingletonComponent::class)`,
     `object AppModule {`,
     ``,
-    `${indent}@Provides`,
-    `${indent}@Singleton`,
-    `${indent}fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {`,
-    `${indent}${indent}return Room.databaseBuilder(`,
-    `${indent}${indent}${indent}appContext,`,
-    `${indent}${indent}${indent}AppDatabase::class.java,`,
-    `${indent}${indent}${indent}"droidly-database"`,
-    `${indent}${indent}).fallbackToDestructiveMigration().build()`,
-    `${indent}}`,
-    ``,
+  )
+  if (localModelBlocks.length !== 0) {
+    code.push(
+      `${indent}@Provides`,
+      `${indent}@Singleton`,
+      `${indent}fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {`,
+      `${indent}${indent}return Room.databaseBuilder(`,
+      `${indent}${indent}${indent}appContext,`,
+      `${indent}${indent}${indent}AppDatabase::class.java,`,
+      `${indent}${indent}${indent}"droidly-database"`,
+      `${indent}${indent}).fallbackToDestructiveMigration().build()`,
+      `${indent}}`,
+      ``,
+    )
+  }
+  code.push(
     `${indent}@Provides`,
     `${indent}@Singleton`,
     `${indent}fun provideFirebaseDatabase() = Firebase`,
@@ -59,7 +66,6 @@ function getAppModuleAndDaos(modelBlocks) {
 
   const modelNames = []
   const daoAbstractFunctions = []
-  const localModelBlocks = modelBlocks.filter(block => block.getFieldValue('MODEL_SOURCE') === 'LOCAL')
   const entities = localModelBlocks.map(block => {
     const modelName = block.getFieldValue('MODEL_NAME')
     modelNames.push(modelName)
@@ -77,18 +83,21 @@ function getAppModuleAndDaos(modelBlocks) {
 
   code.push(`}`, ``)
 
-  code.push(
-    `@Database(`,
-    `${indent}entities = [`,
-    entities,
-    `${indent}],`,
-    `${indent}version = 1`,
-    `)`,
-    `abstract class AppDatabase : RoomDatabase() {`,
-    daoAbstractFunctions.join('\n'),
-    `}`,
-    ``
-  )
+  if (entities.length !== 0) {
+    code.push(
+      `@Database(`,
+      `${indent}entities = [`,
+      entities,
+      `${indent}],`,
+      `${indent}version = 1,`,
+      `${indent}exportSchema = false`,
+      `)`,
+      `abstract class AppDatabase : RoomDatabase() {`,
+      daoAbstractFunctions.join('\n'),
+      `}`,
+      ``
+    )
+  }
 
   return code.join('\n')
 }
@@ -191,8 +200,9 @@ function getViewModel(modelBlocks) {
       `${indent}${indent}${indent}val ${modelNameCamel}s = it.getListOfModels<${name}>()`,
       `${indent}${indent}${indent}mainState = mainState.copy(${modelNameCamel}s = ${modelNameCamel}s)`,
       `${indent}${mainStateNotLoading}`,
-      `${indent}${indent}).addOnFailureListener {`,
+      `${indent}${indent}}.addOnFailureListener {`,
       `${indent}${mainStateNotLoading}`,
+      `${indent}${indent}}`,
       `${indent}}`,
       ``,
       `${indent}fun save${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
@@ -210,6 +220,7 @@ function getViewModel(modelBlocks) {
       `${indent}${indent}${indent}firebaseDatabase.child("${modelNameCamel}").child(${modelNameCamel}.id).setValue(${modelNameCamel})`,
       `${indent}${mainStateNotLoading}`,
       `${indent}${indent}}`,
+      `${indent}}`,
       ``,
       `${indent}fun delete${name}(${modelNameCamel}: ${name}) = viewModelScope.launch {`,
       mainStateLoading,

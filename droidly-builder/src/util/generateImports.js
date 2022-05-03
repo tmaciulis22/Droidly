@@ -56,6 +56,7 @@ export default function generateViewLayerImports() {
     'import com.google.firebase.database.ktx.database',
     'import com.google.firebase.database.DatabaseReference',
     'import java.util.UUID',
+    'import com.example.droidly.util.getListOfModels',
     '',
     ''
   )
