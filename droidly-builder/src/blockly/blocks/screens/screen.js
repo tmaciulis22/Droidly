@@ -31,7 +31,7 @@ Blockly.Kotlin['screen'] = (block) => {
     `${Blockly.Kotlin.INDENT}navController: NavController,`,
   )
   if (isModelScreen) {
-    code.push(`${Blockly.Kotlin.INDENT}modelId: Long,`)
+    code.push(`${Blockly.Kotlin.INDENT}modelId: String,`)
   }
   code.push(
     `${Blockly.Kotlin.INDENT}mainViewModel: MainViewModel = hiltViewModel()`,

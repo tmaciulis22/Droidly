@@ -46,8 +46,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
-import com.example.droidly.ui.navigation.navigate
+import com.example.droidly.util.navigate
 import android.content.Context
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import java.util.UUID
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -63,8 +67,14 @@ object AppModule {
         ).fallbackToDestructiveMigration().build()
     }
 
-    @Singleton
     @Provides
+    @Singleton
+    fun provideFirebaseDatabase() = Firebase
+        .database
+        .reference
+
+    @Provides
+    @Singleton
     fun provideMoshi(): Moshi =
         Moshi
             .Builder()
@@ -72,8 +82,8 @@ object AppModule {
             .addLast(KotlinJsonAdapterFactory())
             .build()
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideOkHttpClient(): OkHttpClient =
         OkHttpClient()
             .newBuilder()
@@ -102,7 +112,8 @@ data class MainState(
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    val personDao: PersonDao
+    private val firebaseDatabase: DatabaseReference,
+    private val personDao: PersonDao
 ) : ViewModel() {
 
     var mainState by mutableStateOf(MainState())
@@ -117,9 +128,15 @@ class MainViewModel @Inject constructor(
 
     fun savePerson(person: Person) = viewModelScope.launch {
         mainState = mainState.copy(isLoading = true)
-        personDao.save(person)
-        val persons = personDao.readAll()
-        mainState = mainState.copy(persons = persons)
+        if (person.id == "-1") {
+            val updatedPerson = person.copy(id = UUID.randomUUID().toString())
+            val updatedPersons = mainState.persons.toMutableList()
+            updatedPersons.add(updatedPerson)
+            personDao.save(updatedPerson)
+            mainState = mainState.copy(persons = updatedPersons)
+        } else {
+            personDao.save(person)
+        }
         mainState = mainState.copy(isLoading = false)
     }
 
@@ -136,7 +153,7 @@ class MainViewModel @Inject constructor(
 **/
 
 enum class Screen(
-    val composable: @Composable (NavController, Long, MainViewModel) -> Unit = {_, _, _ -> },
+    val composable: @Composable (NavController, String, MainViewModel) -> Unit = {_, _, _ -> },
     val isModelScreen: Boolean = false,
     val showTopBar: Boolean = false,
     val bottomBarTabIcon: ImageVector? = null // for screens which show DroidlyBottomBar
@@ -162,7 +179,7 @@ interface PersonDao {
     suspend fun readAll(): List<Person>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(entity: Person)
+    suspend fun save(entity: Person): Long
 
     @Delete
     suspend fun delete(entity: Person)
@@ -170,7 +187,7 @@ interface PersonDao {
 
 @Entity(tableName = "person")
 data class Person(
-    @PrimaryKey(autoGenerate = true) val id: Long? = null,
+    @PrimaryKey val id: String = "-1",
     var firstName: String? = null,
     var lastName: String? = null,
 )
@@ -215,7 +232,7 @@ fun Persons(
         }
         DroidlyFAB(
             modifier = Modifier,
-            onClick = { navController.navigate("CreatePerson", -1L) },
+            onClick = { navController.navigate("CreatePerson", "-1") },
             text = "Add",
         )
     }
@@ -224,7 +241,7 @@ fun Persons(
 @Composable
 fun PersonDetails(
     navController: NavController,
-    modelId: Long,
+    modelId: String,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     val item = mainViewModel.mainState.persons.firstOrNull { it.id == modelId } ?: Person()
@@ -253,7 +270,7 @@ fun PersonDetails(
 @Composable
 fun CreatePerson(
     navController: NavController,
-    modelId: Long,
+    modelId: String,
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
     val item = mainViewModel.mainState.persons.firstOrNull { it.id == modelId } ?: Person()

@@ -50,8 +50,12 @@ export default function generateViewLayerImports() {
     'import androidx.compose.runtime.setValue',
     'import androidx.hilt.navigation.compose.hiltViewModel',
     'import kotlinx.coroutines.launch',
-    'import com.example.droidly.ui.navigation.navigate',
+    'import com.example.droidly.util.navigate',
     'import android.content.Context',
+    'import com.google.firebase.ktx.Firebase',
+    'import com.google.firebase.database.ktx.database',
+    'import com.google.firebase.database.DatabaseReference',
+    'import java.util.UUID',
     '',
     ''
   )

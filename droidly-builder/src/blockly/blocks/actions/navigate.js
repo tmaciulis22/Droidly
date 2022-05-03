@@ -29,7 +29,7 @@ Blockly.Kotlin['navigate'] = (block) => {
   let actionToReturn = '/* navController.navigate("SCREEN_NAME") */'
   if (screenName !== 'NOT_SELECTED') {
     if (isDestinationModelScreen) {
-      actionToReturn = `navController.navigate("${screenName}", ${addItemId ? "item.id" : "-1L"})`
+      actionToReturn = `navController.navigate("${screenName}", ${addItemId ? "item.id" : `"-1"`})`
     } else {
       actionToReturn = `navController.navigate("${screenName}")`
     }

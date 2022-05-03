@@ -1,8 +1,8 @@
-package com.example.droidly.ui.navigation
+package com.example.droidly.util
 
 import androidx.navigation.NavController
 
-fun NavController.navigate(screenName: String, modelId: Long? = null) {
+fun NavController.navigate(screenName: String, modelId: String? = null) {
     if (modelId != null) {
         navigate(route = "$screenName/$modelId")
     } else {

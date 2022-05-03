@@ -27,7 +27,7 @@ fun DroidlyNavHost(
                     }
                     screen.composable.invoke(
                         navController,
-                        it.arguments?.getString(modelIdArgumentKey)?.toLong() ?: -1L,
+                        it.arguments?.getString(modelIdArgumentKey) ?: "-1",
                         hiltViewModel(parentEntry)
                     )
                 }
@@ -38,7 +38,7 @@ fun DroidlyNavHost(
                     }
                     screen.composable.invoke(
                         navController,
-                        -1L,
+                        "-1",
                         hiltViewModel(parentEntry)
                     )
                 }
