@@ -113,23 +113,14 @@ export default function BlocklyEditorPage() {
     const workspaceCode = Blockly.Kotlin.workspaceToCode(workspace)
 
     const sourceCodeBlob = new Blob([imports, dataLayerCode, screenObjects, workspaceCode], { type: 'text/plain'})
-    const url = window.URL.createObjectURL(
-      sourceCodeBlob,
-    )
+    const fileToUpload = new File([sourceCodeBlob], 'DroidlyGeneratedApp.kt')
+    const formData = new FormData()
 
-    const link = document.createElement('a')
-    link.setAttribute(
-      'download',
-      `DroidlyGeneratedApp.kt`,
-    )
-    link.href = url;
-    document.body.appendChild(link)
-
-    window.requestAnimationFrame(function () {
-      var event = new MouseEvent('click')
-      link.dispatchEvent(event)
-      link.parentNode.removeChild(link)
-		})
+    formData.append('generatedApp', fileToUpload)
+    fetch('http://localhost:8080/build', {
+      method: 'POST',
+      body: formData
+    })
   }
 
   return (
