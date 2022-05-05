@@ -123,22 +123,40 @@ export default function BlocklyEditorPage() {
     fetch('http://localhost:8080/build', {
       method: 'POST',
       body: formData
-    }).then(() => {
-      setShowSpinner(false)
-    }).catch((error) => {
-      setShowSpinner(false)
-      console.log(error)
     })
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob)
+        const link = document.createElement('a')
+
+        link.setAttribute(
+          'download',
+          `app-debug.apk`,
+        )
+        link.href = url
+
+        document.body.appendChild(link)
+        window.requestAnimationFrame(function () {
+          var event = new MouseEvent('click')
+          link.dispatchEvent(event)
+          link.parentNode.removeChild(link)
+        })
+
+        setShowSpinner(false)
+      }).catch((error) => {
+        console.log(error)
+        setShowSpinner(false)
+      })
   }
 
   return (
     <Box>
       <div ref={blocklyRef} style={{ height: '100vh' }} />
       <div style={{ 
-        position: 'fixed', 
-        top: '1rem', 
-        right: '2rem', 
-        display: 'flex', 
+        position: 'fixed',
+        top: '1rem',
+        right: '2rem',
+        display: 'flex',
         gap: '1rem'
       }}>
         <Tooltip title="Upload XML">
