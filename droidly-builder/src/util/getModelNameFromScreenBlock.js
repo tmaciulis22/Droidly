@@ -1,5 +1,9 @@
 export default function getModelNameFromScreenBlock(block) {
-  return block.getDescendants().slice(1).find(descendant =>
+  const screenBlock = block.getDescendants().slice(1).find(descendant =>
     descendant.type === 'modelPropertyInput' || descendant.type === 'modelPropertyOutput'
-  ).getFieldValue('MODEL_NAME')
+  )
+  if (screenBlock === undefined) 
+    return '' 
+  else 
+    return screenBlock.getFieldValue('MODEL_NAME')
 }

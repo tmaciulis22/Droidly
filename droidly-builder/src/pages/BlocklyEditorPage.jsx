@@ -13,16 +13,18 @@ import generateViewLayerCode from '../util/generateViewLayerCode';
 import generateViewLayerImports from '../util/generateImports';
 import generateDataLayerCode from '../util/generateDataLayerCode';
 import UploadModal from '../components/UploadModal';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function BlocklyEditorPage() {
 
   const [currentXml, setCurrentXml] = useState('')
+  const [screenBlocks, setScreenBlocks] = useState([])
 
   const [showBuildModal, setShowBuildModal] = useState(false)
   const [showUploadModal, setShowUploadModal] = useState(false)
   const [modalScreenOptions, setModalScreenOptions] = useState([])
 
-  const [screenBlocks, setScreenBlocks] = useState([])
+  const [showSpinner, setShowSpinner] = useState(false)
 
   const blocklyRef = useRef(null)
 
@@ -117,9 +119,15 @@ export default function BlocklyEditorPage() {
     const formData = new FormData()
 
     formData.append('generatedApp', fileToUpload)
+    setShowSpinner(true)
     fetch('http://localhost:8080/build', {
       method: 'POST',
       body: formData
+    }).then(() => {
+      setShowSpinner(false)
+    }).catch((error) => {
+      setShowSpinner(false)
+      console.log(error)
     })
   }
 
@@ -158,6 +166,7 @@ export default function BlocklyEditorPage() {
           </IconButton>
         </Tooltip>
       </div>
+      <LoadingSpinner isLoading={showSpinner} />
       <UploadModal
         show={showUploadModal}
         onClose={handleUploadModalClose}
