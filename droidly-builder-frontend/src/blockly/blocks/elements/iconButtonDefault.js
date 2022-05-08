@@ -1,4 +1,5 @@
 import Blockly from 'blockly';
+import { iconMenuGenerator } from '../../../util/menuGenerators';
 
 Blockly.Blocks['iconButtonDefault'] = {
   init: function() {
@@ -8,24 +9,7 @@ Blockly.Blocks['iconButtonDefault'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('Icon Button')
-      .appendField(new Blockly.FieldDropdown([
-        ['arrow back', 'ArrowBack'],
-        ['account', 'AccountCircle'],
-        ['search', 'Search'],
-        ['home', 'Home'],
-        ['email', 'Email'],
-        ['phone', 'Phone'],
-        ['settings', 'Settings'],
-        ['done', 'Done'],
-        ['info', 'Info'],
-        ['delete', 'Delete'],
-        ['favorite', 'Favorite'],
-        ['article', 'Article'],
-        ['star', 'Star'],
-        ['close', 'Close'],
-        ['add', 'Add'],
-        ['shopping cart', 'ShoppingCart']
-      ]), 'ICON_BUTTON_ICON')
+      .appendField(new Blockly.FieldDropdown(iconMenuGenerator), 'ICON_BUTTON_ICON')
     this.appendValueInput('ICON_BUTTON_CLICK')
       .setCheck('Action')
       .appendField('on click:')

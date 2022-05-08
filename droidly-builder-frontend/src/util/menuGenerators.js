@@ -1,4 +1,20 @@
 import { screenTypes } from "../blockly/blocks/screens"
+import account from '../assets/account.svg'
+import add from '../assets/add.svg'
+import arrowBack from '../assets/arrow-back.svg'
+import article from '../assets/article.svg'
+import close from '../assets/close.svg'
+import deleteIcon from '../assets/delete.svg'
+import done from '../assets/done.svg'
+import favorite from '../assets/favorite.svg'
+import home from '../assets/home.svg'
+import info from '../assets/info.svg'
+import mail from '../assets/mail.svg'
+import phone from '../assets/phone.svg'
+import search from '../assets/search.svg'
+import settings from '../assets/settings.svg'
+import shoppingCart from '../assets/shopping-cart.svg'
+import star from '../assets/star.svg'
 
 export const modelMenuGenerator = (block) => () => {
   const modelOptions = block.workspace.topBlocks_
@@ -64,4 +80,25 @@ export const navigateMenuGenerator = (block) => () => {
   } else {
     return [['SCREEN_NAME', 'NOT_SELECTED']]
   }
+}
+
+export const iconMenuGenerator = () => {
+  return [
+    [{'src': arrowBack, 'width': 18, 'height': 18, 'alt': 'arrow-back'}, 'ArrowBack'],
+    [{'src': account, 'width': 18, 'height': 18, 'alt': 'account'}, 'AccountCircle'],
+    [{'src': search, 'width': 18, 'height': 18, 'alt': 'search'}, 'Search'],
+    [{'src': home, 'width': 18, 'height': 18, 'alt': 'home'}, 'Home'],
+    [{'src': mail, 'width': 18, 'height': 18, 'alt': 'mail'}, 'Email'],
+    [{'src': phone, 'width': 18, 'height': 18, 'alt': 'phone'}, 'Phone'],
+    [{'src': settings, 'width': 18, 'height': 18, 'alt': 'settings'}, 'Settings'],
+    [{'src': done, 'width': 18, 'height': 18, 'alt': 'done'}, 'Done'],
+    [{'src': info, 'width': 18, 'height': 18, 'alt': 'info'}, 'Info'],
+    [{'src': deleteIcon, 'width': 18, 'height': 18, 'alt': 'delete'}, 'Delete'],
+    [{'src': favorite, 'width': 18, 'height': 18, 'alt': 'favorite'}, 'Favorite'],
+    [{'src': article, 'width': 18, 'height': 18, 'alt': 'article'}, 'Article'],
+    [{'src': star, 'width': 18, 'height': 18, 'alt': 'star'}, 'Star'],
+    [{'src': close, 'width': 18, 'height': 18, 'alt': 'close'}, 'Close'],
+    [{'src': add, 'width': 18, 'height': 18, 'alt': 'add'}, 'Add'],
+    [{'src': shoppingCart, 'width': 18, 'height': 18, 'alt': 'shoppingCart'}, 'ShoppingCart']
+  ]
 }
