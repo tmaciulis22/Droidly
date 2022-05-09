@@ -1,13 +1,15 @@
-import { Grid } from '@mui/material';
 import BlocklyEditorPage from './pages/BlocklyEditorPage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import OnboardingPage from './pages/OnboardingPage';
 
 function App() {
   return (
-      <Grid container direction='column'>
-        <Grid item>
-          <BlocklyEditorPage />
-        </Grid>
-      </Grid>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<OnboardingPage />} />
+        <Route path='/builder' element={<BlocklyEditorPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
