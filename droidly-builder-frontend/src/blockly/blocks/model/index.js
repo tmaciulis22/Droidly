@@ -1,7 +1,7 @@
 import './model'
 import './stringProperty'
 import './numberProperty'
-import './booleanProperty'
+// import './booleanProperty'
 import './dateProperty'
 // import './modelProperty'
 // import './listProperty'
@@ -26,10 +26,10 @@ const modelCategoryContent = {
       kind: 'block',
       type: 'numberProperty'
     },
-    {
-      kind: 'block',
-      type: 'booleanProperty'
-    },
+    // {
+    //   kind: 'block',
+    //   type: 'booleanProperty'
+    // },
     {
       kind: 'block',
       type: 'dateProperty'

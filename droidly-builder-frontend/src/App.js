@@ -1,13 +1,13 @@
 import BlocklyEditorPage from './pages/BlocklyEditorPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import OnboardingPage from './pages/OnboardingPage';
+// import OnboardingPage from './pages/OnboardingPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<OnboardingPage />} />
-        <Route path='/builder' element={<BlocklyEditorPage />} />
+        {/* <Route path='/' element={<OnboardingPage />} /> */}
+        <Route path='/' element={<BlocklyEditorPage />} />
       </Routes>
     </BrowserRouter>
   )

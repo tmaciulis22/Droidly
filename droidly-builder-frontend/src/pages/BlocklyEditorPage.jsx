@@ -106,6 +106,7 @@ export default function BlocklyEditorPage() {
   }
 
   const handleBuild = (startScreen) => {
+    setShowSpinner(true)
     const imports = generateViewLayerImports()
     const modelBlocks = workspace.topBlocks_.filter(block =>
       block.type === 'model' || block.type === 'modelApi'
@@ -119,7 +120,6 @@ export default function BlocklyEditorPage() {
     const formData = new FormData()
 
     formData.append('generatedApp', fileToUpload)
-    setShowSpinner(true)
     fetch('http://localhost:8080/build', {
       method: 'POST',
       body: formData
