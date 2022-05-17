@@ -10,7 +10,7 @@ import BuildIcon from '@mui/icons-material/Build';
 import BuildModal from '../components/BuildModal';
 import { screenTypes } from '../blockly/blocks/screens';
 import generateViewLayerCode from '../util/generateViewLayerCode';
-import generateViewLayerImports from '../util/generateImports';
+import generateImports from '../util/generateImports';
 import generateDataLayerCode from '../util/generateDataLayerCode';
 import UploadModal from '../components/UploadModal';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -107,7 +107,7 @@ export default function BlocklyEditorPage() {
 
   const handleBuild = (startScreen) => {
     setShowSpinner(true)
-    const imports = generateViewLayerImports()
+    const imports = generateImports()
     const modelBlocks = workspace.topBlocks_.filter(block =>
       block.type === 'model' || block.type === 'modelApi'
     )

@@ -1,4 +1,4 @@
-export default function generateViewLayerImports() {
+export default function generateImports() {
   const code = []
 
   code.push(
