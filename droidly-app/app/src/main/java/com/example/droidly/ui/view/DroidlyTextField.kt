@@ -18,9 +18,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 fun DroidlyTextField(
     modifier: Modifier = Modifier,
     placeholder: String = "",
-    color: Color = MaterialTheme.colors.onSurface.copy(alpha = TextFieldDefaults.BackgroundOpacity),
+    color: Color = MaterialTheme.colors.onSurface.copy(
+        alpha = TextFieldDefaults.BackgroundOpacity
+    ),
     textColor: Color = MaterialTheme.colors.onSurface,
-    shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
+    shape: Shape = MaterialTheme.shapes.small.copy(
+        bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize
+    ),
     singleLine: Boolean = true,
     border: BorderStroke? = null,
     onValueChanged: (String) -> Unit = {}
