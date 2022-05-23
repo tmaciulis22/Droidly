@@ -1,5 +1,6 @@
 import Blockly from 'blockly';
 import checkIfModelScreen from './checkIfModelScreen';
+import getTakePictureBlock from './getTakePictureBlock';
 
 export default function generateViewLayerCode(screenBlocks, startScreen) {
   const indent = Blockly.Kotlin.INDENT
@@ -17,6 +18,15 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
     `${indent}val bottomBarTabIcon: ImageVector? = null // for screens which show DroidlyBottomBar`,
     ') {'
   )
+
+  const takePictureBlock = getTakePictureBlock(screenBlocks)
+  if (takePictureBlock) {
+    code.push(`${indent}CameraScreen({ navController, _, mainViewModel -> CameraScreen(navController, mainViewModel) }),`)
+  }
+  const selectFromGalleryBlock = getTakePictureBlock(screenBlocks)
+  if (selectFromGalleryBlock) {
+    code.push(`${indent}GalleryScreen({ navController, _, mainViewModel -> CameraScreen(navController, mainViewModel) }),`)
+  }
 
   screenBlocks.forEach((block, index) => {
     const name = block.getFieldValue('SCREEN_NAME')
@@ -45,8 +55,40 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
     `${indent}}`,
     '}',
     '',
-    ''
   )
+
+  if (takePictureBlock) {
+    code.push(
+      `@Composable`,
+      `fun CameraScreen(`,
+      `${indent}navController: NavController,`,
+      `${indent}mainViewModel: MainViewModel`,
+      `) {`,
+      `${indent}DroidlyCamera {`,
+      `${indent}${indent}mainViewModel.picUri = it.toString()`,
+      `${indent}${indent}navController.navigateUp()`,
+      `${indent}}`,
+      `}`,
+      ''
+    )
+  }
+  if (selectFromGalleryBlock) {
+    code.push(
+      `@Composable`,
+      `fun GalleryScreen(`,
+      `${indent}navController: NavController,`,
+      `${indent}mainViewModel: MainViewModel`,
+      `) {`,
+      `${indent}DroidlyGallery {`,
+      `${indent}${indent}mainViewModel.picUri = it.toString()`,
+      `${indent}${indent}navController.navigateUp()`,
+      `${indent}}`,
+      `}`,
+      ''
+    )
+  }
+
+  code.push('')
 
   return code.join('\n')
 }

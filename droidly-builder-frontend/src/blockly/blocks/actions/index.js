@@ -2,6 +2,8 @@ import './navigate'
 import './navigateUp'
 import './save'
 import './delete'
+import './takePicture'
+import './selectFromGallery'
 
 const actionsCategoryContent = {
   kind: 'category',
@@ -23,6 +25,14 @@ const actionsCategoryContent = {
     {
       kind: 'block',
       type: 'delete'
+    },
+    {
+      kind: 'block',
+      type: 'takePicture'
+    },
+    {
+      kind: 'block',
+      type: 'selectFromGallery'
     }
   ]
 }
