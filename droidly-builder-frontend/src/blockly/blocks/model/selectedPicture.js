@@ -6,6 +6,7 @@ Blockly.Blocks['selectedPicture'] = {
     this.setTooltip('Outputs a selected or taken by camera picture url.')
     this.appendDummyInput()
       .appendField('Selected/Taken picture')
+    this.setOutput(true, 'url')
   }
 }
 
