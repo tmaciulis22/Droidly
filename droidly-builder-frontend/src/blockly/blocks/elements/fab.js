@@ -1,4 +1,5 @@
 import Blockly from 'blockly'
+import { iconMenuGenerator } from '../../../util/menuGenerators';
 
 Blockly.Blocks['fab'] = {
   init: function() {
@@ -8,8 +9,7 @@ Blockly.Blocks['fab'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('FAB')
-    this.appendValueInput('TEXT_INPUT')
-      .appendField('text:')
+      .appendField(new Blockly.FieldDropdown(iconMenuGenerator), 'FAB_ICON')
     this.appendValueInput('BUTTON_ON_CLICK')
       .setCheck('Action')
       .appendField('on click:')
@@ -30,8 +30,7 @@ Blockly.Blocks['fab'] = {
 Blockly.Kotlin['fab'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedText = text.includes('item.') ? text : `"${text}"`
+  const imageVector = `Icons.Default.${block.getFieldValue('ICON_BUTTON_ICON')}`
 
   const textColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const buttonColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
@@ -49,7 +48,7 @@ Blockly.Kotlin['fab'] = (block) => {
     'DroidlyFAB(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}onClick = { ${onClick} },`,
-    `${Blockly.Kotlin.INDENT}text = ${formattedText},`,
+    `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
   )
 
   if (buttonColor) {

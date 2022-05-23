@@ -1,16 +1,16 @@
 import Blockly from 'blockly'
 
-Blockly.Blocks['selectedPicture'] = {
+Blockly.Blocks['takenPicture'] = {
   init: function() {
     this.setColour(300)
-    this.setTooltip('Outputs a selected from gallery picture url.')
+    this.setTooltip('Outputs a taken by camera picture url.')
     this.appendDummyInput()
-      .appendField('Selected form gallery picture')
+      .appendField('Taken by camera picture')
     this.setOutput(true, 'url')
   }
 }
 
-Blockly.Kotlin['selectedPicture'] = () => {
+Blockly.Kotlin['takenPicture'] = () => {
 
   return ['mainViewModel.picUri', Blockly.Kotlin.ORDER_ATOMIC]
 }

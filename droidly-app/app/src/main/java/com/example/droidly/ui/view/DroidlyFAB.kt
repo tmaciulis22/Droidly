@@ -5,20 +5,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun DroidlyFAB(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
-    text: String = "",
+    imageVector: ImageVector,
     buttonColor: Color = MaterialTheme.colors.primary,
     textColor: Color = MaterialTheme.colors.onPrimary,
     shape: Shape = CircleShape
@@ -33,7 +34,10 @@ fun DroidlyFAB(
             contentColor = textColor,
             shape = shape
         ) {
-            Text(text = text)
+            Icon(
+                imageVector = imageVector,
+                contentDescription = "FAB",
+            )
         }
     }
 }

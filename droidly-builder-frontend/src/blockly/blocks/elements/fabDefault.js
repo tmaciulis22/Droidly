@@ -1,4 +1,5 @@
 import Blockly from 'blockly'
+import { iconMenuGenerator } from '../../../util/menuGenerators';
 
 Blockly.Blocks['fabDefault'] = {
   init: function() {
@@ -8,8 +9,7 @@ Blockly.Blocks['fabDefault'] = {
     this.setNextStatement(true)
     this.appendDummyInput()
       .appendField('FAB')
-    this.appendValueInput('TEXT_INPUT')
-      .appendField('text:')
+      .appendField(new Blockly.FieldDropdown(iconMenuGenerator), 'FAB_ICON')
     this.appendValueInput('FAB_ON_CLICK')
       .setCheck('Action')
       .appendField('on click:')
@@ -21,8 +21,7 @@ Blockly.Blocks['fabDefault'] = {
 Blockly.Kotlin['fabDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'FAB_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'FAB_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const text = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedText = text.includes('item.') ? text : `"${text}"`
+  const imageVector = `Icons.Default.${block.getFieldValue('ICON_BUTTON_ICON')}`
 
   const modifier = []
   modifier.push('Modifier')
@@ -36,7 +35,7 @@ Blockly.Kotlin['fabDefault'] = (block) => {
     'DroidlyFAB(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
     `${Blockly.Kotlin.INDENT}onClick = { ${onClick} },`,
-    `${Blockly.Kotlin.INDENT}text = ${formattedText},`,
+    `${Blockly.Kotlin.INDENT}imageVector = ${imageVector},`,
     ')'
   )
 

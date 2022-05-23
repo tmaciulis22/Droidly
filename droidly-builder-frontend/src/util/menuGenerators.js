@@ -84,6 +84,7 @@ export const navigateMenuGenerator = (block) => () => {
 
 export const iconMenuGenerator = () => {
   return [
+    [{'src': add, 'width': 18, 'height': 18, 'alt': 'add'}, 'Add'],
     [{'src': arrowBack, 'width': 18, 'height': 18, 'alt': 'arrow-back'}, 'ArrowBack'],
     [{'src': account, 'width': 18, 'height': 18, 'alt': 'account'}, 'AccountCircle'],
     [{'src': search, 'width': 18, 'height': 18, 'alt': 'search'}, 'Search'],
@@ -98,7 +99,6 @@ export const iconMenuGenerator = () => {
     [{'src': article, 'width': 18, 'height': 18, 'alt': 'article'}, 'Article'],
     [{'src': star, 'width': 18, 'height': 18, 'alt': 'star'}, 'Star'],
     [{'src': close, 'width': 18, 'height': 18, 'alt': 'close'}, 'Close'],
-    [{'src': add, 'width': 18, 'height': 18, 'alt': 'add'}, 'Add'],
     [{'src': shoppingCart, 'width': 18, 'height': 18, 'alt': 'shoppingCart'}, 'ShoppingCart']
   ]
 }

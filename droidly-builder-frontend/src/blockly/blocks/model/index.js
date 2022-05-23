@@ -8,6 +8,7 @@ import './dateProperty'
 import './modelPropertyInput'
 import './modelPropertyOutput'
 import './textOutput'
+import './takenPicture'
 import './selectedPicture'
 
 const modelCategoryContent = {
@@ -54,6 +55,10 @@ const modelCategoryContent = {
     {
       kind: 'block',
       type: 'textOutput'
+    },
+    {
+      kind: 'block',
+      type: 'takenPicture'
     },
     {
       kind: 'block',
