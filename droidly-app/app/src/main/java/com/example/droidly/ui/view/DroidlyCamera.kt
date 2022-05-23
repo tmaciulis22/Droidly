@@ -1,6 +1,5 @@
 package com.example.droidly.ui.view
 
-import android.net.Uri
 import android.util.Log
 import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
@@ -41,7 +40,7 @@ import kotlinx.coroutines.launch
 fun DroidlyCamera(
     modifier: Modifier = Modifier,
     cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA,
-    onImageUri: (Uri) -> Unit = { }
+    onImageUri: (String) -> Unit = { }
 ) {
     CameraPermissionRequest()
     val context = LocalContext.current
@@ -70,7 +69,12 @@ fun DroidlyCamera(
                     .align(Alignment.BottomCenter),
                 onClick = {
                     coroutineScope.launch {
-                        onImageUri(imageCaptureUseCase.takePicture(context.executor).toUri())
+                        onImageUri(
+                            imageCaptureUseCase
+                                .takePicture(context.executor)
+                                .toUri()
+                                .toString()
+                        )
                     }
                 }
             ) {

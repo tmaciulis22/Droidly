@@ -149,6 +149,8 @@ function getViewModel(modelBlocks) {
     ``,
     `${indent}var mainState by mutableStateOf(MainState())`,
     `${indent}${indent}private set`,
+    ``,
+    `var picUri by mutableStateOf("")`,
     ``
   )
 

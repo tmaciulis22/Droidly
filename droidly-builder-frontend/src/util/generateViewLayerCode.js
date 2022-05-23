@@ -1,6 +1,7 @@
 import Blockly from 'blockly';
 import checkIfModelScreen from './checkIfModelScreen';
 import getTakePictureBlock from './getTakePictureBlock';
+import getSelectFromGalleryBlock from './getSelectFromGalleryBlock';
 
 export default function generateViewLayerCode(screenBlocks, startScreen) {
   const indent = Blockly.Kotlin.INDENT
@@ -23,7 +24,7 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
   if (takePictureBlock) {
     code.push(`${indent}CameraScreen({ navController, _, mainViewModel -> CameraScreen(navController, mainViewModel) }),`)
   }
-  const selectFromGalleryBlock = getTakePictureBlock(screenBlocks)
+  const selectFromGalleryBlock = getSelectFromGalleryBlock(screenBlocks)
   if (selectFromGalleryBlock) {
     code.push(`${indent}GalleryScreen({ navController, _, mainViewModel -> CameraScreen(navController, mainViewModel) }),`)
   }
@@ -65,7 +66,7 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
       `${indent}mainViewModel: MainViewModel`,
       `) {`,
       `${indent}DroidlyCamera {`,
-      `${indent}${indent}mainViewModel.picUri = it.toString()`,
+      `${indent}${indent}mainViewModel.picUri = it`,
       `${indent}${indent}navController.navigateUp()`,
       `${indent}}`,
       `}`,
@@ -80,7 +81,7 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
       `${indent}mainViewModel: MainViewModel`,
       `) {`,
       `${indent}DroidlyGallery {`,
-      `${indent}${indent}mainViewModel.picUri = it.toString()`,
+      `${indent}${indent}mainViewModel.picUri = it`,
       `${indent}${indent}navController.navigateUp()`,
       `${indent}}`,
       `}`,

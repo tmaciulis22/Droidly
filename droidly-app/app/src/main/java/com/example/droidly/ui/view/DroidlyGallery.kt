@@ -9,13 +9,13 @@ import com.example.droidly.util.GalleryPermissionRequest
 
 @Composable
 fun DroidlyGallery(
-    onImageUri: (Uri?) -> Unit = { }
+    onImageUri: (String) -> Unit = { }
 ) {
     GalleryPermissionRequest()
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri: Uri? ->
-            onImageUri(uri)
+            onImageUri(uri?.toString() ?: "")
         }
     )
 
