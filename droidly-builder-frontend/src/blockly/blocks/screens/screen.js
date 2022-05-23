@@ -48,7 +48,9 @@ Blockly.Kotlin['screen'] = (block) => {
     )
   } else {
     const modelName = getModelNameFromScreenBlock(block)
-    code.push(`${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${camelCase(modelName)}s.firstOrNull { it.id == modelId } ?: ${modelName}()`)
+    if (modelName) {
+      code.push(`${Blockly.Kotlin.INDENT}val item = mainViewModel.mainState.${camelCase(modelName)}s.firstOrNull { it.id == modelId } ?: ${modelName}()`)
+    }
   }
   code.push(
     `${content}`,

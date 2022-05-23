@@ -21,7 +21,7 @@ Blockly.Blocks['image'] = {
 Blockly.Kotlin['image'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'IMAGE_MODIFIER')
   const url = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedUrl = url.includes('item.') ? url : `"${url}"`
+  const formattedUrl = url.includes('item.') ? url : url.includes("mainViewModel.picUri") ? 'mainViewModel.picUri' : `"${url}"`
   const opacity = `${Number(block.getFieldValue('IMAGE_ALPHA')) / 100}f` || '1.0f'
 
   const modifier = []

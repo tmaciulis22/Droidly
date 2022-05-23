@@ -1,7 +1,7 @@
 import Blockly from 'blockly';
 import checkIfModelScreen from './checkIfModelScreen';
-import getTakePictureBlock from './getTakePictureBlock';
-import getSelectFromGalleryBlock from './getSelectFromGalleryBlock';
+import hasTakePictureBlock from './hasTakePictureBlock';
+import hasSelectFromGalleryBlock from './hasSelectFromGalleryBlock';
 
 export default function generateViewLayerCode(screenBlocks, startScreen) {
   const indent = Blockly.Kotlin.INDENT
@@ -20,11 +20,11 @@ export default function generateViewLayerCode(screenBlocks, startScreen) {
     ') {'
   )
 
-  const takePictureBlock = getTakePictureBlock(screenBlocks)
+  const takePictureBlock = hasTakePictureBlock(screenBlocks)
   if (takePictureBlock) {
     code.push(`${indent}CameraScreen({ navController, _, mainViewModel -> CameraScreen(navController, mainViewModel) }),`)
   }
-  const selectFromGalleryBlock = getSelectFromGalleryBlock(screenBlocks)
+  const selectFromGalleryBlock = hasSelectFromGalleryBlock(screenBlocks)
   if (selectFromGalleryBlock) {
     code.push(`${indent}GalleryScreen({ navController, _, mainViewModel -> CameraScreen(navController, mainViewModel) }),`)
   }

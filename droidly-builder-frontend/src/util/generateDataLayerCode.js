@@ -139,8 +139,10 @@ function getViewModel(modelBlocks) {
   code.push(
     `@HiltViewModel`,
     `class MainViewModel @Inject constructor(`,
-    `${indent}private val firebaseDatabase: DatabaseReference,`
   )
+  if (firebaseModelNames.length !== 0 ) {
+    code.push(`${indent}private val firebaseDatabase: DatabaseReference,`)
+  }
   daoNames.forEach(name => {
     code.push(`${indent}private val ${camelCase(name)}: ${name},`)
   })
@@ -150,7 +152,7 @@ function getViewModel(modelBlocks) {
     `${indent}var mainState by mutableStateOf(MainState())`,
     `${indent}${indent}private set`,
     ``,
-    `var picUri by mutableStateOf("")`,
+    `${indent}var picUri by mutableStateOf("")`,
     ``
   )
 

@@ -18,7 +18,7 @@ Blockly.Blocks['imageDefault'] = {
 Blockly.Kotlin['imageDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'IMAGE_MODIFIER')
   const url = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
-  const formattedUrl = url.includes('item.') ? url : `"${url}"`
+  const formattedUrl = url.includes('item.') ? url : url.includes("mainViewModel.picUri") ? 'mainViewModel.picUri' : `"${url}"`
 
   const modifier = []
   modifier.push('Modifier')
