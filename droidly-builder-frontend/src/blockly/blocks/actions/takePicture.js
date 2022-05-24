@@ -6,9 +6,6 @@ Blockly.Blocks['takePicture'] = {
     this.setTooltip('Opens camera to take a picture.')
     this.appendDummyInput()
       .appendField('Take a picture')
-    this.appendValueInput('NAVIGATION_ACTION')
-      .appendField('Next action')
-      .setCheck('Action')
     this.setOutput(true, 'Action')
   }
 }

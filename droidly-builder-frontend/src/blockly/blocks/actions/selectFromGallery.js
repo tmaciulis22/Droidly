@@ -6,9 +6,6 @@ Blockly.Blocks['selectFromGallery'] = {
     this.setTooltip('Opens gallery to pick a picture.')
     this.appendDummyInput()
       .appendField('Select from gallery')
-    this.appendValueInput('NAVIGATION_ACTION')
-      .appendField('Next action')
-      .setCheck('Action')
     this.setOutput(true, 'Action')
   }
 }
