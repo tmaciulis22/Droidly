@@ -10,9 +10,6 @@ Blockly.Blocks['textField'] = {
       .appendField('Text field')
     this.appendValueInput('TEXT_INPUT')
       .appendField('placeholder:')
-    this.appendDummyInput()
-      .appendField('max one line:')
-      .appendField(new Blockly.FieldCheckbox('TRUE'), 'TEXT_FIELD_IS_ONE_LINE')
     this.appendValueInput('TEXT_FIELD_ON_SUBMIT')
       .setCheck(['Action', 'ModelProperty'])
       .appendField('on enter:')
@@ -37,8 +34,6 @@ Blockly.Blocks['textField'] = {
 Blockly.Kotlin['textField'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'TEXT_FIELD_MODIFIER')
 
-  const singleLine = block.getFieldValue('TEXT_FIELD_IS_ONE_LINE') === 'TRUE' ? 'true' : 'false'
-
   const onSubmit = Blockly.Kotlin.valueToCode(block, 'TEXT_FIELD_ON_SUBMIT', Blockly.Kotlin.ORDER_ATOMIC) || null
   const placeholder = `${Blockly.Kotlin.valueToCode(block, 'TEXT_INPUT', Blockly.Kotlin.ORDER_ATOMIC) || ''}`
   const formattedPlaceholder = placeholder.includes('item.') ? placeholder : `"${placeholder}"`
@@ -58,7 +53,6 @@ Blockly.Kotlin['textField'] = (block) => {
   code.push(
     'DroidlyTextField(',
     `${Blockly.Kotlin.INDENT}modifier = ${modifierString},`,
-    `${Blockly.Kotlin.INDENT}singleLine = ${singleLine},`
   )
   if (onSubmit) {
     code.push(`${Blockly.Kotlin.INDENT}onValueChanged = { ${onSubmit} },`)

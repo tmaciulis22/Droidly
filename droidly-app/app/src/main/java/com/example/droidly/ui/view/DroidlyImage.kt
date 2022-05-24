@@ -17,7 +17,7 @@ fun DroidlyImage(
         modifier = modifier,
         painter = rememberImagePainter(url, builder = {
             crossfade(true)
-            error(R.drawable.ic_error)
+            error(R.drawable.ic_image)
             placeholder(R.drawable.ic_loading)
         }),
         contentScale = ContentScale.Fit,

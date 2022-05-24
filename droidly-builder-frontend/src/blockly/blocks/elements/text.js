@@ -14,9 +14,6 @@ Blockly.Blocks['text'] = {
     this.appendDummyInput()
       .appendField('weight:')
       .appendField(new Blockly.FieldNumber(400, 100, 900, 100), 'TEXT_WEIGHT')
-    this.appendDummyInput()
-      .appendField('max one line:')
-      .appendField(new Blockly.FieldCheckbox(), 'IS_ONE_LINE')
     this.appendValueInput('TEXT_COLOR')
       .appendField('colour:')
     this.appendStatementInput('TEXT_MODIFIER')
@@ -32,7 +29,6 @@ Blockly.Kotlin['text'] = (block) => {
   const color = Blockly.Kotlin.valueToCode(block, 'TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const size = block.getFieldValue('TEXT_SIZE') ? `${block.getFieldValue('TEXT_SIZE')}.sp` : null
   const weight = block.getFieldValue('TEXT_WEIGHT') ? `FontWeight.W${block.getFieldValue('TEXT_WEIGHT')}` : null
-  const maxOneLine = block.getFieldValue('IS_ONE_LINE') === 'TRUE' ? 1 : null
 
   const modifier = []
   modifier.push('Modifier')
@@ -56,9 +52,6 @@ Blockly.Kotlin['text'] = (block) => {
   }
   if (weight) {
     code.push(`${Blockly.Kotlin.INDENT}fontWeight = ${weight},`)
-  }
-  if (maxOneLine) {
-    code.push(`${Blockly.Kotlin.INDENT}maxLines = ${maxOneLine},`,)
   }
   code.push(')')
 
