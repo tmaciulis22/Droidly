@@ -3,7 +3,7 @@ import layoutsCategoryContent from './layouts'
 import elementsCategoryContent from './elements'
 import modifiersCategoryContent from './modifiers'
 import stylingCategoryContent from './styling'
-import modelCategoryContent from './model'
+import dataCategoryContent from './data'
 import actionsCategoryContent from './actions'
 
 // import functionsCategoryContent from './functions'
@@ -19,7 +19,7 @@ const contents = [
   elementsCategoryContent,
   modifiersCategoryContent,
   stylingCategoryContent,
-  modelCategoryContent,
+  dataCategoryContent,
   actionsCategoryContent,
   // {
   //   "kind": "sep",

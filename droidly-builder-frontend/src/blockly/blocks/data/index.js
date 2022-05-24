@@ -13,7 +13,7 @@ import './selectedPicture'
 
 const modelCategoryContent = {
   kind: 'category',
-  name: 'Model',
+  name: 'Data',
   colour: '300',
   contents: [
     {
