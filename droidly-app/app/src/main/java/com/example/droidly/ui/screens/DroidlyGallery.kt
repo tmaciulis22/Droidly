@@ -1,4 +1,4 @@
-package com.example.droidly.ui.view
+package com.example.droidly.ui.screens
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult

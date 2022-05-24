@@ -7,6 +7,7 @@ export default function generateImports() {
     'import androidx.navigation.NavController',
     'import androidx.compose.runtime.Composable',
     'import com.example.droidly.ui.view.*',
+    'import com.example.droidly.ui.screens.*',
     'import androidx.compose.foundation.BorderStroke',
     'import androidx.compose.foundation.layout.*',
     'import androidx.compose.foundation.shape.RoundedCornerShape',

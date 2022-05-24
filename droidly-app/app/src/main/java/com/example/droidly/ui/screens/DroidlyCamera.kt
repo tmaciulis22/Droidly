@@ -1,4 +1,4 @@
-package com.example.droidly.ui.view
+package com.example.droidly.ui.screens
 
 import android.util.Log
 import android.view.ViewGroup
