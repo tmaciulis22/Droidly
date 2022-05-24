@@ -14,7 +14,7 @@ Blockly.Blocks['textField'] = {
       .appendField('max one line:')
       .appendField(new Blockly.FieldCheckbox('TRUE'), 'TEXT_FIELD_IS_ONE_LINE')
     this.appendValueInput('TEXT_FIELD_ON_SUBMIT')
-      .setCheck('Action')
+      .setCheck(['Action', 'ModelProperty'])
       .appendField('on enter:')
     this.appendValueInput('TEXT_FIELD_COLOR')
       .setCheck('Colour')

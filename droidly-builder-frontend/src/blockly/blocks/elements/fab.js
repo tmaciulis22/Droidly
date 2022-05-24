@@ -30,7 +30,7 @@ Blockly.Blocks['fab'] = {
 Blockly.Kotlin['fab'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'BUTTON_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'BUTTON_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const imageVector = `Icons.Default.${block.getFieldValue('ICON_BUTTON_ICON')}`
+  const imageVector = `Icons.Default.${block.getFieldValue('FAB_ICON')}`
 
   const textColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_TEXT_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null
   const buttonColor = Blockly.Kotlin.valueToCode(block, 'BUTTON_COLOR', Blockly.Kotlin.ORDER_ATOMIC) || null

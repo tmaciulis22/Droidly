@@ -18,7 +18,7 @@ import com.example.droidly.ui.view.DroidlyTopBar
 fun DroidlyContent() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val currentRoute = navBackStackEntry?.destination?.route?.substringBefore("/")
 
     val showTopBar = Screen.screensWithTopBar.any { it.name == currentRoute }
     val showBottomBar = Screen.bottomNavTabs.any { it.name == currentRoute }

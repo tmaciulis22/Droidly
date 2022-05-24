@@ -20,7 +20,7 @@ fun DroidlyImage(
             error(R.drawable.ic_error)
             placeholder(R.drawable.ic_loading)
         }),
-        contentScale = ContentScale.Crop,
+        contentScale = ContentScale.Fit,
         contentDescription = "image",
         alpha = alpha
     )

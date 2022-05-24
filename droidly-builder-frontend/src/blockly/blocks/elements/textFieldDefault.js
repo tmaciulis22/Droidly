@@ -10,6 +10,7 @@ Blockly.Blocks['textFieldDefault'] = {
       .appendField('Text field')
     this.appendValueInput('TEXT_INPUT')
       .appendField('placeholder:')
+      .setCheck(['Text', 'ModelProperty'])
     this.appendValueInput('TEXT_FIELD_ON_ENTER')
       .setCheck(['Action', 'ModelProperty'])
       .appendField('on enter:')

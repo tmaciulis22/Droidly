@@ -21,7 +21,7 @@ Blockly.Blocks['fabDefault'] = {
 Blockly.Kotlin['fabDefault'] = (block) => {
   const addedModifiers = Blockly.Kotlin.statementToCode(block, 'FAB_MODIFIER')
   const onClick = Blockly.Kotlin.valueToCode(block, 'FAB_ON_CLICK', Blockly.Kotlin.ORDER_ATOMIC) || ''
-  const imageVector = `Icons.Default.${block.getFieldValue('ICON_BUTTON_ICON')}`
+  const imageVector = `Icons.Default.${block.getFieldValue('FAB_ICON')}`
 
   const modifier = []
   modifier.push('Modifier')
