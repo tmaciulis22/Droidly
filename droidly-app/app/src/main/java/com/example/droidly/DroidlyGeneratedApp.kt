@@ -266,7 +266,7 @@ fun Create(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(256.dp),
-                url = item.photoUrl ?: mainViewModel.picUri,
+                url = mainViewModel.picUri,
             )
         }
         DroidlyTextField(
