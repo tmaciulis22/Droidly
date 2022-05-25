@@ -13,7 +13,7 @@ Blockly.Blocks['model'] = {
       .appendField(new Blockly.FieldDropdown(
         [
           ['Local', 'LOCAL'],
-          ['Firebase', 'FIREBASE']
+          ['Cloud', 'FIREBASE']
         ]
       ), 'MODEL_SOURCE')
     this.appendStatementInput('MODEL_PROPERTIES')
