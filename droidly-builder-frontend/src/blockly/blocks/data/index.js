@@ -6,6 +6,7 @@ import './dateProperty'
 // import './modelProperty'
 // import './listProperty'
 import './modelPropertyInput'
+import './modelPropertyInputTo'
 import './modelPropertyOutput'
 import './textOutput'
 import './takenPicture'
@@ -47,6 +48,10 @@ const modelCategoryContent = {
     {
       kind: 'block',
       type: 'modelPropertyInput'
+    },
+    {
+      kind: 'block',
+      type: 'modelPropertyInputTo'
     },
     {
       kind: 'block',

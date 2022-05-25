@@ -24,7 +24,7 @@ export const modelMenuGenerator = (block) => () => {
       return [modelName, modelName]
     })
   
-  if (modelOptions.length !== 0 ) {
+  if (modelOptions.length > 0 ) {
     return modelOptions
   } else {
     return [['ModelClass', 'NOT_SELECTED']]
@@ -54,7 +54,7 @@ export const modelPropertyMenuGenerator = (block) => () => {
     block.getFieldValue('MODEL_NAME') === modelName
   )
   
-  if (modelName === 'NameOfModel' || modelBlock === undefined) {
+  if (modelName === 'NameOfModel' || modelName === 'NOT_SELECTED' || modelBlock === undefined) {
     return [['ModelClassProperty', 'NOT_SELECTED']]
   } else {
     const properties = modelBlock.getDescendants().slice(1).map(child => {

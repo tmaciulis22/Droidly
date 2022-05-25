@@ -4,7 +4,7 @@ import { modelMenuGenerator, modelPropertyMenuGenerator } from '../../../util/me
 Blockly.Blocks['modelPropertyInput'] = {
   init: function() {
     this.setColour(300)
-    this.setTooltip('Marks the element that on any action it should update model property')
+    this.setTooltip('Sets model\'s property to a value on each action (for example, text field\'s each on enter action)')
     this.appendDummyInput()
       .appendField('Set')
       .appendField(new Blockly.FieldDropdown(
@@ -14,7 +14,8 @@ Blockly.Blocks['modelPropertyInput'] = {
       .appendField(new Blockly.FieldDropdown(
         modelPropertyMenuGenerator(this)
       ), 'MODEL_INPUT_PROPERTY')
-    this.setOutput(true, 'ModelProperty')
+    this.setOutput(true, 'Action')
+    this.setInputsInline(true)
   }
 }
 
