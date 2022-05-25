@@ -8,8 +8,8 @@
 
 ### How to run 🚀:
 - To run this project, first you need to install Gradle, JDK and Node dependencies.
-- Next you need to set up Firebase project with Realtime Database and App Check enabled. After that download `google-services.json` and put it inside `Droidly\droidly-app\app\` folder.
+- Next, you need to set up Firebase project with Realtime Database and App Check enabled. After that download `google-services.json` and put it inside `Droidly\droidly-app\app\` folder.
 
-- After you installed the required dependencies run these commands:
+- Lastly, run these commands:
 1. Inside droidly-builder-frontend folder run `npm install` and `npm start`.
 2. Inside droidly-builder-backend folder run `npm install` and `npm start`.
