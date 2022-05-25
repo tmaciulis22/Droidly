@@ -137,7 +137,7 @@ enum class Screen(
 ) {
     CameraScreen({ navController, _, mainViewModel -> CameraScreen(navController, mainViewModel) }),
     Items({ navController, _, mainViewModel -> Items(navController, mainViewModel) }, false, false, null),
-    CreateItem({ navController, modelId, mainViewModel -> CreateItem(navController, modelId, mainViewModel) }, true, true, null);
+    Create({ navController, modelId, mainViewModel -> Create(navController, modelId, mainViewModel) }, true, true, null);
 
     companion object {
         val startingScreen: String
@@ -239,14 +239,14 @@ fun Items(
         }
         DroidlyFAB(
             modifier = Modifier,
-            onClick = { navController.navigate("CreateItem", "-1") },
+            onClick = { navController.navigate("Create", "-1") },
             imageVector = Icons.Default.Add,
         )
     }
 }
 
 @Composable
-fun CreateItem(
+fun Create(
     navController: NavController,
     modelId: String,
     mainViewModel: MainViewModel = hiltViewModel()
