@@ -7,7 +7,7 @@ Blockly.Blocks['stringProperty'] = {
     this.setTooltip('Adds a string(text) property to data model.')
     this.setPreviousStatement(true)
     this.appendDummyInput()
-      .appendField('String')
+      .appendField('Text')
       .appendField(new Blockly.FieldTextInput('stringPropertyName'), 'PROPERTY_NAME')
     this.setNextStatement(true)
   }
